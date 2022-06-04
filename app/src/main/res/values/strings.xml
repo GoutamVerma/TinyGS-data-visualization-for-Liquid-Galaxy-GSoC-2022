@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">TinyGS Data Visualization Tool</string>
+    <string name="insert_the_URL">Insert the URL to connect to Liquid Galaxy</string>
+    <string name="connection_failed">Connection Failed</string>
+    <string name="example_to_connect">192.38.48.77:4897</string>
+    <string name="example_name">Insert your file name</string>
+    <string name="save_locally">Save Locally</string>
+    <string name="save_google_drive">Save on Google Drive</string>
+    <string name="Sign_in_alert">Please Sign in to get full access</string>
+    <string name="image_available_on_screen">Image Available on screen</string>
+    <string name="image_not_available_on_screen">Image not Available on screen</string>
+    <string name="connecting"> Connecting …</string>
+    <string name="test_connection"> Test Location …</string>
+
+    <string name="button_connect">Connect</string>
+    <string name="button_try_again">Try Again</string>
+    <string name="button_change">Change</string>
+    <string name="button_ok">OK</string>
+    <string name="button_cancel">Cancel</string>
+    <string name="button_delete">Delete</string>
+    <string name="button_show">Show LG</string>
+    <string name="button_clean_story_board">Clean Storyboard</string>
+    <string name="button_test">Test</string>
+    <string name="button_stop">Stop</string>
+    <string name="button_demo">Demo Barranquilla</string>
+    <string name="button_refresh">Refresh</string>
+    <string name="button_gdg">GDG</string>
+    <string name="button_tour">Tour GDG</string>
+    <string name="button_stop_tour">Stop Tour</string>
+    <string name="button_open">Open</string>
+    <string name="button_back">Back</string>
+    <string name="button_previous">Previous</string>
+    <string name="button_save">Save</string>
+    <string name="button_save_locally">Save locally</string>
+    <string name="button_save_on_google_driver">\u0020 Save on Drive (Max 5MB) \u0020</string>
+    <string name="button_next">Next</string>
+    <string name="button_location">Location</string>
+    <string name="button_movements">Movements</string>
+    <string name="button_balloon">Balloon</string>
+    <string name="button_shapes">Shapes</string>
+    <string name="button_description">Description</string>
+    <string name="button_add">Add</string>
+    <string name="button_log_in">Log in</string>
+    <string name="button_change_password">Change Password</string>
+    <string name="button_update_password">Update Password</string>
+    <string name="button_log_out">Log Out</string>
+    <string name="button_Connect_Google">Continue with Google</string>
+    <string name="button_import_drive">Connect to Google Drive</string>
+    <string name="button_update_import_drive">Update files from to Google Drive</string>
+
+    <string name="file_name">File Name</string>
+    <string name="storyboards_steps_scroll">Storyboard steps scroll</string>
+    <string name="add_main_contents">Add main contents</string>
+    <string name="file_name_example">Sample File 1</string>
+    <string name="file_description">Description</string>
+    <string name="file_description_slot">Description needed</string>
+    <string name="size_file">Current Size File: \u0020</string>
+
+
+    <string name="status_of_connection_on">Image Available on screen</string>
+    <string name="status_of_connection_off">Image Unavailable on screen</string>
+
+    // Top Bar
+    <string name="menu_help">Help</string>
+    <string name="menu_packets">Packets</string>
+    <string name="menu_constellations">Satellite Constellations</string>
+    <string name="menu_rocket">Rockets</string>
+    <string name="menu_satelite">Satellite</string>
+    <string name="menu_connect">Connect</string>
+    <string name="menu_about">About</string>
+
+
+    <string name="account_username">Username</string>
+    <string name="account_password">Password</string>
+    <string name="account_hint_username">Your username</string>
+    <string name="account_hint_password">Your password</string>
+    <string name="account_liquid_galaxy">liquid galaxy</string>
+
+    //Use by all the Create options
+    <string name="location_name_title_empty">NA</string>
+    <string name="position_save">Step Position*</string>
+    <string name="example_save">Step Position</string>
+
+
+    //Create messages
+    <string name="create_message_charging_storyboard">Charging the storyboard</string>
+    <string name="create_message_error_charging_storyboard">There was an unexpected error charging the storyboard /n Please, try again</string>
+    <string name="explain_step_position">*The position where the content is going to be saved in the storyboard</string>
+
+
+    //String for create storyboard location activity
+    <string name="location_name">Location name </string>
+    <string name="example_storyboard_name">Storyboard name </string>
+    <string name="example_location_name">Insert the name of your Location</string>
+    <string name="latitude">Latitude</string>
+    <string name="latitude_results">-0,000000</string>
+    <string name="longitude">Longitude</string>
+    <string name="longitude_results">0,000000</string>
+    <string name="example_latitude_longitude_altitude">0.000000</string>
+    <string name="altitude">Altitude</string>
+    <string name="duration">Duration</string>
+    <string name="seconds">s</string>
+    <string name="duration_example">3</string>
+    <string name="heading">Heading</string>
+    <string name="heading_example">0.000000</string>
+    <string name="tilt">Tilt</string>
+    <string name="tilt_example">0.000000</string>
+    <string name="range">Range</string>
+    <string name="range_example">0.000000</string>
+    <string name="altitude_mode">Altitude Mode</string>
+    <string name="altitude_mode_example">relativeToSeaFloor</string>
+
+    //String for create storyboard movements activity
+    <string name="old_heading">Old Heading</string>
+    <string name="old_tilt">Old Tilt</string>
+    <string name="orbit_mode">Orbit Mode</string>
+    <string name="seek_bar_hint">0°</string>
+
+    //String for create storyboard place balloon activity
+    <string name="hint_insert_text">Insert text here</string>
+    <string name="button_add_image">Add Image</string>
+    <string name="description_image">Image selected</string>
+    <string name="video_url">Video URL</string>
+    <string name="example_video_url">https://www.youtube.com/embed/xp9qHGNCcjA</string>
+
+    //String for create storyboard place shape activity
+    <string name="point">Point</string>
+    <string name="button_add_point">Add a Point</string>
+    <string name="button_clear_points">Delete All Points</string>
+    <string name="button_clear_point">Delete Last Point</string>
+    <string name="delete_point">You need minimum two points</string>
+    <string name="extrude">Extrude</string>
+
+
+    //Labels of Activities
+    <string name="tittle_create">Create</string>
+    <string name="tittle_create_action_location">Location</string>
+    <string name="tittle_create_action_movement">Movement</string>
+    <string name="tittle_create_action_balloon">Balloon</string>
+    <string name="tittle_create_save">Save</string>
+    <string name="tittle_create_action_graphic">Graphic</string>
+    <string name="tittle_create_action_shape">Shape</string>
+    <string name="tittle_create_action_description">Description</string>
+
+    <string name="tittle_my_storyboard">My Storyboard</string>
+    <string name="tittle_export_google_drive">Export</string>
+    <string name="tittle_import_google_drive">Import</string>
+    <string name="tittle_connect">Connect</string>
+    <string name="tittle_account">Account</string>
+    <string name="tittle_demo">Demo</string>
+    <string name="tittle_about">About</string>
+    <string name="tittle_web_scraping">Web Scraping</string>
+    <string name="tittle_help">Help</string>
+    <string name="tittle_main_activity">Main Activity</string>
+    <string name="toast">Toast</string>
+
+    //Image Label
+    <string name="label_logo">Logo Liquid Galaxy</string>
+    <string name="barranquilla_colombian_flags">Barranquilla and Colombian Flags</string>
+    <string name="logos">partner logos</string>
+    <string name="tittle_TobBar">Topbar</string>
+
+
+    //Messages
+    <string name="activity_connection_success">You are now connected to Liquid Galaxy</string>
+    <string name="activity_connection_error">It was not possible to connect to Liquid Galaxy. \n Please, go to the tab connect and try again.</string>
+    <string name="activity_connection_error_connect">It was not possible to connect to Liquid Galaxy.</string>
+    <string name="activity_connection_host_port_error">The format for the host and port is not valid. \n For Example, 0.0.0.0:22 is a valid format.</string>
+    <string name="activity_create_location_missing_field_error">Please, fill in all the fields</string>
+    <string name="activity_create_location_missing_file_name">Please, fill the location name field</string>
+    <string name="activity_create_location_missing_latitude_field_error">Please, fill the latitude field</string>
+    <string name="activity_create_location_missing_longitude_field_error">Please, fill the longitude field</string>
+    <string name="activity_create_location_missing_altitude_field_error">Please, fill the altitude field</string>
+    <string name="activity_create_location_missing_duration_field_error">Please, fill the duration field</string>
+    <string name="activity_create_location_missing_heading_field_error">Please, fill the heading field</string>
+    <string name="activity_create_location_missing_tilt_field_error">Please, fill the tilt field</string>
+    <string name="activity_create_location_missing_range_field_error">Please, fill the range field</string>
+    <string name="activity_create_location_missing_altitude_mode_field_error">Please, fill the altitude mode field</string>
+    <string name="activity_create_missing_duration_field_error">Please, fill the duration field</string>
+    <string name="You_need_a_name_to_create_a_story_board">You need to insert a name to create a storyboard</string>
+    <string name="error_my_storyboards">Error. The file has been corrupted</string>
+    <string name="You_must_have_a_location">You must have a location. Before any action</string>
+    <string name="You_need_a_location_to_create_a_movement">You need a location to create a movement</string>
+    <string name="You_need_a_location_to_create_a_balloon">You need a location to create a balloon</string>
+    <string name="You_need_a_location_to_create_a_shape">You need a location to create a shape</string>
+    <string name="alert_message_delete_action_location">The actions related to the location will be deleted</string>
+    <string name="alert_message_delete_storyboard">The storyboard will be deleted</string>
+    <string name="alert_permission_denied_image">Permission denied, you cannot select an image</string>
+    <string name="alert_permission_denied_save">Permission denied, you cannot save a story board</string>
+    <string name="alert_permission_denied_import_google_drive">Permission denied, you cannot open the story board from Google Drive</string>
+    <string name="alert_permission_denied_import_locally">Permission denied,  you cannot open the story board from My Storyboards</string>
+    <string name="alert_permission_denied_test_image">Permission denied, you cannot test the balloon in liquid galaxy</string>
+    <string name="alert_permission_denied_video">Permission denied, you cannot select an video</string>
+    <string name="alert_save_story_board">The storyboard has been successfully saved</string>
+    <string name="alert_update_story_board">The storyboard has been updated</string>
+    <string name="icon_action">Icon Action</string>
+    <string name="message_file_less_5MB">The storyboard need to be less of 5MB</string>
+    <string name="message_error_file_size_5MB">File size: max 5MB</string>
+    <string name="message_error_connection">Please, check your internet connection</string>
+    <string name="message_update_web_scraping">You need first to select a option to download the data</string>
+    <string name="message_downloading_data_tcs">Downloading data from Tech Conference Spain</string>
+    <string name="message_downloading_data_gdg">Downloading data from GDG</string>
+    <string name="message_downloading_file">Downloading File</string>
+    <string name="message_uploading_file">Uploading File</string>
+
+    //Google Drive
+    <string name="message_google_drive_success_log_in">Searching files from Google Drive</string>
+    <string name="message_google_drive_failed_log_in">Unable to sign in. Make sure you have internet connection and try again</string>
+    <string name="message_failed_upload">Failed to upload the file to Google Drive</string>
+    <string name="message_success_upload">Uploaded file to Google Drive</string>
+
+
+    //Account
+    <string name="admin_password">Admin Password</string>
+    <string name="example_admin_password">Your Password</string>
+    <string name="current_admin_password">Current Admin Password</string>
+    <string name="example_current_admin_password">Your Current Password</string>
+    <string name="new_admin_password">New Admin Password</string>
+    <string name="example_new_admin_password">Your New Password</string>
+    <string name="confirm_admin_password">Confirm Admin Password</string>
+    <string name="example_confirm_admin_password">Your Confirm Password</string>
+    <string name="message_log_in_success">Your are now log in</string>
+    <string name="message_log_in_fail">Your password is wrong</string>
+    <string name="message_current_password_is_wrong">Wrong current password</string>
+    <string name="message_new_confirm_password_not_equal">The new and confirm password need to be equal</string>
+    <string name="message_you_need_log_in">You need to be log in to access to this feature \n Go to Account tab an log in</string>
+    <string name="message_your_password_update">Your password has been updated</string>
+
+    //Fix Values
+    <string name="action_default_time_location">7</string>
+    <string name="action_default_time_movement">10</string>
+    <string name="action_default_time_balloon">8</string>
+    <string name="action_default_time_shape">8</string>
+
+
+    //Web scrapping
+    <string name="text_view_community_name">Community Name</string>
+    <string name="text_view_city">City</string>
+    <string name="text_view_country">Country</string>
+    <string name="text_based_kevin">Based on Kevin Simper\'s gdgsearch.com \n https://github.com/kevinsimper/gdg-search</string>
+    <string name="text_empty">empty</string>
+    <string name="text_search">Type and Search</string>
+
+    //About
+    <string name="my_name">Orbit Satellite Visualizer for Liquid Galaxy, Google Summer of Code 2021</string>
+    <string name="linked_id">Project based on the previous GSoC "SimpleCMS for Liquid Galaxy" by Diego Riveros</string>
+    <string name="github_account">Coded by Albert Morea</string>
+
+    //Demo
+    <string name="start_demo">Check out your Liquid Galaxy \n Running Barranquilla, Colombia Demo</string>
+    <string name="stop_demo">Stop</string>
+    <string name="stop_message">Thanks for watching the demo. We hope you like it!</string>
+
+
+    //Explain texts
+    <string name="text_version">Version 1.0.0</string>
+    <string name="butt_location_explain">Open a location content</string>
+    <string name="butt_movement_explain">Open a movement content</string>
+    <string name="butt_balloon_explain">Open a balloon content</string>
+    <string name="butt_shape_explain">Open a shape content</string>
+    <string name="butt_stop_explain">Stop a running test</string>
+    <string name="butt_test_explain2">Test a storyboard, location, movement, balloon, shape</string>
+    <string name="butt_clean_story_board_explain">Clean the storyboard</string>
+    <string name="butt_save_locally_explain">Save the storyboard in your tablet</string>
+    <string name="butt_save_on_google_driver_explain">Save the storyboard in Google Drive</string>
+    <string name="butt_delete_explain">Delete the action</string>
+    <string name="butt_cancel_explain">Cancel the edition of the content</string>
+    <string name="butt_add_explain">Add a location, movement, balloon, shape to the storyboard</string>
+    <string name="butt_save_explain">Save a location, movement, balloon, shape to the storyboard</string>
+    <string name="butt_add_point_explain">Add a point at the end</string>
+    <string name="butt_delete_point_explain">Delete the last point</string>
+    <string name="butt_delete_points_explain">Delete all the point and leave the first two</string>
+    <string name="butt_demo_barranquilla_explain">Starts the demo from barranquilla</string>
+    <string name="butt_connect_google_drive_explain">Connect to Google Drive and download all the files</string>
+    <string name="butt_update_liquid_galaxy_explain">Update the files that are in Google Drive</string>
+    <string name="butt_refresh_explain">Refresh all the information of the GDG\'s communities</string>
+    <string name="butt_tour_explain">Start a tour in all the GDG\'s communities</string>
+    <string name="butt_stop_tour_explain">Stop the GDG\'s communities tour</string>
+    <string name="butt_connect_liquid_galaxy_explain">Connect to Liquid Galaxy</string>
+    <string name="butt_try_again_liquid_galaxy_explain">Try to connect to the Liquid Galaxy, again</string>
+
+
+    //Elevation Types
+    <string-array name="elevation_types">
+        <item>absolute</item>
+        <item>clampToGround</item>
+        <item>clampToSeaFloor</item>
+        <item>relativeToGround</item>
+        <item>relativeToSeaFloor</item>
+    </string-array>
+
+
+    <dimen name="top_bar_text_font_size">18sp</dimen>
+    <dimen name="primary_text_font_size">18sp</dimen>
+    <dimen name="button_text_font_size">23sp</dimen>
+    <dimen name="satelite_description">20</dimen>
+    <dimen name="button_main_text_font_size">25sp</dimen>
+    <dimen name="information_text_font_size">35sp</dimen>
+    <dimen name="results_text_font_size">28sp</dimen>
+    <dimen name="hint_text_font_size">30sp</dimen>
+    <dimen name="simple_cms">35sp</dimen>
+    <dimen name="satelite_title">26sp</dimen>
+
+
+    <string name="send_orbit">SEND ORBIT</string>
+    <string name="button_show_iss">DISPLAY ORBIT</string>
+    <string name="button_show_starlink">DISPLAY ORBIT</string>
+    <string name="button_show_enxaneta">DISPLAY ORBIT</string>
+    <string name="starlink_constellation">SHOW STARLINK ORBITS</string>
+    <string name="iridium_constellation">SHOW IRIDIUMS ORBITS</string>
+    <string name="starlink_const_live">SHOW STARLINK LIVE</string>
+    <string name="iridium_const_live">SHOW IRIDIUMS LIVE</string>
+    <string name="get_tle">GET TLE</string>
+    <string name="button_iss_live">DISPLAY LIVE</string>
+    <string name="button_starlink_live">DISPLAY LIVE</string>
+    <string name="button_enxaneta_live">DISPLAY LIVE</string>
+    <string name="butt_catalog">Search by catalog ID</string>
+    <string name="text_catalog">You can display any satellite or orbiting body around Earth just by inserting here its Satellite Catalog Number</string>
+    <string name="enter_SCN">Enter a Satellite Catalog Number</string>
+    <string name="button_send_scn">DISPLAY SATELLITE</string>
+    <string name="scn_description">The Satellite Catalog Number (also known as NORAD (North American Aerospace Defense) Catalog Number, NORAD ID or USSPACECOM object number ) is a sequential nine-digit number assigned by the United States Space Command in order of discovery to all artificial objects in the orbits of Earth and Mars and space probes launched from Earth. The first catalogued object, catalog number 1, is the Sputnik 1 launch vehicle, with the Sputnik 1 satellite having been assigned catalog number 2.</string>
+    <string name="stop_live_display">STOP LIVE DISPLAY</string>
+    <string name="clean_kml">CLEAN LG DISPLAY</string>
+    <string name="load_enxaneta">LOAD ENXANETA SCN 47954</string>
+    <string name="load_iss">LOAD ISS SCN 25544</string>
+    <string name="load_starlink">LOAD STARLINK-24 SCN 44238</string>
+    <string name="load_iridium">LOAD IRIDIUM 7 SCN 24793</string>
+    <string name="load_tiangong">LOAD TIANGONG 1 SCN 37820</string>
+
+    <string name="sp_baikonur">BAIKONUR</string>
+    <string name="sp_china">JIUQUAN</string>
+    <string name="sp_kourou">KOUROU</string>
+    <string name="sp_ksc">KENNEDY SPACE CENTER</string>
+    <string name="sp_rocketlab">MAHIA</string>
+    <string name="sp_starbase">STARBASE</string>
+
+    //satellite title
+    <string name="norby_title">"NORBY"</string>
+    <string name="fees_title">"FEES"</string>
+    <string name="satlla_2b_title">"SATLLA-2B"</string>
+    <string name="fees2_title">"FEES2"</string>
+    <string name="fossasat_2e1_title">"FOSSASAT-2E1"</string>
+    <string name="fossasat_2e2_title">"FOSSASAT-2E2"</string>
+    <string name="fossasat_2e3_title">"FOSSASAT-2E3"</string>
+    <string name="fossasat_2e4_title">"FOSSASAT-2E4"</string>
+    <string name="fossasat_2e5_title">"FOSSASAT-2E5"</string>
+    <string name="fossasat_2e6_title">"FOSSASAT-2E6"</string>
+    <string name="fossasat_2e7_title">"FOSSASAT-2E7"</string>
+    <string name="fossasat_2e8_title">"FOSSASAT-2E8"</string>
+    <string name="fossasat_2e9_title">"FOSSASAT-2E9"</string>
+    <string name="fossasat_2e10_title">"FOSSASAT-2E10"</string>
+    <string name="fossasat_2e11_title">"FOSSASAT-2E11"</string>
+    <string name="fossasat_2e12_title">"FOSSASAT-2E12"</string>
+    <string name="fossasat_2e13_title">"FOSSASAT-2E13"</string>
+    <string name="vr3x_a_littlefoot_title">"VR3X=A Littlefoot"</string>
+    <string name="vr3x_b_petrie_title">"VR3X-B Petrie"</string>
+    <string name="vr3x_c_cera_title">"VR3X-C Cera"</string>
+    <string name="satish_dhawan_title">"Satish Dhawan Satellite</string>
+    <string name="fossasat_1">"FossaSat-1"</string>
+    <string name="mdqubesat_1_title">"MDQubeSAT-1"</string>
+    <string name="pycubed_1_title">"PyCubed-1"</string>
+    <string name="thingsat_title">"ThingSat"</string>
+    <string name="wisa_woodsat_title">"WISA Woodsat"</string>
+    <string name="gossamer_title">"Gossamer"</string>
+    <string name="sbudnic_title">"SBUDNIC"</string>
+    <string name="satlla_2a_title">"SATLLA-2A"</string>
+    <string name="vzlusat_2_title">"VZLUSAT-2"</string>
+    <string name="grizu_263a_title">"Grizu-263A"</string>
+    <string name="platform_1_title">"Platform-1</string>
+    <string name="bz_lora_5_title">"BZ-LORA-5"</string>
+    <string name="bz_lora_6_title">"BZ-LORA-6"</string>
+    <string name="lw_lora_1_title">"LW-LORA-1"</string>
+    <string name="fossasat_1b_title">"FossatSat-1B"</string>
+    <string name="fossasat_2_title">"FossatSat-2"</string>
+    <string name="iris_a_title">"IRIS-A"</string>
+    <string name="test_satellite_title">"Test Satellite ISM 433.3"</string>
+
+    //satellit breif description
+    <string name="norby_b">"The NSU apparatus carries the payload of the Skobeltsyn Research Institute of Nuclear Physics of Moscow State University"</string>
+    <string name="fees_b">"FEES (Flexible Experimental Embedded Satellite) is a self funded, collaborative project by the Italian GP Advanced Projects aimed at developing a low cost platform for In Orbit Testing and Validation of Electronics components."</string>
+    <string name="satlla_2b_b">"The nanosatellites were built at the research laboratory of Ariel University, Israel, under the direction of Prof. Boaz Ben Moshe and by students from various departments of the university."</string>
+    <string name="fees2_b">"FEES2 (Flexible Experimental Embedded Satellite2) is an evolution of FEES1, devoted to data relay testing in LoRa. "</string>
+    <string name="fossasat_2e1_b">"FOSSASAT-2E is a 2P (10x5x5cm, 600g) Picosatellite manufactured by FOSSA Systems which provides IoT LoRa connectivity and is part of an 80-satellite constellation being launched by 2024. "</string>
+    <string name="fossasat_2e2_b">"FOSSASAT-2E is a 2P (10x5x5cm, 600g) Picosatellite manufactured by FOSSA Systems which provides IoT LoRa connectivity and is part of an 80-satellite constellation being launched by 2024. "</string>
+    <string name="fossasat_2e3_b">"FOSSASAT-2E is a 2P (10x5x5cm, 600g) Picosatellite manufactured by FOSSA Systems which provides IoT LoRa connectivity and is part of an 80-satellite constellation being launched by 2024. "</string>
+    <string name="fossasat_2e4_b">"FOSSASAT-2E is a 2P (10x5x5cm, 600g) Picosatellite manufactured by FOSSA Systems which provides IoT LoRa connectivity and is part of an 80-satellite constellation being launched by 2024. "</string>
+    <string name="fossasat_2e5_b">"FOSSASAT-2E is a 2P (10x5x5cm, 600g) Picosatellite manufactured by FOSSA Systems which provides IoT LoRa connectivity and is part of an 80-satellite constellation being launched by 2024. "</string>
+    <string name="fossasat_2e6_b">"FOSSASAT-2E is a 2P (10x5x5cm, 600g) Picosatellite manufactured by FOSSA Systems which provides IoT LoRa connectivity and is part of an 80-satellite constellation being launched by 2024. "</string>
+    <string name="fossasat_2e7_b">"FOSSASAT-2E is a 2P (10x5x5cm, 600g) Picosatellite manufactured by FOSSA Systems which provides IoT LoRa connectivity and is part of an 80-satellite constellation being launched by 2024. "</string>
+    <string name="fossasat_2e8_b">"FOSSASAT-2E is a 2P (10x5x5cm, 600g) Picosatellite manufactured by FOSSA Systems which provides IoT LoRa connectivity and is part of an 80-satellite constellation being launched by 2024. "</string>
+    <string name="fossasat_2e9_b">"FOSSASAT-2E is a 2P (10x5x5cm, 600g) Picosatellite manufactured by FOSSA Systems which provides IoT LoRa connectivity and is part of an 80-satellite constellation being launched by 2024. "</string>
+    <string name="fossasat_2e10_b">"FOSSASAT-2E is a 2P (10x5x5cm, 600g) Picosatellite manufactured by FOSSA Systems which provides IoT LoRa connectivity and is part of an 80-satellite constellation being launched by 2024. "</string>
+    <string name="fossasat_2e11_b">"FOSSASAT-2E is a 2P (10x5x5cm, 600g) Picosatellite manufactured by FOSSA Systems which provides IoT LoRa connectivity and is part of an 80-satellite constellation being launched by 2024. "</string>
+    <string name="fossasat_2e12_b">"FOSSASAT-2E is a 2P (10x5x5cm, 600g) Picosatellite manufactured by FOSSA Systems which provides IoT LoRa connectivity and is part of an 80-satellite constellation being launched by 2024. "</string>
+    <string name="fossasat_2e13_b">"FOSSASAT-2E is a 2P (10x5x5cm, 600g) Picosatellite manufactured by FOSSA Systems which provides IoT LoRa connectivity and is part of an 80-satellite constellation being launched by 2024. "</string>
+    <string name="vr3x_a_littlefoot_b">"V-R3x is a CubeSat mission developed by a team of researchers from the Robotic Exploration Lab at Carnegie Mellon and Stanford Universities and NASA Ames Research Center."</string>
+    <string name="vr3x_b_petrio_b">V-R3x is a CubeSat mission developed by a team of researchers from the Robotic Exploration Lab at Carnegie Mellon and Stanford Universities and NASA Ames Research Center."</string>
+    <string name="vr3x_c_cera_b">"V-R3x is a CubeSat mission developed by a team of researchers from the Robotic Exploration Lab at Carnegie Mellon and Stanford Universities and NASA Ames Research Center."</string>
+    <string name="satish_dhawan_satelite_b">"Satish Dhawan SAT is a 3U cubesat built by students at Space Kidz India, an NGO working towards promoting Space Education among Children and Youth."</string>
+    <string name="fossasat_1_title">"FossaSat is a pocketqube satellite which is being developed using free and open source ethics, more detailed information about the hardware and software involved in this project can be found here."</string>
+    <string name="mdqubesat_1_b">"Innova Space developed MDQubeSAT-1, a 2P Picosatellite of 10 x 5 x 5 cm and 461 g, complying to the PocketQube standard."</string>
+    <string name="pycubed_1_b">"Demonstrate smallest-ever spacecraft with full 3-axis attitude determination and control. Design, build, and launch a a 50mm3 spacecraft to demonstrate the capability of 3-axis attitude determination and control."</string>
+    <string name="thingsat_b">"The ThingSat payload is dedicated to test, and structuring of long-distance communication with low energy consumption. The main objective is to test and develop multiple use cases of IoT between space."</string>
+    <string name="wisa_woodsat_b">"WISA Woodsat is a 1U CubeSat that is built and designed by Arctic Astronautics Ltd in Finland. The main goal of the mission is to test how birch plywood by UPM Plywood will withstand the space conditions."</string>
+    <string name="gossamer_b">"Gossamer Piccolomini from Lunasonde."</string>
+    <string name="sbudnic_b">"SBUDNIC is a Sputnik-like 3U CubeSat engineered by a team of undergrad and graduate students from Brown University."</string>
+    <string name="satlla_2a_b">"The nanosatellites were built at the research laboratory of Ariel University, Israel, under the direction of Prof. Boaz Ben Moshe and by students from various departments of the university. "</string>
+    <string name="vzlusat_2_b">"The objectives of the mission are: \n\n– The satellite will provide a beacon and telemetry data for which aateur satellite users and ham radio users will be able to receive."</string>
+    <string name="grizu_263a_b">"The Grizu-263A was developed as Turkey’s first PocketQube satellite by the Grizu-263 Space Team at Bülent Ecevit University in Turkey`s northern province of Zonguldak"</string>
+    <string name="platform_1_b">"Platform-1 test"</string>
+    <string name="bz_lora_5_b">"ZeelandHAB"</string>
+    <string name="bz_lora_6_b">"ZeelandHAB"</string>
+    <string name="lw_lora_1_b">"LW-LORA-1"</string>
+    <string name="fossa_sat_b1_b">"Continuing from our previous launch, here at FOSSA Systems we have some exciting projects coming just around the corner."</string>
+    <string name="fossa_sat_2_b">"Fossa Systems has developed the FOSSASAT-2 picosatellite platform in response to the current market need for LEO telecommunications constellations."</string>
+    <string name="iris_a_b">"Demonstrate Internet of Things. Challenge is the lack of frequency bandwidth for data communication. Key features implemented in payload"</string>
+    <string name="test_satellite_b">"Dummy Satellite for tinyGS test on the 433.3 ISM Band"</string>
+
+
+    //satellite information
+    <string name="norby">"The NSU apparatus carries the payload of the Skobeltsyn Research Institute of Nuclear Physics of Moscow State University for monitoring heliogeophysical parameters of near-earth space in the interests of Roshydromet and additional target equipment of the Information Satellite Systems Joint-Stock Company a set of promising commutation boards of the SpaceWire format.\n\nISS JSC is testing the boards to confirm the possibility of their flight qualification as part of the CubeSat satellites and further integration of the equipment into the federal spacecraft. \n\nMCA "NORBI" was launched within the framework of the program of the state corporation "Roscosmos" "UniverSat".The program allows launching small spacecraft developed by Russian universities and research centers, taking into account the payload requirements of the Roscosmos state corporation. \n\nSMKA "NORBI" is assembled on the basis of a universal modular satellite platform developed at the OAI NSU  within the framework of the project of the Federal Target Program of the Ministry of Education and Science of the Russian Federation for 2017–2019. The platform was developed jointly with the university's industrial partner OKB "Fifth Generation". \n\nThe device got its name in honor of the unique little robot Norby from the cycle of stories for children of the same name by the famous science fiction writer Isaac Asimov. The name of the robot is an anagram of the name of the writer's daughter, Robin."</string>
+    <string name="fees">"FEES (Flexible Experimental Embedded Satellite) is a self funded, collaborative project by the Italian GP Advanced Projects aimed at developing a low cost platform for In Orbit Testing and Validation of Electronics components. \n\nThe whole satellite, including the electronics boards, is entirely design and manufactured within the project. The flight will be also the validation of this platform and components. The 0.3 kg satellite is built to a 0.3UCubeSat (10 cm × 10 cm × 3 cm) form factor. \n\nFEES Mission had three main goals. First of all, we aimed to obtain an in-orbit qualification of both an attitude determination architecture and a commercial GPS receiver. FEES also validated the exploitation of IRIDIUM global network to receive data, testing and supporting on-board traditional radio transmissions, which allowed us to manage the mission without a direct link to ground station and receiving early notifications. Finally, we meant to test a low cost UHF receivers with advanced modulation protocols."</string>
+    <string name="satlla_2b">"The nanosatellites were built at the research laboratory of Ariel University, Israel, under the direction of Prof. Boaz Ben Moshe and by students from various departments of the university. \n\nThe purpose of the satellites is to promote and make accessible research activities on the "new space" and provide a research platform for other research institutions and universities. Both satellites contain several scientific experiments such as a star tracking system, an aircraft tracking system, preparations for a laser communication stabilization system - Free Space Optical (FSO), photography and image analysis, and various other experiments. The size of the satellite is about 14X5X5 cm and its mass is about 300 grams. \n\nSATLLA-2A and SATLLA-2B will transmit a signal via amateur radio with their position in orbit and data from their sensors (battery status, gyros, temperatures, GPS). Both satellites are capable of relaying short messages via amateur radio."</string>
+    <string name="fees2">"FEES2 (Flexible Experimental Embedded Satellite2) is an evolution of FEES1, devoted to data relay testing in LoRa. \n\nThe whole satellite, including the electronics boards, weights 0.3 kg and is built to a 0.3UCubeSat (10 cm × 10 cm × 3 cm) form factor. The configuration includes two independent radio modules which can transmit and receive respectively in VHF and UHF bands. FEES2 is the smallest satellite ever delivered from the ISS.. \n\nFEES2 Mission has the goal of understanding the required equipment and power levels to successfully execute a packet transmission to a satellite, and this will be made possible allowing the reception of LoRa packets in VHF and UHF bands and its retransmission (limited in length) within the UHF beacon. In addition, being delivered from the ISS, FEES2 will inherit its orbital characteristics, allowing to understand possible impacts of altitude and sun/eclipse cycles on such small pico-platforms."</string>
+    <string name="fossasat_2e1">"FOSSASAT-2E is a 2P (10x5x5cm, 600g) Picosatellite manufactured by FOSSA Systems which provides IoT LoRa connectivity and is part of an 80-satellite constellation being launched by 2024. Several satellites are dedicated to experiments and specific projects, such as earth observation or others. \n\nBased on the PocketQube platform, this system of 5x5x5cm and 250g units hugely reduces the current cost for access to space. \n\nBase model features a GNSS receiver, GFSK, LoRa and S-BAND communications, an ARM STM32 Processor with 512Mb of flash, a high-efficieny MPPT based EPS with a regulated 3.3V common bus and 9W of solar power in direct sunlight. \n\nFOSSA is currently undergoing initial testing of these satellites and will soon open up the beacons with the first over the air update, for amateurs to decode. We will also allow packet retransmission and other experiments as we evaluate the capacities of the satellites."</string>
+    <string name="fossasat_2e2">"FOSSASAT-2E is a 2P (10x5x5cm, 600g) Picosatellite manufactured by FOSSA Systems which provides IoT LoRa connectivity and is part of an 80-satellite constellation being launched by 2024. Several satellites are dedicated to experiments and specific projects, such as earth observation or others. \n\nBased on the PocketQube platform, this system of 5x5x5cm and 250g units hugely reduces the current cost for access to space. \n\nBase model features a GNSS receiver, GFSK, LoRa and S-BAND communications, an ARM STM32 Processor with 512Mb of flash, a high-efficieny MPPT based EPS with a regulated 3.3V common bus and 9W of solar power in direct sunlight. \n\nFOSSA is currently undergoing initial testing of these satellites and will soon open up the beacons with the first over the air update, for amateurs to decode. We will also allow packet retransmission and other experiments as we evaluate the capacities of the satellites."</string>
+    <string name="fossasat_2e3">"FOSSASAT-2E is a 2P (10x5x5cm, 600g) Picosatellite manufactured by FOSSA Systems which provides IoT LoRa connectivity and is part of an 80-satellite constellation being launched by 2024. Several satellites are dedicated to experiments and specific projects, such as earth observation or others. \n\nBased on the PocketQube platform, this system of 5x5x5cm and 250g units hugely reduces the current cost for access to space. \n\nBase model features a GNSS receiver, GFSK, LoRa and S-BAND communications, an ARM STM32 Processor with 512Mb of flash, a high-efficieny MPPT based EPS with a regulated 3.3V common bus and 9W of solar power in direct sunlight. \n\nFOSSA is currently undergoing initial testing of these satellites and will soon open up the beacons with the first over the air update, for amateurs to decode. We will also allow packet retransmission and other experiments as we evaluate the capacities of the satellites."</string>
+    <string name="fossasat_2e4">"FOSSASAT-2E is a 2P (10x5x5cm, 600g) Picosatellite manufactured by FOSSA Systems which provides IoT LoRa connectivity and is part of an 80-satellite constellation being launched by 2024. Several satellites are dedicated to experiments and specific projects, such as earth observation or others. \n\nBased on the PocketQube platform, this system of 5x5x5cm and 250g units hugely reduces the current cost for access to space. \n\nBase model features a GNSS receiver, GFSK, LoRa and S-BAND communications, an ARM STM32 Processor with 512Mb of flash, a high-efficieny MPPT based EPS with a regulated 3.3V common bus and 9W of solar power in direct sunlight. \n\nFOSSA is currently undergoing initial testing of these satellites and will soon open up the beacons with the first over the air update, for amateurs to decode. We will also allow packet retransmission and other experiments as we evaluate the capacities of the satellites."</string>
+    <string name="fossasat_2e5">"FOSSASAT-2E is a 2P (10x5x5cm, 600g) Picosatellite manufactured by FOSSA Systems which provides IoT LoRa connectivity and is part of an 80-satellite constellation being launched by 2024. Several satellites are dedicated to experiments and specific projects, such as earth observation or others. \n\nBased on the PocketQube platform, this system of 5x5x5cm and 250g units hugely reduces the current cost for access to space. \n\nBase model features a GNSS receiver, GFSK, LoRa and S-BAND communications, an ARM STM32 Processor with 512Mb of flash, a high-efficieny MPPT based EPS with a regulated 3.3V common bus and 9W of solar power in direct sunlight. \n\nFOSSA is currently undergoing initial testing of these satellites and will soon open up the beacons with the first over the air update, for amateurs to decode. We will also allow packet retransmission and other experiments as we evaluate the capacities of the satellites."</string>
+    <string name="fossasat_2e6">"FOSSASAT-2E is a 2P (10x5x5cm, 600g) Picosatellite manufactured by FOSSA Systems which provides IoT LoRa connectivity and is part of an 80-satellite constellation being launched by 2024. Several satellites are dedicated to experiments and specific projects, such as earth observation or others. \n\nBased on the PocketQube platform, this system of 5x5x5cm and 250g units hugely reduces the current cost for access to space. \n\nBase model features a GNSS receiver, GFSK, LoRa and S-BAND communications, an ARM STM32 Processor with 512Mb of flash, a high-efficieny MPPT based EPS with a regulated 3.3V common bus and 9W of solar power in direct sunlight. \n\nFOSSA is currently undergoing initial testing of these satellites and will soon open up the beacons with the first over the air update, for amateurs to decode. We will also allow packet retransmission and other experiments as we evaluate the capacities of the satellites."</string>
+    <string name="fossasat_2e7">"FOSSASAT-2E is a 2P (10x5x5cm, 600g) Picosatellite manufactured by FOSSA Systems which provides IoT LoRa connectivity and is part of an 80-satellite constellation being launched by 2024. Several satellites are dedicated to experiments and specific projects, such as earth observation or others. \n\nBased on the PocketQube platform, this system of 5x5x5cm and 250g units hugely reduces the current cost for access to space. \n\nBase model features a GNSS receiver, GFSK, LoRa and S-BAND communications, an ARM STM32 Processor with 512Mb of flash, a high-efficieny MPPT based EPS with a regulated 3.3V common bus and 9W of solar power in direct sunlight. \n\nFOSSA is currently undergoing initial testing of these satellites and will soon open up the beacons with the first over the air update, for amateurs to decode. We will also allow packet retransmission and other experiments as we evaluate the capacities of the satellites."</string>
+    <string name="fossasat_2e8">"FOSSASAT-2E is a 2P (10x5x5cm, 600g) Picosatellite manufactured by FOSSA Systems which provides IoT LoRa connectivity and is part of an 80-satellite constellation being launched by 2024. Several satellites are dedicated to experiments and specific projects, such as earth observation or others. \n\nBased on the PocketQube platform, this system of 5x5x5cm and 250g units hugely reduces the current cost for access to space. \n\nBase model features a GNSS receiver, GFSK, LoRa and S-BAND communications, an ARM STM32 Processor with 512Mb of flash, a high-efficieny MPPT based EPS with a regulated 3.3V common bus and 9W of solar power in direct sunlight. \n\nFOSSA is currently undergoing initial testing of these satellites and will soon open up the beacons with the first over the air update, for amateurs to decode. We will also allow packet retransmission and other experiments as we evaluate the capacities of the satellites."</string>
+    <string name="fossasat_2e9">"FOSSASAT-2E is a 2P (10x5x5cm, 600g) Picosatellite manufactured by FOSSA Systems which provides IoT LoRa connectivity and is part of an 80-satellite constellation being launched by 2024. Several satellites are dedicated to experiments and specific projects, such as earth observation or others. \n\nBased on the PocketQube platform, this system of 5x5x5cm and 250g units hugely reduces the current cost for access to space. \n\nBase model features a GNSS receiver, GFSK, LoRa and S-BAND communications, an ARM STM32 Processor with 512Mb of flash, a high-efficieny MPPT based EPS with a regulated 3.3V common bus and 9W of solar power in direct sunlight. \n\nFOSSA is currently undergoing initial testing of these satellites and will soon open up the beacons with the first over the air update, for amateurs to decode. We will also allow packet retransmission and other experiments as we evaluate the capacities of the satellites."</string>
+    <string name="fossasat_2e10">"FOSSASAT-2E is a 2P (10x5x5cm, 600g) Picosatellite manufactured by FOSSA Systems which provides IoT LoRa connectivity and is part of an 80-satellite constellation being launched by 2024. Several satellites are dedicated to experiments and specific projects, such as earth observation or others. \n\nBased on the PocketQube platform, this system of 5x5x5cm and 250g units hugely reduces the current cost for access to space. \n\nBase model features a GNSS receiver, GFSK, LoRa and S-BAND communications, an ARM STM32 Processor with 512Mb of flash, a high-efficieny MPPT based EPS with a regulated 3.3V common bus and 9W of solar power in direct sunlight. \n\nFOSSA is currently undergoing initial testing of these satellites and will soon open up the beacons with the first over the air update, for amateurs to decode. We will also allow packet retransmission and other experiments as we evaluate the capacities of the satellites."</string>
+    <string name="fossasat_2e11">"FOSSASAT-2E is a 2P (10x5x5cm, 600g) Picosatellite manufactured by FOSSA Systems which provides IoT LoRa connectivity and is part of an 80-satellite constellation being launched by 2024. Several satellites are dedicated to experiments and specific projects, such as earth observation or others. \n\nBased on the PocketQube platform, this system of 5x5x5cm and 250g units hugely reduces the current cost for access to space. \n\nBase model features a GNSS receiver, GFSK, LoRa and S-BAND communications, an ARM STM32 Processor with 512Mb of flash, a high-efficieny MPPT based EPS with a regulated 3.3V common bus and 9W of solar power in direct sunlight. \n\nFOSSA is currently undergoing initial testing of these satellites and will soon open up the beacons with the first over the air update, for amateurs to decode. We will also allow packet retransmission and other experiments as we evaluate the capacities of the satellites."</string>
+    <string name="fossasat_2e12">"FOSSASAT-2E is a 2P (10x5x5cm, 600g) Picosatellite manufactured by FOSSA Systems which provides IoT LoRa connectivity and is part of an 80-satellite constellation being launched by 2024. Several satellites are dedicated to experiments and specific projects, such as earth observation or others. \n\nBased on the PocketQube platform, this system of 5x5x5cm and 250g units hugely reduces the current cost for access to space. \n\nBase model features a GNSS receiver, GFSK, LoRa and S-BAND communications, an ARM STM32 Processor with 512Mb of flash, a high-efficieny MPPT based EPS with a regulated 3.3V common bus and 9W of solar power in direct sunlight. \n\nFOSSA is currently undergoing initial testing of these satellites and will soon open up the beacons with the first over the air update, for amateurs to decode. We will also allow packet retransmission and other experiments as we evaluate the capacities of the satellites."</string>
+    <string name="fossasat_2e13">"FOSSASAT-2E is a 2P (10x5x5cm, 600g) Picosatellite manufactured by FOSSA Systems which provides IoT LoRa connectivity and is part of an 80-satellite constellation being launched by 2024. Several satellites are dedicated to experiments and specific projects, such as earth observation or others. \n\nBased on the PocketQube platform, this system of 5x5x5cm and 250g units hugely reduces the current cost for access to space. \n\nBase model features a GNSS receiver, GFSK, LoRa and S-BAND communications, an ARM STM32 Processor with 512Mb of flash, a high-efficieny MPPT based EPS with a regulated 3.3V common bus and 9W of solar power in direct sunlight. \n\nFOSSA is currently undergoing initial testing of these satellites and will soon open up the beacons with the first over the air update, for amateurs to decode. We will also allow packet retransmission and other experiments as we evaluate the capacities of the satellites."</string>
+    <string name="vr2x_a_littlefoot">"V-R3x is a CubeSat mission developed by a team of researchers from the Robotic Exploration Lab at Carnegie Mellon and Stanford Universities and NASA Ames Research Center. Three V-R3x spacecraft, named Littlefoot, Petrie, and Cera, will be launched together on the SpaceX Transporter-1 mission in early 2021. After deployment, the three satellites will perform a series of mesh networking and navigation experiments using their UHF and S-band radios as well as GPS. The goal of the mission is to demonstrate new technologies for networked communication, relative navigation, formation flying, and swarming among large groups of small satellites."</string>
+    <string name="vr3x_b_petrio">V-R3x is a CubeSat mission developed by a team of researchers from the Robotic Exploration Lab at Carnegie Mellon and Stanford Universities and NASA Ames Research Center. Three V-R3x spacecraft, named Littlefoot, Petrie, and Cera, will be launched together on the SpaceX Transporter-1 mission in early 2021. After deployment, the three satellites will perform a series of mesh networking and navigation experiments using their UHF and S-band radios as well as GPS. The goal of the mission is to demonstrate new technologies for networked communication, relative navigation, formation flying, and swarming among large groups of small satellites.</string>
+    <string name="vr3x_c_cera">"V-R3x is a CubeSat mission developed by a team of researchers from the Robotic Exploration Lab at Carnegie Mellon and Stanford Universities and NASA Ames Research Center. Three V-R3x spacecraft, named Littlefoot, Petrie, and Cera, will be launched together on the SpaceX Transporter-1 mission in early 2021. After deployment, the three satellites will perform a series of mesh networking and navigation experiments using their UHF and S-band radios as well as GPS. The goal of the mission is to demonstrate new technologies for networked communication, relative navigation, formation flying, and swarming among large groups of small satellites."</string>
+    <string name="satish_dhawan_satelite">"Satish Dhawan SAT is a 3U cubesat built by students at Space Kidz India, an NGO working towards promoting Space Education among Children and Youth. The satellite carries a Radiation counter to study the ionising radiation as payload and also a LoRa Transceiver to study the possibilities of Space based gateways for enhancing IoT networks \n\nGoals of the Satellite \n\nTo study space radiation Magnetosphere and Demonstrate the indigenously designed and developed nanosatellite components as part of our Hon'ble PM's Vision - Aatmanirbhar Bharat Initiative. The satellite also tests the capabilities of LoRa technology in Space which could be helpful for many applications in the future in short and M2M communication. \n\nWith the ambition of creating awareness and educating the common man about space sciences, SKI is sending 25,000 names to space onboard its SD-SAT."</string>
+    <string name="invalid">"FossaSat is a pocketqube satellite which is being developed using free and open source ethics, more detailed information about the hardware and software involved in this project can be found here. \n\nIt will create the world’s first free and open source IoT network. The satellite will test the new LoRa spread spectrum modulation, allowing unprecedented link budgets with 5$ receivers, democratizing telecommunications to millions of students and individuals worldwide.\n\nBased on the 5x5x5cm PocketQube standard, it will truly reduce the barrier to entry for launching a satellite with launch and development costs under 30000 EUR. \n\nDevelopment of miniaturized and inexpensive satellite systems for space applications using off the shelf components\n\nFossaSat-1 has completed it’s mission in orbit with thousands of data points received and these are being analyzed. Although with reduced gain, LoRa packets have successfully been received and dozens of RTTY packets decoded by amateurs. Thermal model conclusions have already been carried and can be seen here."</string>
+    <string name="mdqubesat_1">"Innova Space developed MDQubeSAT-1, a 2P Picosatellite of 10 x 5 x 5 cm and 461 g, complying to the PocketQube standard. \n\nWith the ambition of providing communication access opportunity to remote IoT devices, for agricultural, energy, marine and environmental applications, MDQubeSAT-1 is the first mission which belongs to the constellation “Libertadores de América”. This mission has the goal of validating the platform concept. \n\nThe satellite includes 7 high-efficiency solar panels connected with MPPTs and a battery charge management controller. Along with two batteries, these are used to power the satellite through two DC / DC at 3.3V and 5V respectively. \n\nIt has a 3-axis active attitude determination and control system and a GNSS receiver. It also has an absolute orientation sensor (accelerometer, gyroscope and magnetometer), that is used by the ADCS and also for monitoring. Temperature, current and light sensors were included for general monitoring of the satellite. A commercial LoRa RF module is used for communication."</string>
+    <string name="pycubed_1">"Demonstrate smallest-ever spacecraft with full 3-axis attitude determination and control. Design, build, and launch a a 50mm3 spacecraft to demonstrate the capability of 3-axis attitude determination and control. The spacecraft will be equipped with a camera, and LoRa radios for communication and ranging."</string>
+    <string name="thingsat">"The ThingSat payload is dedicated to test, and structuring of long-distance communication with low energy consumption. The main objective is to test and develop multiple use cases of IoT between space and the ground based on LoRa technology. \n\Launching in June 2021, STORK is the innovative shared platform with Earth-Observation capabilities. Aimed at in-orbit services, the mission currently has capacity for external payloads. We add value to your business case by providing real-life service scenarios."</string>
+    <string name="wisa_woodsat">"WISA Woodsat is a 1U CubeSat that is built and designed by Arctic Astronautics Ltd in Finland. The main goal of the mission is to test how birch plywood by UPM Plywood will withstand the space conditions and how wood can be used in spacecraft construction.The behaviour of the plywood structure will be studied with a sensor suite provided by the European Space Agency and a camera on a "selfie stick", an additively manufactured deployable boom designed by Huld. \n\n In addition, the spacecraft carries a LoRa packet repeater as a technology demonstrator for popularising satellite communication and inspiring people around the world. \n\nRead more about the WISA WOODSAT mission at wisawoodsat.space or check out our more technical blogs at kitsat.fi/blogs \n\nNote: LoRa 435–438 MHz (Exact frequency TBD)."</string>
+    <string name="gossamer">"Gossamer Piccolomini from Lunasonde."</string>
+    <string name="sbudnic">"SBUDNIC is a Sputnik-like 3U CubeSat engineered by a team of undergrad and graduate students from Brown University. The program emerged from Professor Rick Fleeter’s “Design of Space Systems” class when a few students received an opportunity to build and launch a CubeSat aboard one of SpaceX’s Falcon 9 rockets. Since then, the program has expanded to include a diverse team of undergraduate and graduate students coming from a multitude of interdisciplinary backgrounds with the goal of being one of the fastest sketch-to-launch developments of a 3U CubeSat. \n\nThe satellite is built with low-budget, easily accessible parts in mind. It is equipped with an over-the-counter Arduino board for on-board data handling, a Ham radio based Arduino add-on for communication, and a camera for photo capture all while being powered by simple AA batteries. SBUDNIC will be sending telemetry data and photos from orbit during its mission life. The temperature sensors onboard will allow the satellite to record rudimentary temperature data at orbit altitude, and the camera will periodically capture and send photos in orbit. Since one of the goals of SBUDNIC is to make space exploration more accessible, anyone will be able to access the downlink and receive data and status updates through the satellite. \n\nThe program is made possible through the support of the Rhode Island Space Grant, Brown University, and various other generous European professional partners."</string>
+    <string name="satlla_2a">"The nanosatellites were built at the research laboratory of Ariel University, Israel, under the direction of Prof. Boaz Ben Moshe and by students from various departments of the university. \n\nThe purpose of the satellites is to promote and make accessible research activities on the "new space" and provide a research platform for other research institutions and universities. Both satellites contain several scientific experiments such as a star tracking system, an aircraft tracking system, preparations for a laser communication stabilization system - Free Space Optical (FSO), photography and image analysis, and various other experiments. The size of the satellite is about 14X5X5 cm and its mass is about 300 grams. \n\nSATLLA-2A and SATLLA-2B will transmit a signal via amateur radio with their position in orbit and data from their sensors (battery status, gyros, temperatures, GPS). Both satellites are capable of relaying short messages via amateur radio."</string>
+    <string name="vzlusat_2">"The objectives of the mission are: \n\n– The satellite will provide a beacon and telemetry data for which aateur satellite users and ham radio users will be able to receive.\n– Test the capabilities of reusable flight platform, which consists of radio module, onboard computer, Power Supply Unit, ADCS (Attitude\n Determination and Control System), Antenna deployment system.\n Test the reliability of high performance industrial grade multicore SoC payload computer (Application Processing unit) with linux.\n Test the ability to make OTA-updates to the Application Processing Unit.\n Take and transmit pictures on request to the ground.\n Lower the barrier of creating software to space by increasing the abstraction level.\n VZLU Scientists have completed work on the second VZLU nanosatellite and prepared its transport to Netherlands, from where the satellite, together with other European satellites will be transferred to the USA and installed in the dispenser of the Falcon 9 rocket launcher. \n\nNanosatellite is equipped with the experimental camera and with the unit for precise attitude control. In addition, on board there is also second generation of devices which have already proven their qualities on the previous VZLUSAT-1 satellite. \n\n"VZLUSAT-2 is a technological mission that should verify several subsystems for more advanced future missions. Many technologies are being tested in the Czech Republic for the first time. Despite advanced simulation and testing possibilities, it is not possible to fully verify everything here on Earth, so we need to obtain data from the orbit, this applies for example to the precise attitude control system that cannot be fully verified here on Earth.“ Notes the head of VZLÚ satellite systems Juraj Dudáš. \n\nNanosatellite VZLUSAT-2 benefits from proven construction of CubeSat 3U, with dimensions of 100x100x350mm. The flight window for the Falcon 9 launcher is opened from the first December and ends at the end of March next year (launch is preliminarily scheduled for 12/18/2020). Target orbit of the satellite is at altitudes between 500-600 km above the Earth. Communication with the satellite will be performed through the ground station of the Faculty of Electrical Engineering, University of West Bohemia. Registration of the satellite was made by Ministry of Transport of Czech Republic. VZLUSAT-2 will therefore fly with the Czech flag. \n\nNew VZLU space team specialists were also involved in the development of the satellite, which allowed them to gain valuable experience with the construction of the satellite. Gained knowledge will be utilized in future project of the Czech satellite constellation, which is being prepared in VZLU for the following years. \n\nThe co-researchers of the VZLUSAT-2 project are Evolving systems consulting, ltd. and CTU and UWB universities. The project partners are Eltvor Instruments ltd., Advacam ltd., Rigaku Innovative Technologies Europe ltd., TTS ltd. NEEDRONIX ltd., Spacemanic CZ ltd., and Konkoly Observatory. \n\nThe project was made possible with the support of the Ministry of Industry and Trade, focused on the long-term conceptual development of a research organization. The project was implemented with financial support from the state through the Technology Agency of the Czech Republic by the EPSILON program. Specifically, the project TH04010294 named Technological Demonstrator - Radial Orbital Monitor with Spacepix Sensor."</string>
+    <string name="grizu_263a">"The Grizu-263A was developed as Turkey’s first PocketQube satellite by the Grizu-263 Space Team at Bülent Ecevit University in Turkey`s northern province of Zonguldak \n\nMission objectives and experiment description \n\nDesign and implement a satellite that will handle basic capabilities and operations. In addition, this satellite has a system that will repeat the incoming data that will serve amateurs. The DIGIPEATING MODE on the satellite will allow forwarding of received messages back to earth to support communication and messaging between radio amateurs (Digital QSOs). The telemetry information will be shared to all radio amateurs and networks before launch. Analysis of the ADCS system operating status and the efficiency of the power system with data from the IMU sensor. We anticipate that amateurs can work on receiving telemetry data and sending telecoms over this satellite and analyzing doppler effects in this regard. There is only one command to be uplinked to turn off the satellite if needed. In addition, this satellite has a system that will repeat the incoming data that will serve amateurs. The DIGIPEATING MODE on the satellite will allow forwarding of received messages back to earth to support communication and messaging between radio amateurs (Digital QSOs)"</string>
+    <string name="platform_1">"Platform-1 test"</string>
+    <string name="bz_lora_5">"ZeelandHAB"</string>
+    <string name="bz_lora_6">"ZeelandHAB"</string>
+    <string name="lw_lora_1">"LW-LORA-1"</string>
+    <string name="fossa_sat_b1">"Continuing from our previous launch, here at FOSSA Systems we have some exciting projects coming just around the corner. 2 new satellite’s FOSSASAT-1B and FOSSASAT-12! \n\n1B is an improved FOSSASAT-1 with many changes including some communication protocol modifications including an addition of continuous wave (CW) support, this allows us to transmit morse code. FOSSASAT-2 is an even bigger satellite which has an on-board camera and will be taking pictures of Earth from Space using advanced orientation systems. \n\nCopy of the FossaSat-1 satellite already licensed and launching in November of 2019, it differs in the use of CW instead of RTTY and new solar panels. The following points are our objectives for the mission: The first is the general development of miniaturized and inexpensive satellite systems for space applications using off the shelf component"</string>
+    <string name="fossa_sat_2">"Fossa Systems has developed the FOSSASAT-2 picosatellite platform in response to the current market need for LEO telecommunications constellations and performance-oriented integrated solutions for customer payloads such as radio modules or EO sensors. \n\nHaving learned from the design of the FOSSASAT-1 satellite launched in December of 2019, these latest improvements are reflected with this new architecture. \n\nBased on the PocketQube platform, this system of 5x5x5cm and 250g units hugely reduces the current cost for access to space. Costing under 40,000€ for access to a 500km low-earth orbit with existing brokers. \n\nFOSSASAT-2 uses two pockeqube units (2P) and has a weight of a maximum of 500g, it uses the UHF band for transmission of telemetry and uplink, reaching a maximum of 50kbps using medium-gain antennas. \n\nBase model features a GNSS receiver, GFSK, LoRa &amp; CW Transmission, an ARM STM32 Processor with 512Mb of flash, a high-efficieny MPPT based EPS with a regulated 3.3V common bus and 1W of solar power in direct sunlight."</string>
+    <string name="iris_a">"Demonstrate Internet of Things. \n\nChallenge is the lack of frequency bandwidth for data communication. Key features implemented in payload:\n\n- Auto recognition - find the registered GS by satellite itself. \n- Auto frequency allocation assigned by the connected GS. \n- Handover mechanism from one GS to another.\n\nOdysseus Space is providing pre-launch testing and arranging launch services.\n\nThe mission of the LoRa receiver (433.365MHz) is to collect weak LoRa signals from the ground terminals of amateur radio operators. In order to understand the issue of Doppler frequency shift and path lose, so that the ground signal can be measured on the uplink, stored and forward issue IRIS-A also provide FM voice transponder, allowing the operator to have both digital and voice operation modes. The students can learn to understand about each sub-system of satellite. The issues of Doppler frequency shift have always plagued the applications and creativity of amateur radio operator. Here, The LoRa payload receivers receive signals, through the Store and Forward, all Ham radio operators can have more creativity and application. According to the LoRa standard parameter settings we provide, Ham radio operator upload the data to IRIS then able to get uplink data from IRIS-A website through the store and forward function. In addition. The IRIS-A also provide FM voice transponder, allowing the operator to have both digital and voice operation modes. "</string>
+    <string name="test_satellite">"Dummy Satellite for tinyGS test on the 433.3 ISM Band"</string>
+</resources>

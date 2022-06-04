@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="250dp"
+    android:layout_height="370dp"
+    android:background="@color/white"
+    android:elevation="5dp"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="433dp"
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints">
+
+        <!-- Media -->
+        <ImageView
+            android:id="@+id/listitemImageView1"
+            android:layout_width="match_parent"
+            android:layout_height="170dp"
+            android:contentDescription="image"
+            android:scaleType="centerCrop"
+            android:src="@drawable/norby" />
+
+        <TextView
+            android:id="@+id/listitemTextView1"
+            android:layout_width="228dp"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="Norby"
+            android:textAppearance="?attr/textAppearanceHeadline6" />
+
+        <TextView
+            android:id="@+id/Data"
+            android:layout_width="match_parent"
+            android:layout_height="110dp"
+            android:layout_marginTop="0dp"
+            android:padding="3dp"
+            android:text="@string/norby_b"
+            android:textAppearance="?attr/textAppearanceBody2"
+            android:textColor="?android:attr/textColorSecondary" />
+    </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>

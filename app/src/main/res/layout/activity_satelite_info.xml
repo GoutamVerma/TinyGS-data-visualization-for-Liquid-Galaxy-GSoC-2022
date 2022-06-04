@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+    <include
+        android:id="@+id/top_bar"
+        layout="@layout/activity_top_bar"
+        android:layout_width="1280dp"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="705dp"
+        android:layout_height="574dp"
+        android:orientation="vertical"
+        android:padding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.114"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/top_bar"
+        app:layout_constraintVertical_bias="0.376"
+        tools:ignore="MissingConstraints">
+
+        <!-- Title, secondary and supporting text -->
+
+        <TextView
+            android:id="@+id/satelite_title"
+            android:layout_width="588dp"
+            android:layout_height="75dp"
+            android:paddingLeft="15dp"
+            android:paddingTop="30dp"
+            android:text="Norby"
+            android:textAppearance="?attr/textAppearanceHeadline6"
+            android:textSize="@dimen/satelite_title" />
+
+        <TextView
+            android:id="@+id/satelite_description"
+            android:layout_width="wrap_content"
+            android:layout_height="364dp"
+            android:justificationMode="inter_word"
+            android:paddingLeft="15dp"
+            android:scrollbars="vertical"
+            android:text="@string/norby"
+            android:textAppearance="?attr/textAppearanceBody2"
+            android:textColor="?android:attr/textColorSecondary"
+            android:textSize="@dimen/primary_text_font_size" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="184dp"
+        android:layout_height="68dp"
+        android:layout_marginTop="52dp"
+        android:background="@drawable/button_primary"
+        android:text="TEST"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toEndOf="@+id/linearLayout"
+        app:layout_constraintTop_toBottomOf="@+id/top_bar" />
+
+    <ImageView
+        android:id="@+id/satelite_image"
+        android:layout_width="243dp"
+        android:layout_height="205dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.512"
+        app:layout_constraintStart_toEndOf="@+id/linearLayout"
+        app:layout_constraintTop_toBottomOf="@+id/button2"
+        app:layout_constraintVertical_bias="0.135"
+        />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

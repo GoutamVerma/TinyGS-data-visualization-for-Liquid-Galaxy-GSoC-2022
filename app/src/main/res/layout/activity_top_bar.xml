@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout2"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/background"
+    tools:context=".TopBarActivity">
+
+
+    <Button
+        android:id="@+id/butt_about"
+        android:layout_width="0dp"
+        android:layout_height="81dp"
+        android:layout_weight="1"
+        android:background="@color/white"
+        android:fontFamily="@font/roboto"
+        android:onClick="buttAbout"
+        android:text="@string/menu_about"
+        android:textAllCaps="false"
+        android:textColor="@color/textColorPrimary"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/butt_connect_menu"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ButtonStyle" />
+    <Button
+        android:id="@+id/butt_scn"
+        android:layout_width="0dp"
+        android:layout_height="81dp"
+        android:layout_weight="1"
+        android:background="@color/white"
+        android:fontFamily="@font/roboto"
+        android:onClick="buttCatalog"
+        android:text="@string/menu_help"
+        android:textAllCaps="false"
+        android:textColor="@color/textColorPrimary"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/butt_single_spacecrafts"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="ButtonStyle,MissingConstraints" />
+
+
+    <Button
+        android:id="@+id/butt_single_spacecrafts"
+        android:layout_width="0dp"
+        android:layout_height="81dp"
+        android:layout_weight="1"
+        android:background="@color/white"
+        android:fontFamily="@font/roboto"
+        android:onClick="buttSingleSpacecraft"
+        android:text="@string/menu_satelite"
+        android:textAllCaps="false"
+        android:textColor="@color/textColorPrimary"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/butt_spaceports"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/butt_scn"
+        tools:ignore="ButtonStyle,MissingConstraints" />
+
+
+
+    <Button
+        android:id="@+id/butt_spaceports"
+        android:layout_width="0dp"
+        android:layout_height="81dp"
+        android:layout_weight="1"
+        android:background="@color/colorPrimary"
+        android:fontFamily="@font/roboto"
+        android:onClick="buttSpaceports"
+        android:text="@string/menu_packets"
+        android:textAllCaps="false"
+        android:textColor="@color/textColorPrimary"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/butt_connect_menu"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/butt_single_spacecrafts"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ButtonStyle" />
+
+    <Button
+        android:id="@+id/butt_connect_menu"
+        android:layout_width="0dp"
+        android:layout_height="81dp"
+        android:layout_weight="1"
+        android:background="@color/colorPrimary"
+        android:fontFamily="@font/roboto"
+        android:onClick="buttConnectMenu"
+        android:text="@string/menu_connect"
+        android:textAllCaps="false"
+        android:textColor="@color/textColorPrimary"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/butt_about"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/butt_spaceports"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ButtonStyle" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
