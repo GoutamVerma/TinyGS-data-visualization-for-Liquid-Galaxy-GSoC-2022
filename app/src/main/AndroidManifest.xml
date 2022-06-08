@@ -17,7 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/TinyGSVisualizationTool">
         <activity android:name=".DemoThread"></activity>
-        <activity android:name="com.Goutam.TinygsDataVisualization.PacketsActivity" />
+        <activity android:name="com.Goutam.TinygsDataVisualization.Packets.PacketsActivity" />
         <activity
             android:name="com.Goutam.TinygsDataVisualization.CatalogActivity"
             android:windowSoftInputMode="stateHidden" />

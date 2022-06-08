@@ -1,11 +1,25 @@
-package com.Goutam.TinygsDataVisualization;
+package com.Goutam.TinygsDataVisualization.Packets;
 
 import android.app.Dialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
+import com.Goutam.TinygsDataVisualization.R;
+import com.Goutam.TinygsDataVisualization.TopBarActivity;
 import com.Goutam.TinygsDataVisualization.create.utility.model.ActionController;
+
+import org.json.JSONException;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
 
 public class PacketsActivity extends TopBarActivity {
     private static final String TAG_DEBUG = "SpaceportsActivity";
@@ -19,6 +33,41 @@ public class PacketsActivity extends TopBarActivity {
         setContentView(R.layout.activity_packets);
         View topBar = findViewById(R.id.top_bar);
         buttSpaceports = topBar.findViewById(R.id.butt_spaceports);
+        gets_data();
+    }
+
+    public void gets_data(){
+      Thread t1 = new Thread(new Runnable() {
+          @Override
+          public void run() {
+              try
+              {
+                  StringBuilder content = new StringBuilder();
+                  String output  = "https://api.tinygs.com/v1/packets";
+                  URL url = new URL(output); // creating a url object
+                  URLConnection urlConnection = url.openConnection(); // creating a urlconnection object
+                  BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+                  String line;
+                  // reading from the urlconnection using the bufferedreader
+                  while ((line = bufferedReader.readLine()) != null)
+                  {
+                      content.append(line + "\n");
+                  }
+                  bufferedReader.close();
+                  JSONObject obj=(JSONObject) JSONValue.parse(content.toString());
+                  JSONArray arr=(JSONArray)obj.get("packets");
+                  for(int i=0;i<50;i++){
+                      JSONObject obj1 = (JSONObject) JSONValue.parse(arr.get(i).toString());
+                      System.out.println(obj1.get("id"));
+                  }
+              }
+              catch(IOException e)
+              {
+                 }
+          }
+      });
+      t1.start();
+
     }
 
     public void sendBaikonur(View view) {

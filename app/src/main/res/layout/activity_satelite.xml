@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    tools:context=".PacketsActivity">
+    tools:context=".Packets.PacketsActivity">
 
     <include
         android:id="@+id/top_bar"
@@ -18,7 +18,7 @@
         android:layout_width="1016dp"
         android:layout_height="435dp"
         android:layout_marginTop="28dp"
-        android:horizontalSpacing="5dp"
+        android:horizontalSpacing="7dp"
         android:numColumns="4"
         android:verticalSpacing="12dp"
         app:layout_constraintBottom_toBottomOf="parent"

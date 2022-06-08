@@ -27,7 +27,7 @@
             android:id="@+id/listitemTextView1"
             android:layout_width="228dp"
             android:layout_height="wrap_content"
-            android:padding="5dp"
+            android:padding="7dp"
             android:text="Norby"
             android:textAppearance="?attr/textAppearanceHeadline6" />
 
@@ -36,7 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="110dp"
             android:layout_marginTop="0dp"
-            android:padding="3dp"
+            android:padding="5dp"
             android:text="@string/norby_b"
             android:textAppearance="?attr/textAppearanceBody2"
             android:textColor="?android:attr/textColorSecondary" />
