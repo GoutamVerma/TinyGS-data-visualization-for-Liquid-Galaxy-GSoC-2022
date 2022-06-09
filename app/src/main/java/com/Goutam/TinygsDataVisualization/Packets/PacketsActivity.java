@@ -18,14 +18,17 @@ import org.json.simple.JSONValue;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.sql.Array;
 
 public class PacketsActivity extends TopBarActivity {
     private static final String TAG_DEBUG = "SpaceportsActivity";
     public static final String EXTRA_MESSAGE = "com.example.orbitsatellitevisualizer.MESSAGE";
     private Dialog dialog;
     private Button buttSpaceports;
+    public String [] id = new String[50];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,41 +36,87 @@ public class PacketsActivity extends TopBarActivity {
         setContentView(R.layout.activity_packets);
         View topBar = findViewById(R.id.top_bar);
         buttSpaceports = topBar.findViewById(R.id.butt_spaceports);
-        gets_data();
+        gets_id();
     }
 
-    public void gets_data(){
-      Thread t1 = new Thread(new Runnable() {
-          @Override
-          public void run() {
-              try
-              {
-                  StringBuilder content = new StringBuilder();
-                  String output  = "https://api.tinygs.com/v1/packets";
-                  URL url = new URL(output); // creating a url object
-                  URLConnection urlConnection = url.openConnection(); // creating a urlconnection object
-                  BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
-                  String line;
-                  // reading from the urlconnection using the bufferedreader
-                  while ((line = bufferedReader.readLine()) != null)
-                  {
-                      content.append(line + "\n");
-                  }
-                  bufferedReader.close();
-                  JSONObject obj=(JSONObject) JSONValue.parse(content.toString());
-                  JSONArray arr=(JSONArray)obj.get("packets");
-                  for(int i=0;i<50;i++){
-                      JSONObject obj1 = (JSONObject) JSONValue.parse(arr.get(i).toString());
-                      System.out.println(obj1.get("id"));
+    public void gets_id(){
+        Thread t1 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try
+                {
+                    StringBuilder content = new StringBuilder();
+                    String output  = "https://api.tinygs.com/v1/packets";
+                    URL url = new URL(output); // creating a url object
+                    URLConnection urlConnection = url.openConnection(); // creating a urlconnection object
+                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+                    String line;
+                    // reading from the urlconnection using the bufferedreader
+                    while ((line = bufferedReader.readLine()) != null)
+                    {
+                        content.append(line + "\n");
+                    }
+                    bufferedReader.close();
+                    JSONObject obj=(JSONObject) JSONValue.parse(content.toString());
+                    JSONArray arr=(JSONArray)obj.get("packets");
+                    for(int i=0;i<50;i++){
+                        JSONObject obj1 = (JSONObject) JSONValue.parse(arr.get(i).toString());
+                        id[i] = (String) obj1.get("id");
+                        System.out.println(obj1.get("id"));
+                    }
+                }
+                catch(IOException e)
+                {
+                }
+            }
+        });
+        t1.start();
+        try {
+            t1.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        get_id();
+    }
+
+    public void get_id(){
+          Thread t2 = new Thread(new Runnable() {
+              @Override
+              public void run() {
+                  try {
+                      for (int i = 0; i < 50; i++) {
+                          StringBuilder content = new StringBuilder();
+                          if(id[i]==null){
+                              continue;
+                          }
+                          String output = "https://api.tinygs.com/v1/packet/" + id[i];
+                          System.out.println(output);
+                          URL url = new URL(output); // creating a url object
+                          URLConnection urlConnection = url.openConnection(); // creating a urlconnection object
+                          BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+                          String line;
+                          // reading from the urlconnection using the bufferedreader
+                          while ((line = bufferedReader.readLine()) != null) {
+                              content.append(line + "\n");
+                          }
+                          bufferedReader.close();
+                          JSONObject obj = (JSONObject) JSONValue.parse(content.toString());
+                          String mode_name = (String) obj.get("mode");
+                          System.out.println(mode_name + " " + obj.get("freq") + " " + obj.get("sf") + " " + obj.get("bw") + " " + obj.get("cr") + " " + " " + " " + obj.get("tinygsBatCap") + " " + obj.get("tinygsTemp") + " " + obj.get("tinyTxTemp"));
+                      }
+                  } catch (MalformedURLException e) {
+                      e.printStackTrace();
+                  } catch (IOException e) {
+                      e.printStackTrace();
                   }
               }
-              catch(IOException e)
-              {
-                 }
-          }
-      });
-      t1.start();
-
+          });
+          t2.start();
+        try {
+            t2.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public void sendBaikonur(View view) {
