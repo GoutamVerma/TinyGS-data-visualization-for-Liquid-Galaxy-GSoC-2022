@@ -33,9 +33,13 @@ public class packet_adapter extends ArrayAdapter<packet_card_model> {
         TextView courseTV = listitemView.findViewById(R.id.listitemtitle);
         TextView courseTVd = listitemView.findViewById(R.id.packet_mode);
         TextView station = listitemView.findViewById(R.id.station_received);
-        courseTV.setText("\uD83D\uDCFB"+packetcardmodel.getCourse_name());
+        TextView completedata = listitemView.findViewById(R.id.packet_brief_data);
+
+        courseTV.setText("\uD83D\uDEF0 "+packetcardmodel.getCourse_name());
         courseTVd.setText(packetcardmodel.getCourse_data());
         station.setText(packetcardmodel.get_station()+" Stations");
+        completedata.setText(packetcardmodel.get_satelite_data());
+
         return listitemView;
     }
 }

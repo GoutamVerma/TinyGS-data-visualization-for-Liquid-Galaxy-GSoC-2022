@@ -62,73 +62,73 @@ public class PacketsActivity extends TopBarActivity {
             progressDialog.setCancelable(false);
             progressDialog.setContentView(R.layout.progress_dialog);
             progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-            t1.start();
-            try {
-                t1.join();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            updater();
+            get_Data();
         }
         else{
             CustomDialogUtility.showDialog(PacketsActivity.this,"Internet not connected");
         }
     }
+    public void get_Data() {
         Thread t1 = new Thread(new Runnable() {
             @Override
             public void run() {
-                try
-                {
+                try {
                     StringBuilder content = new StringBuilder();
-                    String output  = "https://api.tinygs.com/v1/packets";
+                    String output = "https://api.tinygs.com/v1/packets";
                     URL url = new URL(output); // creating a url object
                     URLConnection urlConnection = url.openConnection(); // creating a urlconnection object
                     BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
                     String line;
                     // reading from the urlconnection using the bufferedreader
-                    while ((line = bufferedReader.readLine()) != null)
-                    {
+                    while ((line = bufferedReader.readLine()) != null) {
                         content.append(line + "\n");
                     }
                     bufferedReader.close();
-                    JSONObject obj=(JSONObject) JSONValue.parse(content.toString());
-                    JSONArray arr=(JSONArray)obj.get("packets");
-                    for(int i=0;i<50;i++){
+                    JSONObject obj = (JSONObject) JSONValue.parse(content.toString());
+                    JSONArray arr = (JSONArray) obj.get("packets");
+                    for (int i = 0; i < 50; i++) {
                         List<String> data = new ArrayList<String>();
                         JSONObject obj1 = (JSONObject) JSONValue.parse(arr.get(i).toString());
-                        JSONObject arr1=(JSONObject)obj1.get("parsed");
+                        JSONObject arr1 = (JSONObject) obj1.get("parsed");
                         JSONObject pay = (JSONObject) arr1.get("payload");
-                        boolean mode = obj1.get("mode") == null ?data.add("null") : data.add(obj1.get("mode").toString());
-                        boolean freq = obj1.get("freq") == null ?data.add("null") : data.add(obj1.get("freq").toString());
-                        boolean sf = obj1.get("sf") == null ?data.add("null") : data.add(obj1.get("sf").toString());
-                        boolean bw = obj1.get("bw") == null ?data.add("null") : data.add(obj1.get("bw").toString());
-                        boolean cr = obj1.get("cr") == null ?data.add("null") : data.add(obj1.get("cr").toString());
-                        boolean name = obj1.get("satDisplayName") == null ?data.add("null") : data.add(obj1.get("satDisplayName").toString());
-                        boolean loadpower = pay.get("tinygsTxPower") == null ?data.add("null") : data.add(pay.get("tinygsTxPower").toString());
-                        boolean txpower = pay.get("tinygsTxPower") == null ?data.add("null") : data.add(pay.get("tinygsTxPower").toString());
-                        boolean gstemp = pay.get("tinygsTemp") == null ?data.add("null") : data.add(pay.get("tinygsTemp").toString());
-                        boolean chargepower = pay.get("tinygsChargePower") == null ?data.add("null") :data.add(pay.get("tinygsChargePower").toString());
-                        boolean mainvolt = pay.get("tinygsMainVoltage") == null ?data.add("null") : data.add(pay.get("tinygsMainVoltage").toString());
-                        boolean sat = obj1.get("satPos") == null ?data.add("null") : data.add(obj1.get("satPos").toString());
-                        boolean number = obj1.get("stationNumber") == null ?data.add("null") : data.add(obj1.get("stationNumber").toString());
-                        packets.put(i,data);
-                        System.out.println(i+ "  " +data);
-                    }
-                }
-                catch(IOException e)
-                {
+                        boolean mode = obj1.get("mode") == null ? data.add("null") : data.add(obj1.get("mode").toString());
+                        boolean freq = obj1.get("freq") == null ? data.add("null") : data.add(obj1.get("freq").toString());
+                        boolean sf = obj1.get("sf") == null ? data.add("null") : data.add(obj1.get("sf").toString());
+                        boolean bw = obj1.get("bw") == null ? data.add("null") : data.add(obj1.get("bw").toString());
+                        boolean cr = obj1.get("cr") == null ? data.add("null") : data.add(obj1.get("cr").toString());
+                        boolean name = obj1.get("satDisplayName") == null ? data.add("null") : data.add(obj1.get("satDisplayName").toString());
+                        boolean loadpower = pay.get("tinygsTxPower") == null ? data.add("null") : data.add(pay.get("tinygsTxPower").toString());
+                        boolean txpower = pay.get("tinygsTxPower") == null ? data.add("null") : data.add(pay.get("tinygsTxPower").toString());
+                        boolean gstemp = pay.get("tinygsTemp") == null ? data.add("null") : data.add(pay.get("tinygsTemp").toString());
+                        boolean chargepower = pay.get("tinygsChargePower") == null ? data.add("null") : data.add(pay.get("tinygsChargePower").toString());
+                        boolean mainvolt = pay.get("tinygsMainVoltage") == null ? data.add("null") : data.add(pay.get("tinygsMainVoltage").toString());
+                        boolean sat = obj1.get("satPos") == null ? data.add("null") : data.add(obj1.get("satPos").toString());
+                        boolean number = obj1.get("stationNumber") == null ? data.add("null") : data.add(obj1.get("stationNumber").toString());
+                        packets.put(i, data);
+                        System.out.println(i + "  " + data);
+                     }
+                     updater();
+                } catch (IOException e) {
 
                 }
             }
         });
-    public void updater(){
-        for(int i=0;i<50;i++) {
-            packetcardmodelArrayList.add(new packet_card_model(packets.get(i).get(5), packets.get(i).get(0)+"@"+packets.get(i).get(1),packets.get(i).get(12)));
-        }
-        packet_adapter adapter = new packet_adapter(PacketsActivity.this, packetcardmodelArrayList);
-        grid.setAdapter(adapter);
-        progressDialog.dismiss();
+        t1.start();
     }
+    public void updater(){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                for(int i=0;i<50;i++) {
+                    packetcardmodelArrayList.add(new packet_card_model(packets.get(i).get(5), packets.get(i).get(0)+"@"+packets.get(i).get(1),packets.get(i).get(12),"\uD83D\uDCFB "+packets.get(i).get(6)+"mW \uD83C\uDF21 "+packets.get(i).get(8)+"ºC \uD83D\uDEF0 "+packets.get(i).get(10)+"mV ⛽️ not avaiable mW \uD83C\uDF21"+packets.get(i).get(8)+"ºC ☀️notavaiable \uD83D\uDD0B notavaiable mAh \uD83D\uDD0C "+packets.get(i).get(9)+"mW \uD83C\uDF21 Board PMM: "+packets.get(i).get(2)+"ºC PAM: 5ºC PDM: notavaiableºC"));
+                }
+                packet_adapter adapter = new packet_adapter(PacketsActivity.this, packetcardmodelArrayList);
+                grid.setAdapter(adapter);
+                progressDialog.dismiss();
+
+            }
+        });
+        }
     public void sendBaikonur(View view) {
         String imagePath = "/baikonur_sp.jpeg";
         String name = "BAIKONUR COSMODROME";

@@ -16,12 +16,12 @@
 
     <GridView
         android:id="@+id/GridviewPakcets"
-        android:layout_width="940dp"
-        android:layout_height="463dp"
+        android:layout_width="927dp"
+        android:layout_height="430dp"
         android:layout_marginTop="28dp"
-        android:horizontalSpacing="7dp"
+        android:horizontalSpacing="5dp"
         android:numColumns="1"
-        android:verticalSpacing="12dp"
+        android:verticalSpacing="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
