@@ -1,16 +1,23 @@
 package com.Goutam.TinygsDataVisualization.Packets;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.GridView;
 import android.widget.Toast;
 
 import com.Goutam.TinygsDataVisualization.R;
+import com.Goutam.TinygsDataVisualization.Satelite.Satelite_Adapter;
+import com.Goutam.TinygsDataVisualization.Satelite.Satelite_card_model;
 import com.Goutam.TinygsDataVisualization.TopBarActivity;
 import com.Goutam.TinygsDataVisualization.create.utility.model.ActionController;
-
-import org.json.JSONException;
+import com.Goutam.TinygsDataVisualization.dialog.CustomDialogUtility;
+import com.Goutam.TinygsDataVisualization.Packets.packet_adapter;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
@@ -33,8 +40,11 @@ public class PacketsActivity extends TopBarActivity {
     public static final String EXTRA_MESSAGE = "com.example.orbitsatellitevisualizer.MESSAGE";
     private Dialog dialog;
     private Button buttSpaceports;
+    public ProgressDialog progressDialog;
     public String [] id = new String[50];
     public HashMap<Integer,List<String>> packets = new HashMap<Integer, List<String>>();
+    public GridView grid;
+    ArrayList<packet_card_model> packetcardmodelArrayList = new ArrayList<packet_card_model>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,9 +52,28 @@ public class PacketsActivity extends TopBarActivity {
         setContentView(R.layout.activity_packets);
         View topBar = findViewById(R.id.top_bar);
         buttSpaceports = topBar.findViewById(R.id.butt_spaceports);
-        t1.start();
+        grid = findViewById(R.id.GridviewPakcets);
+        ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        if(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+            //we are connected to a network
+            progressDialog = new ProgressDialog(PacketsActivity.this);
+            progressDialog.show();
+            progressDialog.setCancelable(false);
+            progressDialog.setContentView(R.layout.progress_dialog);
+            progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+            t1.start();
+            try {
+                t1.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            updater();
+        }
+        else{
+            CustomDialogUtility.showDialog(PacketsActivity.this,"Internet not connected");
+        }
     }
-
         Thread t1 = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -69,7 +98,6 @@ public class PacketsActivity extends TopBarActivity {
                         JSONObject obj1 = (JSONObject) JSONValue.parse(arr.get(i).toString());
                         JSONObject arr1=(JSONObject)obj1.get("parsed");
                         JSONObject pay = (JSONObject) arr1.get("payload");
-//                        JSONObject parsedd = (JSONObject) JSONValue.parse(arr1.toString());
                         boolean mode = obj1.get("mode") == null ?data.add("null") : data.add(obj1.get("mode").toString());
                         boolean freq = obj1.get("freq") == null ?data.add("null") : data.add(obj1.get("freq").toString());
                         boolean sf = obj1.get("sf") == null ?data.add("null") : data.add(obj1.get("sf").toString());
@@ -85,15 +113,22 @@ public class PacketsActivity extends TopBarActivity {
                         boolean number = obj1.get("stationNumber") == null ?data.add("null") : data.add(obj1.get("stationNumber").toString());
                         packets.put(i,data);
                         System.out.println(i+ "  " +data);
-
                     }
                 }
                 catch(IOException e)
                 {
+
                 }
             }
         });
-
+    public void updater(){
+        for(int i=0;i<50;i++) {
+            packetcardmodelArrayList.add(new packet_card_model(packets.get(i).get(5), packets.get(i).get(0)+"@"+packets.get(i).get(1),packets.get(i).get(12)));
+        }
+        packet_adapter adapter = new packet_adapter(PacketsActivity.this, packetcardmodelArrayList);
+        grid.setAdapter(adapter);
+        progressDialog.dismiss();
+    }
     public void sendBaikonur(View view) {
         String imagePath = "/baikonur_sp.jpeg";
         String name = "BAIKONUR COSMODROME";

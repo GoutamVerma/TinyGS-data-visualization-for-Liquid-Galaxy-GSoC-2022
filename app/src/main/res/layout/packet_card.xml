@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    android:background="@color/white"
+    android:elevation="5dp"
+    >
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/listitemtitle"
+            android:layout_width="229dp"
+            android:layout_height="36dp"
+            android:layout_marginTop="16dp"
+            android:padding="5dp"
+            android:text="Norby"
+            android:textAppearance="?attr/textAppearanceHeadline6"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/mode"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="Mode"
+            android:textSize="13dp"
+            app:layout_constraintStart_toEndOf="@+id/listitemtitle"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/recieved"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="Recieved By"
+            android:textSize="13dp"
+            app:layout_constraintStart_toEndOf="@+id/mode"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/packet_mode"
+            android:layout_width="170dp"
+            android:layout_height="43dp"
+            android:text="TextView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/listitemtitle"
+            app:layout_constraintTop_toBottomOf="@+id/mode"
+            app:layout_constraintVertical_bias="1.0"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/station_received"
+            android:layout_width="171dp"
+            android:layout_height="43dp"
+            android:text="TextView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/packet_mode"
+            app:layout_constraintTop_toBottomOf="@+id/recieved"
+            app:layout_constraintVertical_bias="0.727" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
