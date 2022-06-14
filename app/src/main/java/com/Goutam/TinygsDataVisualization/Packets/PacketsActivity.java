@@ -7,8 +7,10 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.Goutam.TinygsDataVisualization.R;
@@ -63,10 +65,21 @@ public class PacketsActivity extends TopBarActivity {
             progressDialog.setContentView(R.layout.progress_dialog);
             progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
             get_Data();
+            grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    setContentView(R.layout.activity_packets_info);
+                    TextView name = findViewById(R.id.packet_name);
+                    TextView data = findViewById(R.id.packet_description);
+                    name.setText(packets.get(i).get(5));
+                    data.setText(packets.get(i).get(0)+"@"+ packets.get(i).get(1) + packets.get(i).get(12)+"\n\uD83D\uDCFB" + packets.get(i).get(6) +"mW \uD83C\uDF21 "+packets.get(i).get(8)+"ºC \uD83D\uDEF0 "+packets.get(i).get(10)+"\nmV ⛽️ not avaiable mW \uD83C\uDF21"+packets.get(i).get(8)+"ºC ☀️notavaiable \uD83D\uDD0B notavaiable mAh \uD83D\uDD0C "+packets.get(i).get(9)+"mW \uD83C\uDF21 Board PMM: "+packets.get(i).get(2)+"ºC PAM: 5ºC PDM: notavaiableºC"+ "\n\nSatellite position \n" + packets.get(i).get(11));
+                }
+            });
         }
         else{
             CustomDialogUtility.showDialog(PacketsActivity.this,"Internet not connected");
         }
+
     }
     public void get_Data() {
         Thread t1 = new Thread(new Runnable() {
@@ -125,7 +138,6 @@ public class PacketsActivity extends TopBarActivity {
                 packet_adapter adapter = new packet_adapter(PacketsActivity.this, packetcardmodelArrayList);
                 grid.setAdapter(adapter);
                 progressDialog.dismiss();
-
             }
         });
         }
