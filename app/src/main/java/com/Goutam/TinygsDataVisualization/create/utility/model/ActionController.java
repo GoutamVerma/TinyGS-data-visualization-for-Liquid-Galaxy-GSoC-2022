@@ -590,6 +590,26 @@ public class ActionController {
         lgConnectionManager.addCommandToLG(lgCommand);
     }
 
+    public void sendPacket(AppCompatActivity activity, String description, String name, double[] lla_coords, String imagePath){
+        createResourcesFolder();
+        cleanFileKMLs(0);
+        String kml = "";
+
+        System.out.println(kml);
+        System.out.println(name.split(" ")[0]);
+
+        LGCommand lgCommand = new LGCommand(kml, LGCommand.CRITICAL_MESSAGE,(String result) -> {
+        });
+        System.out.println(lgCommand);
+        LGConnectionManager lgConnectionManager = LGConnectionManager.getInstance();
+        lgConnectionManager.startConnection();
+        lgConnectionManager.addCommandToLG(lgCommand);
+
+        startOrbit(null);
+
+        writeSpaceport(name.split(" ")[0]);
+    }
+
     public void sendSpaceportFile(AppCompatActivity activity, String description, String name, double[] lla_coords, String imagePath) {
 
         createResourcesFolder();

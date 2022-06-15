@@ -3,6 +3,7 @@ package com.Goutam.TinygsDataVisualization.Packets;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -14,12 +15,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.Goutam.TinygsDataVisualization.R;
-import com.Goutam.TinygsDataVisualization.Satelite.Satelite_Adapter;
-import com.Goutam.TinygsDataVisualization.Satelite.Satelite_card_model;
 import com.Goutam.TinygsDataVisualization.TopBarActivity;
 import com.Goutam.TinygsDataVisualization.create.utility.model.ActionController;
 import com.Goutam.TinygsDataVisualization.dialog.CustomDialogUtility;
-import com.Goutam.TinygsDataVisualization.Packets.packet_adapter;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
@@ -27,15 +26,11 @@ import org.json.simple.JSONValue;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
-import java.util.Map;
 
 public class PacketsActivity extends TopBarActivity {
     private static final String TAG_DEBUG = "SpaceportsActivity";
@@ -72,7 +67,8 @@ public class PacketsActivity extends TopBarActivity {
                     TextView name = findViewById(R.id.packet_name);
                     TextView data = findViewById(R.id.packet_description);
                     name.setText(packets.get(i).get(5));
-                    data.setText(packets.get(i).get(0)+"@"+ packets.get(i).get(1) + packets.get(i).get(12)+"\n\uD83D\uDCFB" + packets.get(i).get(6) +"mW \uD83C\uDF21 "+packets.get(i).get(8)+"ºC \uD83D\uDEF0 "+packets.get(i).get(10)+"\nmV ⛽️ not avaiable mW \uD83C\uDF21"+packets.get(i).get(8)+"ºC ☀️notavaiable \uD83D\uDD0B notavaiable mAh \uD83D\uDD0C "+packets.get(i).get(9)+"mW \uD83C\uDF21 Board PMM: "+packets.get(i).get(2)+"ºC PAM: 5ºC PDM: notavaiableºC"+ "\n\nSatellite position \n" + packets.get(i).get(11));
+                    data.setText("\n"+packets.get(i).get(0)+"@"+ packets.get(i).get(1) + packets.get(i).get(12)+"\n\n\uD83D\uDCFB" + packets.get(i).get(6) +"mW \uD83C\uDF21 "+packets.get(i).get(8)+"ºC \uD83D\uDEF0 "+packets.get(i).get(10)+"\nmV ⛽️ not avaiable mW \uD83C\uDF21"+packets.get(i).get(8)+"ºC ☀️notavaiable \uD83D\uDD0B notavaiable mAh \uD83D\uDD0C "+packets.get(i).get(9)+"mW \uD83C\uDF21 Board PMM: "+packets.get(i).get(2)+"ºC PAM: 5ºC PDM: notavaiableºC"+ "\n\nSatellite position \n" + packets.get(i).get(11));
+                    sendBaikonur(view);
                 }
             });
         }
