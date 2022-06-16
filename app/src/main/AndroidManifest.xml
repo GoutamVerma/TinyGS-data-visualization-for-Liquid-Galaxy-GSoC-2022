@@ -27,6 +27,7 @@
         <activity android:name="com.Goutam.TinygsDataVisualization.AboutActivity" />
         <activity android:name="com.Goutam.TinygsDataVisualization.Satelite.SateliteActivity" />
         <activity android:name="com.Goutam.TinygsDataVisualization.TopBarActivity" />
+        <activity android:name="com.Goutam.TinygsDataVisualization.Packets.packet_activity_test"/>
         <activity android:name="com.Goutam.TinygsDataVisualization.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
