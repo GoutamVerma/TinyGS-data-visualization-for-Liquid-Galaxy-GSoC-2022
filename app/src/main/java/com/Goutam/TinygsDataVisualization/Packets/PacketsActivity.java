@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.Goutam.TinygsDataVisualization.R;
+import com.Goutam.TinygsDataVisualization.Satelite.SateliteActivity;
 import com.Goutam.TinygsDataVisualization.TopBarActivity;
 import com.Goutam.TinygsDataVisualization.create.utility.model.ActionController;
 import com.Goutam.TinygsDataVisualization.dialog.CustomDialogUtility;
@@ -68,7 +69,8 @@ public class PacketsActivity extends TopBarActivity {
                     TextView data = findViewById(R.id.packet_description);
                     name.setText(packets.get(i).get(5));
                     data.setText("\n"+packets.get(i).get(0)+"@"+ packets.get(i).get(1) + packets.get(i).get(12)+"\n\n\uD83D\uDCFB" + packets.get(i).get(6) +"mW \uD83C\uDF21 "+packets.get(i).get(8)+"ºC \uD83D\uDEF0 "+packets.get(i).get(10)+"\nmV ⛽️ not avaiable mW \uD83C\uDF21"+packets.get(i).get(8)+"ºC ☀️notavaiable \uD83D\uDD0B notavaiable mAh \uD83D\uDD0C "+packets.get(i).get(9)+"mW \uD83C\uDF21 Board PMM: "+packets.get(i).get(2)+"ºC PAM: 5ºC PDM: notavaiableºC"+ "\n\nSatellite position \n" + packets.get(i).get(11));
-                    sendBaikonur(view);
+                    Button btn = findViewById(R.id.test);
+                    btn.setOnClickListener(view1 -> sendPacket());
                 }
             });
         }
@@ -137,6 +139,15 @@ public class PacketsActivity extends TopBarActivity {
             }
         });
         }
+
+    public void sendPacket(){
+        String imagePath = "/baikonur_sp.jpeg";
+        String name = "BAIKONUR COSMODROME";
+        String description = "This is the Baikonur Cosmodrome";
+        double[] lla_coords = {45.9645249018041,63.30353977828937,0};
+        ActionController.getInstance().sendPacket(PacketsActivity.this, description, name, lla_coords, imagePath);
+    }
+
     public void sendBaikonur(View view) {
         String imagePath = "/baikonur_sp.jpeg";
         String name = "BAIKONUR COSMODROME";

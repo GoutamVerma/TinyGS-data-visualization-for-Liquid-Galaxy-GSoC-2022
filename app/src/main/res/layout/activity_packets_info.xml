@@ -15,17 +15,17 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="705dp"
-        android:layout_height="574dp"
+        android:layout_width="641dp"
+        android:layout_height="303dp"
+        android:background="@color/white"
         android:orientation="vertical"
         android:padding="16dp"
-        android:background="@color/background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.114"
+        app:layout_constraintHorizontal_bias="0.164"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/top_bar"
-        app:layout_constraintVertical_bias="0.376"
+        app:layout_constraintVertical_bias="0.125"
         tools:ignore="MissingConstraints">
 
         <!-- Title, secondary and supporting text -->
@@ -44,6 +44,7 @@
             android:id="@+id/packet_description"
             android:layout_width="wrap_content"
             android:layout_height="364dp"
+            android:background="@color/white"
             android:justificationMode="inter_word"
             android:paddingLeft="15dp"
             android:scrollbars="vertical"
@@ -56,14 +57,15 @@
 
     <Button
         android:id="@+id/test"
-        android:layout_width="184dp"
-        android:layout_height="68dp"
-        android:layout_marginTop="52dp"
+        android:layout_width="202dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="48dp"
         android:background="@drawable/button_primary"
         android:text="TEST"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintHorizontal_bias="0.262"
         app:layout_constraintStart_toEndOf="@+id/linearLayout"
         app:layout_constraintTop_toBottomOf="@+id/top_bar" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
