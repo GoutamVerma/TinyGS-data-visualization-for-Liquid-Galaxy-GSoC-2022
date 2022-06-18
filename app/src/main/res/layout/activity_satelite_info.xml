@@ -17,7 +17,6 @@
         android:layout_width="705dp"
         android:layout_height="574dp"
         android:orientation="vertical"
-        android:background="@color/white"
         android:padding="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

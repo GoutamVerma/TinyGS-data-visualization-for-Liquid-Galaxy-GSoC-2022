@@ -38,24 +38,155 @@ public class ActionBuildCommandUtility {
         String startCommand =  "echo '" +
                 "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                 "<kml xmlns=\"http://www.opengis.net/kml/2.2\"\n" +
-                "xmlns:atom=\"http://www.w3.org/2005/Atom\" \n" +
-                " xmlns:gx=\"http://www.google.com/kml/ext/2.2\"> \n" +
-                "<Document id=\"slave_3\">\n" +
-                " <Folder> \n" +
-                " <name>Logos</name> \n" +
-                "  <ScreenOverlay>\n" +
-                "  <name>Logo</name> \n" +
-                "  <Icon> \n" +
-                "   <href>http://lg1:81/resources/logos.png</href> \n" +
-                "  </Icon> \n" +
-                "  <overlayXY x=\"0\" y=\"1\" xunits=\"fraction\" yunits=\"fraction\"/> \n" +
-                "  <screenXY x=\"0.02\" y=\"0.95\" xunits=\"fraction\" yunits=\"fraction\"/> \n" +
-                "  <rotationXY x=\"0\" y=\"0\" xunits=\"fraction\" yunits=\"fraction\"/> \n" +
-                "  <size x=\"0.4\" y=\"0.2\" xunits=\"fraction\" yunits=\"fraction\"/> \n" +
-                "  </ScreenOverlay> \n" +
-                " </Folder> \n" +
-                "</Document> \n" +
-                "</kml>\n" +
+                " xmlns:gx=\"http://www.google.com/kml/ext/2.2\">\n" +
+                "\n" +
+                "<Document>\n" +
+                "  <name>A tour and some features</name>\n" +
+                "  <open>1</open>\n" +
+                "\n" +
+                "  <gx:Tour>\n" +
+                "    <name>Play me!</name>\n" +
+                "    <gx:Playlist>\n" +
+                "\n" +
+                "      <gx:FlyTo>\n" +
+                "        <gx:duration>5.0</gx:duration>\n" +
+                "        <!-- bounce is the default flyToMode -->\n" +
+                "        <Camera>\n" +
+                "          <longitude>170.157</longitude>\n" +
+                "          <latitude>-43.671</latitude>\n" +
+                "          <altitude>9700</altitude>\n" +
+                "          <heading>-6.333</heading>\n" +
+                "          <tilt>33.5</tilt>\n" +
+                "        </Camera>\n" +
+                "      </gx:FlyTo>\n" +
+                "\n" +
+                "      <gx:Wait>\n" +
+                "        <gx:duration>1.0</gx:duration>\n" +
+                "      </gx:Wait>\n" +
+                "\n" +
+                "      <gx:FlyTo>\n" +
+                "        <gx:duration>6.0</gx:duration>\n" +
+                "        <Camera>\n" +
+                "          <longitude>174.063</longitude>\n" +
+                "          <latitude>-39.663</latitude>\n" +
+                "          <altitude>18275</altitude>\n" +
+                "          <heading>-4.921</heading>\n" +
+                "          <tilt>65</tilt>\n" +
+                "          <altitudeMode>absolute</altitudeMode>\n" +
+                "        </Camera>\n" +
+                "      </gx:FlyTo>\n" +
+                "\n" +
+                "      <gx:FlyTo>\n" +
+                "        <gx:duration>3.0</gx:duration>\n" +
+                "        <gx:flyToMode>smooth</gx:flyToMode>\n" +
+                "        <LookAt>\n" +
+                "          <longitude>174.007</longitude>\n" +
+                "          <latitude>-39.279</latitude>\n" +
+                "          <altitude>0</altitude>\n" +
+                "          <heading>112.817</heading>\n" +
+                "          <tilt>68.065</tilt>\n" +
+                "          <range>6811.884</range>\n" +
+                "          <altitudeMode>relativeToGround</altitudeMode>\n" +
+                "        </LookAt>\n" +
+                "      </gx:FlyTo>\n" +
+                "\n" +
+                "      <gx:FlyTo>\n" +
+                "        <gx:duration>3.0</gx:duration>\n" +
+                "        <gx:flyToMode>smooth</gx:flyToMode>\n" +
+                "        <LookAt>\n" +
+                "          <longitude>174.064</longitude>\n" +
+                "          <latitude>-39.321</latitude>\n" +
+                "          <altitude>0</altitude>\n" +
+                "          <heading>-48.463</heading>\n" +
+                "          <tilt>67.946</tilt>\n" +
+                "          <range>4202.579</range>\n" +
+                "          <altitudeMode>relativeToGround</altitudeMode>\n" +
+                "        </LookAt>\n" +
+                "       </gx:FlyTo>\n" +
+                "\n" +
+                "      <gx:FlyTo>\n" +
+                "        <gx:duration>5.0</gx:duration>\n" +
+                "        <LookAt>\n" +
+                "          <longitude>175.365</longitude>\n" +
+                "          <latitude>-36.523</latitude>\n" +
+                "          <altitude>0</altitude>\n" +
+                "          <heading>-95</heading>\n" +
+                "          <tilt>65</tilt>\n" +
+                "          <range>2500</range>\n" +
+                "          <altitudeMode>relativeToGround</altitudeMode>\n" +
+                "        </LookAt>\n" +
+                "      </gx:FlyTo>\n" +
+                "\n" +
+                "      <gx:AnimatedUpdate>\n" +
+                "        <gx:duration>0.0</gx:duration>\n" +
+                "        <Update>\n" +
+                "          <targetHref/>\n" +
+                "          <Change>\n" +
+                "            <Placemark targetId=\"pin2\">\n" +
+                "              <gx:balloonVisibility>1</gx:balloonVisibility>\n" +
+                "            </Placemark>\n" +
+                "          </Change>\n" +
+                "        </Update>\n" +
+                "      </gx:AnimatedUpdate>\n" +
+                "\n" +
+                "      <gx:Wait>\n" +
+                "        <gx:duration>6.0</gx:duration>\n" +
+                "      </gx:Wait>\n" +
+                "\n" +
+                "    </gx:Playlist>\n" +
+                "  </gx:Tour>\n" +
+                "\n" +
+                "  <Folder>\n" +
+                "    <name>Points and polygons</name>\n" +
+                "\n" +
+                "    <Style id=\"pushpin\">\n" +
+                "      <IconStyle>\n" +
+                "        <Icon>\n" +
+                "          <href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>\n" +
+                "        </Icon>\n" +
+                "      </IconStyle>\n" +
+                "    </Style>\n" +
+                "\n" +
+                "    <Placemark id=\"mountainpin1\">\n" +
+                "      <name>New Zealand's Southern Alps</name>\n" +
+                "      <styleUrl>#pushpin</styleUrl>\n" +
+                "      <Point>\n" +
+                "        <coordinates>170.144,-43.605,0</coordinates>\n" +
+                "      </Point>\n" +
+                "    </Placemark>\n" +
+                "\n" +
+                "    <Placemark id=\"pin2\">\n" +
+                "      <name>The End</name>\n" +
+                "      <description>\n" +
+                "        Learn more at http://developers.google.com/kml/documentation\n" +
+                "      </description>\n" +
+                "      <styleUrl>pushpin</styleUrl>\n" +
+                "      <Point>\n" +
+                "        <coordinates>175.370,-36.526,0</coordinates>\n" +
+                "      </Point>\n" +
+                "    </Placemark>\n" +
+                "\n" +
+                "    <Placemark id=\"polygon1\">\n" +
+                "      <name>Polygon</name>\n" +
+                "      <Polygon>\n" +
+                "        <tessellate>1</tessellate>\n" +
+                "        <outerBoundaryIs>\n" +
+                "          <LinearRing>\n" +
+                "            <coordinates>\n" +
+                "              175.365,-36.522,0\n" +
+                "              175.366,-36.530,0\n" +
+                "              175.369,-36.529,0\n" +
+                "              175.366,-36.521,0\n" +
+                "              175.365,-36.522,0\n" +
+                "            </coordinates>\n" +
+                "          </LinearRing>\n" +
+                "        </outerBoundaryIs>\n" +
+                "      </Polygon>\n" +
+                "    </Placemark>\n" +
+                "\n" +
+                "  </Folder>\n" +
+                "</Document>\n" +
+                "</kml>" +
                 "' > " +
                 BASE_PATH +
                 "kml/slave_4.kml";
