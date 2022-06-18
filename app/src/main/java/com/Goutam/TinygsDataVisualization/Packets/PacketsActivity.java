@@ -70,7 +70,12 @@ public class PacketsActivity extends TopBarActivity {
                     name.setText(packets.get(i).get(5));
                     data.setText("\n"+packets.get(i).get(0)+"@"+ packets.get(i).get(1) + packets.get(i).get(12)+"\n\n\uD83D\uDCFB" + packets.get(i).get(6) +"mW \uD83C\uDF21 "+packets.get(i).get(8)+"ºC \uD83D\uDEF0 "+packets.get(i).get(10)+"\nmV ⛽️ not avaiable mW \uD83C\uDF21"+packets.get(i).get(8)+"ºC ☀️notavaiable \uD83D\uDD0B notavaiable mAh \uD83D\uDD0C "+packets.get(i).get(9)+"mW \uD83C\uDF21 Board PMM: "+packets.get(i).get(2)+"ºC PAM: 5ºC PDM: notavaiableºC"+ "\n\nSatellite position \n" + packets.get(i).get(11));
                     Button btn = findViewById(R.id.test);
-                    btn.setOnClickListener(view1 ->  sendStarlink(view));
+                    String sat = packets.get(i).get(11);
+                    String pos[]= sat.split(",");
+                    String lon[]= pos[0].split(":");
+                    String alti[]= pos[1].split(":");
+                    String lat[]= pos[2].split(":");
+                    btn.setOnClickListener(view1 ->  sendISS(view,lon[1],lat[1].substring(0, lat[1].length() - 1),alti[1]));
                 }
             });
         }
@@ -141,8 +146,9 @@ public class PacketsActivity extends TopBarActivity {
         });
         }
 
-    public void sendStarlink(View view) {
-        ActionController.getInstance().sendBalloonWithLogos(PacketsActivity.this);
+
+    public void sendISS(View view,String longi,String lat,String alti) {
+        ActionController.getInstance().sendISSfile(PacketsActivity.this,longi,lat,alti);
     }
 
 
