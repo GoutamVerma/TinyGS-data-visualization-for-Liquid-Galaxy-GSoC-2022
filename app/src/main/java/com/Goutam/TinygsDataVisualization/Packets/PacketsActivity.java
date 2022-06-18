@@ -68,9 +68,25 @@ public class PacketsActivity extends TopBarActivity {
                     TextView name = findViewById(R.id.packet_name);
                     TextView data = findViewById(R.id.packet_description);
                     name.setText(packets.get(i).get(5));
-                    data.setText("\n"+packets.get(i).get(0)+"@"+ packets.get(i).get(1) + packets.get(i).get(12)+"\n\n\uD83D\uDCFB" + packets.get(i).get(6) +"mW \uD83C\uDF21 "+packets.get(i).get(8)+"ºC \uD83D\uDEF0 "+packets.get(i).get(10)+"\nmV ⛽️ not avaiable mW \uD83C\uDF21"+packets.get(i).get(8)+"ºC ☀️notavaiable \uD83D\uDD0B notavaiable mAh \uD83D\uDD0C "+packets.get(i).get(9)+"mW \uD83C\uDF21 Board PMM: "+packets.get(i).get(2)+"ºC PAM: 5ºC PDM: notavaiableºC"+ "\n\nSatellite position \n" + packets.get(i).get(11));
+                    data.setText("Received on: June 18, 2022 5:59 PM\n" +
+                            "LoRa 436.703 Mhz SF: 10 CR: 5 BW: 250 kHz\n" +
+                            "Sat in Umbra \uD83C\uDF0C Eclipse Depth: 40.85º\n" +
+                            "Theoretical coverage 5174 km\n" +
+                            "\n" +
+                            "\uD83D\uDCFB 2000mW \uD83C\uDF21 22ºC\n" +
+                            "\uD83D\uDEF0 8256mV ⛽️ 1385mW \uD83C\uDF2122ºC\n" +
+                            "☀️0mW \uD83D\uDD0B13828mAh \uD83D\uDD0C -1949mW\n" +
+                            "\uD83C\uDF21 Board PMM: 11ºC PAM: 10ºC PDM: 8ºC\n" +
+                            "\uD83C\uDF21 Solar Array X-: -8ºC X+: -9ºC\n" +
+                            "\uD83D\uDCE6: 2045.26784");
+//                    data.setText("\n"+packets.get(i).get(0)+"@"+ packets.get(i).get(1) + packets.get(i).get(12)+"\n\n\uD83D\uDCFB" + packets.get(i).get(6) +"mW \uD83C\uDF21 "+packets.get(i).get(8)+"ºC \uD83D\uDEF0 "+packets.get(i).get(10)+"\nmV ⛽️ not avaiable mW \uD83C\uDF21"+packets.get(i).get(8)+"ºC ☀️notavaiable \uD83D\uDD0B notavaiable mAh \uD83D\uDD0C "+packets.get(i).get(9)+"mW \uD83C\uDF21 Board PMM: "+packets.get(i).get(2)+"ºC PAM: 5ºC PDM: notavaiableºC"+ "\n\nSatellite position \n" + packets.get(i).get(11));
                     Button btn = findViewById(R.id.test);
-                    btn.setOnClickListener(view1 -> sendPacket());
+                    String sat = packets.get(i).get(11);
+                    String pos[]= sat.split(",");
+                    String lon[]= pos[0].split(":");
+                    String alti[]= pos[1].split(":");
+                    String lat[]= pos[2].split(":");
+                    btn.setOnClickListener(view1 ->  sendISS(view,lon[1],lat[1].substring(0, lat[1].length() - 1),alti[1]));
                 }
             });
         }
@@ -88,6 +104,7 @@ public class PacketsActivity extends TopBarActivity {
                     String output = "https://api.tinygs.com/v1/packets";
                     URL url = new URL(output); // creating a url object
                     URLConnection urlConnection = url.openConnection(); // creating a urlconnection object
+                    System.out.println("insides of thread");
                     BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
                     String line;
                     // reading from the urlconnection using the bufferedreader
@@ -140,18 +157,16 @@ public class PacketsActivity extends TopBarActivity {
         });
         }
 
-    public void sendPacket(){
-        String imagePath = "/baikonur_sp.jpeg";
-        String name = "BAIKONUR COSMODROME";
-        String description = "This is the Baikonur Cosmodrome";
-        double[] lla_coords = {45.9645249018041,63.30353977828937,0};
-        ActionController.getInstance().sendPacket(PacketsActivity.this, description, name, lla_coords, imagePath);
+
+    public void sendISS(View view,String longi,String lat,String alti) {
+        ActionController.getInstance().sendISSfile(PacketsActivity.this,longi,lat,alti);
     }
+
 
     public void sendBaikonur(View view) {
         String imagePath = "/baikonur_sp.jpeg";
         String name = "BAIKONUR COSMODROME";
-        String description = "This is the Baikonur Cosmodrome";
+        String description = "The Liquid Galaxy";
         double[] lla_coords = {45.9645249018041,63.30353977828937,0};
         ActionController.getInstance().sendSpaceportFile(PacketsActivity.this, description, name, lla_coords, imagePath);
     }

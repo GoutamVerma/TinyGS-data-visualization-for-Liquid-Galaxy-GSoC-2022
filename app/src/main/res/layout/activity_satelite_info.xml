@@ -17,7 +17,6 @@
         android:layout_width="705dp"
         android:layout_height="574dp"
         android:orientation="vertical"
-        android:background="@color/white"
         android:padding="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -46,9 +45,9 @@
             android:justificationMode="inter_word"
             android:paddingLeft="15dp"
             android:scrollbars="vertical"
+            android:textColor="@color/textColorClick"
             android:text="@string/norby"
             android:textAppearance="?attr/textAppearanceBody2"
-            android:textColor="?android:attr/textColorSecondary"
             android:textSize="@dimen/primary_text_font_size" />
 
     </LinearLayout>

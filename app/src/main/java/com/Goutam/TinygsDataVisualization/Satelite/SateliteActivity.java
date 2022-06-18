@@ -91,6 +91,8 @@ public class SateliteActivity extends TopBarActivity {
         coursesGV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 setContentView(R.layout.activity_satelite_info);
+                Button btn = findViewById(R.id.button_paket_test);
+//                btn.setOnClickListener(view1 -> sendISS(view));
                 TextView title = findViewById(R.id.satelite_title);
                 TextView description = findViewById(R.id.satelite_description);
                 ImageView sat_img = findViewById(R.id.satelite_image);
@@ -264,7 +266,7 @@ public class SateliteActivity extends TopBarActivity {
         ActionController.getInstance().sendEnxanetaFile(SateliteActivity.this);
     }
 
-    public void sendISS(View view) {
-        ActionController.getInstance().sendISSfile(SateliteActivity.this);
-    }
+//    public void sendISS(View view) {
+//        ActionController.getInstance().sendISSfile(SateliteActivity.this);
+//    }
 }

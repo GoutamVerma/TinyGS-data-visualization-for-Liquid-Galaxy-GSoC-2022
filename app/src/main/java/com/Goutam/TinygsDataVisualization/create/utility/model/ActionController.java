@@ -3,7 +3,6 @@ package com.Goutam.TinygsDataVisualization.create.utility.model;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,6 +16,7 @@ import org.jsoup.Jsoup;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -53,6 +53,7 @@ public class ActionController {
             }
         });
         handler.postDelayed(() -> lgConnectionManager.addCommandToLG(lgCommandStartOrbit), 3000);
+        System.out.println("ORbit ki line dehkle");
         System.out.println(lgCommandStartOrbit);
         //cleanFileKMLs(46000);
     }
@@ -104,11 +105,11 @@ public class ActionController {
         startOrbit(null);
     }
 
-    public void sendISSfile(AppCompatActivity activity) {
+    public void sendISSfile(AppCompatActivity activity,String lon,String lat,String alti) {
         createResourcesFolder();
         cleanFileKMLs(0);
 
-        String imagePath = getISSFile(activity);
+        String imagePath = getISSFile(activity,lon,lat,alti);
         Log.w(TAG_DEBUG, "ISS KML FILEPATH: " + imagePath);
         LGConnectionSendFile lgConnectionSendFile = LGConnectionSendFile.getInstance();
         lgConnectionSendFile.addPath(imagePath);
@@ -138,7 +139,7 @@ public class ActionController {
         lgConnectionSendFile.startConnection();
 
         handler.postDelayed(() -> {
-            LGCommand lgCommand = new LGCommand(ActionBuildCommandUtility.buildWriteEnxanetaFile(),
+            LGCommand lgCommand = new LGCommand(ActionBuildCommandUtility.buildWriteISSFile(),
                     LGCommand.CRITICAL_MESSAGE, (String result) -> {
             });
             LGConnectionManager lgConnectionManager = LGConnectionManager.getInstance();
@@ -266,29 +267,285 @@ public class ActionController {
         }
         return file.getPath();
     }
-
-    private String getISSFile(AppCompatActivity activity) {
+    private String getISSFile(AppCompatActivity activity,String lon,String lat,String alti) {
+        System.out.println(lon+" "+lat+ " "+alti);
+        String kml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
+                "<kml xmlns=\"http://www.opengis.net/kml/2.2\" xmlns:gx=\"http://www.google.com/kml/ext/2.2\" xmlns:kml=\"http://www.opengis.net/kml/2.2\" xmlns:atom=\"http://www.w3.org/2005/Atom\">\n" +
+                "<Document>\n" +
+                "\t<name>My Places.kml</name>\n" +
+                "\t<Style id=\"inline1\">\n" +
+                "\t\t<LineStyle>\n" +
+                "\t\t\t<color>ff0000ff</color>\n" +
+                "\t\t\t<width>2</width>\n" +
+                "\t\t</LineStyle>\n" +
+                "\t</Style>\n" +
+                "\t<StyleMap id=\"inline0\">\n" +
+                "\t\t<Pair>\n" +
+                "\t\t\t<key>normal</key>\n" +
+                "\t\t\t<styleUrl>#inline1</styleUrl>\n" +
+                "\t\t</Pair>\n" +
+                "\t\t<Pair>\n" +
+                "\t\t\t<key>highlight</key>\n" +
+                "\t\t\t<styleUrl>#inline</styleUrl>\n" +
+                "\t\t</Pair>\n" +
+                "\t</StyleMap>\n" +
+                "\t<Style id=\"s_ylw-pushpin\">\n" +
+                "\t\t<IconStyle>\n" +
+                "\t\t\t<scale>3</scale>\n" +
+                "\t\t\t<Icon>\n" +
+                "\t\t\t\t<href>sat.png</href>\n" +
+                "\t\t\t</Icon>\n" +
+                "\t\t\t<hotSpot x=\"0.5\" y=\"0.5\" xunits=\"fraction\" yunits=\"fraction\"/>\n" +
+                "\t\t</IconStyle>\n" +
+                "\t\t<LineStyle>\n" +
+                "\t\t\t<color>ff0000ff</color>\n" +
+                "\t\t</LineStyle>\n" +
+                "\t</Style>\n" +
+                "\t<Style id=\"inline\">\n" +
+                "\t\t<LineStyle>\n" +
+                "\t\t\t<color>ff0000ff</color>\n" +
+                "\t\t\t<width>2</width>\n" +
+                "\t\t</LineStyle>\n" +
+                "\t</Style>\n" +
+                "\t<Style id=\"s_ylw-pushpin_hl\">\n" +
+                "\t\t<IconStyle>\n" +
+                "\t\t\t<scale>3.54545</scale>\n" +
+                "\t\t\t<Icon>\n" +
+                "\t\t\t\t<href>"+"app/src/main/res/drawable/satellite_icon.png"+"</href>\n" +
+                "\t\t\t</Icon>\n" +
+                "\t\t\t<hotSpot x=\"0.5\" y=\"0.5\" xunits=\"fraction\" yunits=\"fraction\"/>\n" +
+                "\t\t</IconStyle>\n" +
+                "\t\t<LineStyle>\n" +
+                "\t\t\t<color>ff0000ff</color>\n" +
+                "\t\t</LineStyle>\n" +
+                "\t</Style>\n" +
+                "\t<StyleMap id=\"m_ylw-pushpin\">\n" +
+                "\t\t<Pair>\n" +
+                "\t\t\t<key>normal</key>\n" +
+                "\t\t\t<styleUrl>#s_ylw-pushpin</styleUrl>\n" +
+                "\t\t</Pair>\n" +
+                "\t\t<Pair>\n" +
+                "\t\t\t<key>highlight</key>\n" +
+                "\t\t\t<styleUrl>#s_ylw-pushpin_hl</styleUrl>\n" +
+                "\t\t</Pair>\n" +
+                "\t</StyleMap>\n" +
+                "\n" +
+                "\t\t<Style>\n" +
+                "\t\t\t<ListStyle>\n" +
+                "\t\t\t\t<listItemType>check</listItemType>\n" +
+                "\t\t\t\t<ItemIcon>\n" +
+                "\t\t\t\t\t<state>open</state>\n" +
+                "\t\t\t\t\t<href>:/mysavedplaces_open.png</href>\n" +
+                "\t\t\t\t</ItemIcon>\n" +
+                "\t\t\t\t<ItemIcon>\n" +
+                "\t\t\t\t\t<state>closed</state>\n" +
+                "\t\t\t\t\t<href>:/mysavedplaces_closed.png</href>\n" +
+                "\t\t\t\t</ItemIcon>\n" +
+                "\t\t\t\t<bgColor>00ffffff</bgColor>\n" +
+                "\t\t\t\t<maxSnippetLines>2</maxSnippetLines>\n" +
+                "\t\t\t</ListStyle>\n" +
+                "\t\t</Style>\n" +
+                "\t\t<Placemark>\n" +
+                "\t\t\t<name>Norby</name>\n" +
+                "\t\t\t<LookAt>\n" +
+                "\t\t\t\t<longitude>"+lon+"</longitude>\n" +
+                "\t\t\t\t<latitude>"+lat+"</latitude>\n" +
+                "\t\t\t\t<altitude>0</altitude>\n" +
+                "\t\t\t\t<heading>-5.029091935818897</heading>\n" +
+                "\t\t\t\t<tilt>0</tilt>\n" +
+                "\t\t\t\t<range>4880964.396775676</range>\n" +
+                "\t\t\t\t<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>\n" +
+                "\t\t\t</LookAt>\n" +
+                "\t\t\t<styleUrl>#m_ylw-pushpin</styleUrl>\n" +
+                "\t\t\t<Point>\n" +
+                "\t\t\t\t<extrude>1</extrude>\n" +
+                "\t\t\t\t<altitudeMode>absolute</altitudeMode>\n" +
+                "\t\t\t\t<gx:drawOrder>1</gx:drawOrder>\n" +
+                "\t\t\t\t<coordinates>"+lon +","+lat +",800000</coordinates>\n" +
+                "\t\t\t</Point>\n" +
+                "\t\t</Placemark>\n" +
+                "\t\t<gx:Tour>\n" +
+                "             <name>Orbit</name>\n" +
+                "             <gx:Playlist>\n" +
+                "        <gx:FlyTo>\n" +
+                "        <gx:duration>1.2</gx:duration>\n" +
+                "        <gx:flyToMode>smooth</gx:flyToMode>\n" +
+                "         \t\t\t<LookAt>\n" +
+                "                   \t\t\t\t<longitude>"+lon+"</longitude>\n" +
+                "                   \t\t\t\t<latitude>"+lat+"</latitude>\n" +
+                "                   \t\t\t\t<altitude>0</altitude>\n" +
+                "                   \t\t\t\t<heading>-5.029091935818897</heading>\n" +
+                "                   \t\t\t\t <gx:fovy>70</gx:fovy>\n" +
+                "                   \t\t\t\t<tilt>20</tilt>\n" +
+                "                   \t\t\t\t<range>4880964.396775676</range>\n" +
+                "                   \t\t\t\t<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>\n" +
+                "                   \t\t\t</LookAt>\n" +
+                "                 </gx:FlyTo>\n" +
+                "     </gx:Playlist>\n" +
+                "    </gx:Tour>\n" +
+                "</Document>\n" +
+                "</kml>\n";
         File file = new File(activity.getFilesDir() + "/ISS.kml");
-        if (!file.exists()) {
-            try {
-                InputStream is = activity.getAssets().open("ISS.kml");
-                int size = is.available();
-                Log.w(TAG_DEBUG, "GET ISS KML SIZE: " + size);
-                byte[] buffer = new byte[size];
-                is.read(buffer);
-                is.close();
-
-                FileOutputStream fos = new FileOutputStream(file);
+        if (file.exists()) file.delete();
+        File file1 = new File(activity.getFilesDir() + "/ISS.kml");
+        if (!file1.exists()){
+        try {
+                byte[] buffer = kml.getBytes(StandardCharsets.UTF_8);
+                FileOutputStream fos = new FileOutputStream(file1);
                 fos.write(buffer);
                 fos.close();
-
-                return file.getPath();
+                return file1.getPath();
             } catch (Exception e) {
                 Log.w(TAG_DEBUG, "ERROR: " + e.getMessage());
             }
         }
-        return file.getPath();
+        return file1.getPath();
     }
+
+
+    //    private String getISSFile(AppCompatActivity activity,String lon,String lat,String alti) {
+//        System.out.println(lon+" "+lat+ " "+alti);
+//        String kml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
+//                "<kml xmlns=\"http://www.opengis.net/kml/2.2\" xmlns:gx=\"http://www.google.com/kml/ext/2.2\" xmlns:kml=\"http://www.opengis.net/kml/2.2\" xmlns:atom=\"http://www.w3.org/2005/Atom\">\n" +
+//                "<Document>\n" +
+//                "\t<name>My Places.kml</name>\n" +
+//                "\t<Style id=\"inline1\">\n" +
+//                "\t\t<LineStyle>\n" +
+//                "\t\t\t<color>ff0000ff</color>\n" +
+//                "\t\t\t<width>2</width>\n" +
+//                "\t\t</LineStyle>\n" +
+//                "\t</Style>\n" +
+//                "\t<StyleMap id=\"inline0\">\n" +
+//                "\t\t<Pair>\n" +
+//                "\t\t\t<key>normal</key>\n" +
+//                "\t\t\t<styleUrl>#inline1</styleUrl>\n" +
+//                "\t\t</Pair>\n" +
+//                "\t\t<Pair>\n" +
+//                "\t\t\t<key>highlight</key>\n" +
+//                "\t\t\t<styleUrl>#inline</styleUrl>\n" +
+//                "\t\t</Pair>\n" +
+//                "\t</StyleMap>\n" +
+//                "\t<Style id=\"s_ylw-pushpin\">\n" +
+//                "\t\t<IconStyle>\n" +
+//                "\t\t\t<scale>3</scale>\n" +
+//                "\t\t\t<Icon>\n" +
+//                "\t\t\t\t<href>sat.png</href>\n" +
+//                "\t\t\t</Icon>\n" +
+//                "\t\t\t<hotSpot x=\"0.5\" y=\"0.5\" xunits=\"fraction\" yunits=\"fraction\"/>\n" +
+//                "\t\t</IconStyle>\n" +
+//                "\t\t<LineStyle>\n" +
+//                "\t\t\t<color>ff0000ff</color>\n" +
+//                "\t\t</LineStyle>\n" +
+//                "\t</Style>\n" +
+//                "\t<Style id=\"inline\">\n" +
+//                "\t\t<LineStyle>\n" +
+//                "\t\t\t<color>ff0000ff</color>\n" +
+//                "\t\t\t<width>2</width>\n" +
+//                "\t\t</LineStyle>\n" +
+//                "\t</Style>\n" +
+//                "\t<Style id=\"s_ylw-pushpin_hl\">\n" +
+//                "\t\t<IconStyle>\n" +
+//                "\t\t\t<scale>3.54545</scale>\n" +
+//                "\t\t\t<Icon>\n" +
+//                "\t\t\t\t<href>sat.png</href>\n" +
+//                "\t\t\t</Icon>\n" +
+//                "\t\t\t<hotSpot x=\"0.5\" y=\"0.5\" xunits=\"fraction\" yunits=\"fraction\"/>\n" +
+//                "\t\t</IconStyle>\n" +
+//                "\t\t<LineStyle>\n" +
+//                "\t\t\t<color>ff0000ff</color>\n" +
+//                "\t\t</LineStyle>\n" +
+//                "\t</Style>\n" +
+//                "\t<StyleMap id=\"m_ylw-pushpin\">\n" +
+//                "\t\t<Pair>\n" +
+//                "\t\t\t<key>normal</key>\n" +
+//                "\t\t\t<styleUrl>#s_ylw-pushpin</styleUrl>\n" +
+//                "\t\t</Pair>\n" +
+//                "\t\t<Pair>\n" +
+//                "\t\t\t<key>highlight</key>\n" +
+//                "\t\t\t<styleUrl>#s_ylw-pushpin_hl</styleUrl>\n" +
+//                "\t\t</Pair>\n" +
+//                "\t</StyleMap>\n" +
+//                "\n" +
+//                "\t\t<Style>\n" +
+//                "\t\t\t<ListStyle>\n" +
+//                "\t\t\t\t<listItemType>check</listItemType>\n" +
+//                "\t\t\t\t<ItemIcon>\n" +
+//                "\t\t\t\t\t<state>open</state>\n" +
+//                "\t\t\t\t\t<href>:/mysavedplaces_open.png</href>\n" +
+//                "\t\t\t\t</ItemIcon>\n" +
+//                "\t\t\t\t<ItemIcon>\n" +
+//                "\t\t\t\t\t<state>closed</state>\n" +
+//                "\t\t\t\t\t<href>:/mysavedplaces_closed.png</href>\n" +
+//                "\t\t\t\t</ItemIcon>\n" +
+//                "\t\t\t\t<bgColor>00ffffff</bgColor>\n" +
+//                "\t\t\t\t<maxSnippetLines>2</maxSnippetLines>\n" +
+//                "\t\t\t</ListStyle>\n" +
+//                "\t\t</Style>\n" +
+//                "\t\t<Placemark>\n" +
+//                "\t\t\t<name>Norby</name>\n" +
+//                "\t\t\t<LookAt>\n" +
+//                "\t\t\t\t<longitude>49.50408822052504</longitude>\n" +
+//                "\t\t\t\t<latitude>28.57753708216346</latitude>\n" +
+//                "\t\t\t\t<altitude>0</altitude>\n" +
+//                "\t\t\t\t<heading>-5.029091935818897</heading>\n" +
+//                "\t\t\t\t<tilt>0</tilt>\n" +
+//                "\t\t\t\t<range>4880964.396775676</range>\n" +
+//                "\t\t\t\t<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>\n" +
+//                "\t\t\t</LookAt>\n" +
+//                "\t\t\t<styleUrl>#m_ylw-pushpin</styleUrl>\n" +
+//                "\t\t\t<Point>\n" +
+//                "\t\t\t\t<extrude>1</extrude>\n" +
+//                "\t\t\t\t<altitudeMode>absolute</altitudeMode>\n" +
+//                "\t\t\t\t<gx:drawOrder>1</gx:drawOrder>\n" +
+//                "\t\t\t\t<coordinates>49.50408822052503,28.57753708216346,800000</coordinates>\n" +
+//                "\t\t\t</Point>\n" +
+//                "\t\t</Placemark>\n" +
+//                "\t\t<Placemark>\n" +
+//                "\t\t\t<name>Circle</name>\n" +
+//                "\t\t\t<styleUrl>#inline0</styleUrl>\n" +
+//                "\t\t\t<LineString>\n" +
+//                "\t\t\t\t<tessellate>1</tessellate>\n" +
+//                "\t\t\t\t<altitudeMode>absolute</altitudeMode>\n" +
+//                "\t\t\t\t<coordinates>\n" +
+//                "\t\t\t\t\t44.26573551023718,33.71234801649251,800000 44.77305541429159,34.07919985649966,800000 45.32102399319722,34.40586782448167,800000 45.90520846083111,34.6893929692399,800000 46.52067652180367,34.92717175896533,800000 47.16204664829838,35.11699458739064,800000 47.82355257909141,35.25707990821893,800000 48.49912080058445,35.34610275557409,800000 49.18245891729177,35.38321654551731,800000 49.86715205856425,35.36806727379847,800000 50.54676388220106,35.30079951521972,800000 51.21493839132645,35.18205396903527,800000 51.86549871934096,35.0129566552629,800000 52.49253926628429,34.79510021842127,800000 53.09050806126224,34.53051810896685,800000 53.65427692232841,34.22165266438157,800000 54.17919780958381,33.87131828494692,800000 54.66114463330486,33.48266098640895,800000 55.09654060497284,33.05911561485856,800000 55.48237193800088,32.60436193796991,800000 55.81618927058484,32.12228069665731,800000 56.09609857251007,31.61691053065476,800000 56.32074350964491,31.09240649940083,800000 56.48928129031083,30.55300072323843,800000 56.60135393449205,30.00296548359765,800000 56.65705672356469,29.44657895506356,800000 56.65690533938726,28.88809360371718,800000 56.60180291883352,28.33170717804451,800000 56.49300795965379,27.78153614130582,800000 56.33210373623264,27.24159134564953,800000 56.12096963352224,26.71575572510087,800000 55.86175459278143,26.20776378269347,800000 55.5568526878243,25.72118266195258,800000 55.20888071589306,25.25939462023026,800000 54.82065759121057,24.82558075685093,800000 54.39518526832534,24.4227058888793,800000 53.93563089221036,24.05350450827989,800000 53.44530986791388,23.72046779351637,800000 52.92766955943371,23.42583168396864,800000 52.38627336046903,23.17156605516271,800000 51.82478492401516,22.95936505544699,800000 51.24695238883301,22.79063867963717,800000 50.65659249434944,22.66650566199853,800000 50.05757452756643,22.58778776992181,800000 49.45380409252706,22.55500557139819,800000 48.84920673176824,22.56837573494206,800000 48.24771145754563,22.62780990132391,800000 47.65323426670193,22.73291514400712,800000 47.06966171588773,22.88299601136274,800000 46.50083462325786,23.07705812046975,800000 45.95053193940643,23.31381325146902,800000 45.42245479559048,23.59168587476461,800000 44.92021069338863,23.90882103235729,800000 44.44729774964016,24.26309349043559,800000 44.00708885715665,24.65211808384143,800000 43.60281556909184,25.0732611845392,800000 43.23755146715924,25.52365324566104,800000 42.9141947355641,26.00020239950702,800000 42.63544963827213,26.49960912099084,800000 42.40380659194107,27.01838200588585,800000 42.22152054545992,27.55285475378732,800000 42.09058742446008,28.09920448639598,800000 42.01271847996667,28.65347156946936,800000 41.9893124984013,29.21158113800318,800000 42.02142598801521,29.76936654487471,800000 42.10974165503709,30.32259495893974,800000 42.25453571887618,30.86699532491633,800000 42.45564488304932,31.39828885995911,800000 42.71243406538885,31.91222219687177,800000 43.02376627985878,32.40460318883604,800000 43.38797632901476,32.87133926461959,800000 43.80285018111887,33.30847806832747,800000 44.26573551023718,33.71234801649251,800000\n" +
+//                "\t\t\t\t</coordinates>\n" +
+//                "\t\t\t</LineString>\n" +
+//                "\t\t</Placemark>\n" +
+//                "\t\t<gx:Tour>\n" +
+//                "             <name>Orbit</name>\n" +
+//                "             <gx:Playlist>\n" +
+//                "        <gx:FlyTo>\n" +
+//                "        <gx:duration>1.2</gx:duration>\n" +
+//                "        <gx:flyToMode>smooth</gx:flyToMode>\n" +
+//                "         \t\t\t<LookAt>\n" +
+//                "                   \t\t\t\t<longitude>49.50408822052504</longitude>\n" +
+//                "                   \t\t\t\t<latitude>28.57753708216346</latitude>\n" +
+//                "                   \t\t\t\t<altitude>0</altitude>\n" +
+//                "                   \t\t\t\t<heading>-5.029091935818897</heading>\n" +
+//                "                   \t\t\t\t <gx:fovy>35</gx:fovy>\n" +
+//                "                   \t\t\t\t<tilt>0</tilt>\n" +
+//                "                   \t\t\t\t<range>4880964.396775676</range>\n" +
+//                "                   \t\t\t\t<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>\n" +
+//                "                   \t\t\t</LookAt>\n" +
+//                "                 </gx:FlyTo>\n" +
+//                "     </gx:Playlist>\n" +
+//                "    </gx:Tour>\n" +
+//                "</Document>\n" +
+//                "</kml>\n";
+//        File file = new File(activity.getFilesDir() + "/ISS.kml");
+//        if (!file.exists()) {
+//            try {
+//                byte[] buffer = kml.getBytes(StandardCharsets.UTF_8);
+//                FileOutputStream fos = new FileOutputStream(file);
+//                fos.write(buffer);
+//                fos.close();
+//                return file.getPath();
+//            } catch (Exception e) {
+//                Log.w(TAG_DEBUG, "ERROR: " + e.getMessage());
+//            }
+//        }
+//        return file.getPath();
+//    }
     private String getEnxanetaFile(AppCompatActivity activity) {
         File file = new File(activity.getFilesDir() + "/Enxaneta.kml");
         if (!file.exists()) {
@@ -594,47 +851,7 @@ public class ActionController {
     public void sendPacket(AppCompatActivity activity, String description, String name, double[] lla_coords, String imagePath){
         createResourcesFolder();
         cleanFileKMLs(0);
-        String kml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
-                "<kml xmlns=\"http://www.opengis.net/kml/2.2\" xmlns:gx=\"http://www.google.com/kml/ext/2.2\" xmlns:kml=\"http://www.opengis.net/kml/2.2\" xmlns:atom=\"http://www.w3.org/2005/Atom\">\n" +
-                "<Document>\n" +
-                "\t<name>Circle Measure.kml</name>\n" +
-                "\t<Style id=\"inline\">\n" +
-                "\t\t<LineStyle>\n" +
-                "\t\t\t<color>ff0000ff</color>\n" +
-                "\t\t\t<width>2</width>\n" +
-                "\t\t</LineStyle>\n" +
-                "\t</Style>\n" +
-                "\t<Style id=\"inline0\">\n" +
-                "\t\t<LineStyle>\n" +
-                "\t\t\t<color>ff0000ff</color>\n" +
-                "\t\t\t<width>2</width>\n" +
-                "\t\t</LineStyle>\n" +
-                "\t</Style>\n" +
-                "\t<StyleMap id=\"inline1\">\n" +
-                "\t\t<Pair>\n" +
-                "\t\t\t<key>normal</key>\n" +
-                "\t\t\t<styleUrl>#inline0</styleUrl>\n" +
-                "\t\t</Pair>\n" +
-                "\t\t<Pair>\n" +
-                "\t\t\t<key>highlight</key>\n" +
-                "\t\t\t<styleUrl>#inline</styleUrl>\n" +
-                "\t\t</Pair>\n" +
-                "\t</StyleMap>\n" +
-                "\t<Placemark>\n" +
-                "\t\t<name>Circle Measure</name>\n" +
-                "\t\t<styleUrl>#inline1</styleUrl>\n" +
-                "\t\t<LineString>\n" +
-                "\t\t\t<tessellate>1</tessellate>\n" +
-                "\t\t\t<altitudeMode>absolute</altitudeMode>\n" +
-                "\t\t\t<coordinates>\n" +
-                "\t\t\t\t35.65095188307584,-0.5446760455675255,800000 36.42633666458408,-0.2419776623658956,800000 37.22483661110317,-0.006988561012517308,800000 38.04057571646405,0.1585091033709722,800000 38.86752795898867,0.253256732746197,800000 39.69956833479145,0.2765324514434745,800000 40.5305265533961,0.2281587731670529,800000 41.35424197558719,0.1085044991544322,800000 42.16461828525588,-0.08151922023605709,800000 42.95567640592726,-0.3404685203145204,800000 43.72160429688115,-0.6663818156109156,800000 44.45680248168711,-1.056799642175712,800000 45.1559244536511,-1.50878870327858,800000 45.81391144246447,-2.01896938336347,800000 46.42602138593803,-2.583545955228301,800000 46.98785230224956,-3.198338715559865,800000 47.49536057687943,-3.858817340526312,800000 47.94487494456582,-4.560134849424141,800000 48.33310714623656,-5.29716169160183,800000 48.65716036586582,-6.064519620101012,800000 48.91453659957114,-6.856615174431078,800000 49.10314407996654,-7.667672754724778,800000 49.2213057764452,-8.491767421042331,800000 49.26776982185232,-9.322857686524083,800000 49.24172248391186,-10.15481868403774,800000 49.14280401238513,-10.9814761662918,800000 48.97112735784185,-11.79664184311212,800000 48.72729938455534,-12.59415056136494,800000 48.41244380098869,-13.36789978832608,800000 48.02822462376668,-14.1118917648313,800000 47.57686859783207,-14.82027854887347,800000 47.06118464588837,-15.4874099747953,800000 46.48457814922335,-16.10788431301222,800000 45.85105770826637,-16.67660114017349,800000 45.16523203327707,-17.18881563508265,800000 44.43229480616901,-17.64019322218984,800000 43.65799575392639,-18.02686321721574,800000 42.84859678327483,-18.34546991628098,800000 42.01081282118869,-18.59321943829945,800000 41.15173793500151,-18.767920603836,800000 40.27875829245317,-18.86801822763526,800000 39.39945447082701,-18.89261742067958,800000 38.52149643395383,-18.84149783143237,800000 37.6525350733825,-18.71511718160855,800000 36.8000944860508,-18.51460393444676,800000 35.97146910133582,-18.24173943058651,800000 35.17362938278522,-17.8989302938824,800000 34.41313916156418,-17.48917230641646,800000 33.69608678890111,-17.01600724737419,800000 33.02803132124772,-16.4834743657767,800000 32.41396397531099,-15.89605820769937,800000 31.8582842004382,-15.25863445297469,800000 31.36478898156206,-14.57641525320927,800000 30.93667344885479,-13.85489532759088,800000 30.5765405452153,-13.09979979342361,800000 30.28641738129404,-12.31703441178039,800000 30.06777596447487,-11.51263863884894,800000 29.9215561875669,-10.6927416092688,800000 29.84818926578898,-9.863520952343048,800000 29.84762017921989,-9.031164163592363,800000 29.91932807912325,-8.201832126403856,800000 30.06234402343126,-7.381624301785796,800000 30.27526579840754,-6.576545076293491,800000 30.55626994470545,-5.792470775239478,800000 30.90312142537085,-5.035116905496352,800000 31.31318164214313,-4.310005283970347,800000 31.78341571753322,-3.622430827967944,800000 32.31040010723464,-2.977427925309256,800000 32.89033168469329,-2.379736457463675,800000 33.519039442395,-1.833767709601324,800000 34.19199987979054,-1.343570557813858,800000 34.90435699604825,-0.9127984657848471,800000 35.65095188307584,-0.5446760455675255,800000 \n" +
-                "\t\t\t</coordinates>\n" +
-                "\t\t</LineString>\n" +
-                "\t</Placemark>\n" +
-                "</Document>\n" +
-                "</kml>\n"+
-                "' > /var/www/html/spaceport" + name.split(" ")[0] + ".kml";
-        ;
+        String kml = "";
 
         System.out.println(kml);
         System.out.println(name.split(" ")[0]);
@@ -645,10 +862,10 @@ public class ActionController {
         LGConnectionManager lgConnectionManager = LGConnectionManager.getInstance();
         lgConnectionManager.startConnection();
         lgConnectionManager.addCommandToLG(lgCommand);
-        System.out.println("Clearing lg connection manager");
-//        startOrbit(null);
 
-//        writeSpaceport(name.split(" ")[0]);
+        startOrbit(null);
+
+        writeSpaceport(name.split(" ")[0]);
     }
 
     public void sendSpaceportFile(AppCompatActivity activity, String description, String name, double[] lla_coords, String imagePath) {
