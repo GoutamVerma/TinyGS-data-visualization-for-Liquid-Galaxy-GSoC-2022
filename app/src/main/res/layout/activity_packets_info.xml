@@ -15,17 +15,17 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="705dp"
-        android:layout_height="574dp"
+        android:layout_width="724dp"
+        android:layout_height="401dp"
+        android:background="@color/white"
         android:orientation="vertical"
         android:padding="16dp"
-        android:background="@color/background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.114"
+        app:layout_constraintHorizontal_bias="0.136"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/top_bar"
-        app:layout_constraintVertical_bias="0.376"
+        app:layout_constraintVertical_bias="0.168"
         tools:ignore="MissingConstraints">
 
         <!-- Title, secondary and supporting text -->
@@ -37,6 +37,7 @@
             android:paddingLeft="15dp"
             android:paddingTop="30dp"
             android:text="Norby"
+            android:textColor="@color/textColorClick"
             android:textAppearance="?attr/textAppearanceHeadline6"
             android:textSize="@dimen/satelite_title" />
 
@@ -49,7 +50,7 @@
             android:scrollbars="vertical"
             android:text="@string/norby"
             android:textAppearance="?attr/textAppearanceBody2"
-            android:textColor="?android:attr/textColorSecondary"
+            android:textColor="@color/textColorClick"
             android:textSize="@dimen/primary_text_font_size" />
 
     </LinearLayout>

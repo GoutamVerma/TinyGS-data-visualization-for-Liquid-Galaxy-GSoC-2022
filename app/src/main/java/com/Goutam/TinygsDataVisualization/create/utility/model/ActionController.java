@@ -311,7 +311,7 @@ public class ActionController {
                 "\t\t<IconStyle>\n" +
                 "\t\t\t<scale>3.54545</scale>\n" +
                 "\t\t\t<Icon>\n" +
-                "\t\t\t\t<href>sat.png</href>\n" +
+                "\t\t\t\t<href>"+"app/src/main/res/drawable/satellite_icon.png"+"</href>\n" +
                 "\t\t\t</Icon>\n" +
                 "\t\t\t<hotSpot x=\"0.5\" y=\"0.5\" xunits=\"fraction\" yunits=\"fraction\"/>\n" +
                 "\t\t</IconStyle>\n" +
@@ -375,7 +375,7 @@ public class ActionController {
                 "                   \t\t\t\t<latitude>"+lat+"</latitude>\n" +
                 "                   \t\t\t\t<altitude>0</altitude>\n" +
                 "                   \t\t\t\t<heading>-5.029091935818897</heading>\n" +
-                "                   \t\t\t\t <gx:fovy>35</gx:fovy>\n" +
+                "                   \t\t\t\t <gx:fovy>70</gx:fovy>\n" +
                 "                   \t\t\t\t<tilt>20</tilt>\n" +
                 "                   \t\t\t\t<range>4880964.396775676</range>\n" +
                 "                   \t\t\t\t<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>\n" +

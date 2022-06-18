@@ -45,9 +45,9 @@
             android:justificationMode="inter_word"
             android:paddingLeft="15dp"
             android:scrollbars="vertical"
+            android:textColor="@color/textColorClick"
             android:text="@string/norby"
             android:textAppearance="?attr/textAppearanceBody2"
-            android:textColor="?android:attr/textColorSecondary"
             android:textSize="@dimen/primary_text_font_size" />
 
     </LinearLayout>
