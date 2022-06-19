@@ -267,6 +267,25 @@ public class ActionController {
         }
         return file.getPath();
     }
+    private String generateCircle(String longi,String lati,String alti){
+        double centerLat = Math.toRadians(Double.parseDouble(lati));
+        double centerLng = Math.toRadians(Double.parseDouble(longi));
+        double diameter = 800; // diameter of circle in km
+        double dist = diameter / 6371.0;
+
+        // start generating KML
+
+        String coordinate="";
+        for (int x = 0; x <= 360; x ++)
+        {
+            double brng = Math.toRadians(x);
+            double latitude = Math.asin(Math.sin(centerLat) * Math.cos(dist) + Math.cos(centerLat) * Math.sin(dist) * Math.cos(brng));
+            double longitude = centerLng + Math.atan2(Math.sin(brng) * Math.sin(dist)* Math.cos(centerLat), Math.cos(dist) - Math.sin(centerLat)
+                            * Math.sin(latitude)) ;
+            coordinate +=  Math.toDegrees(longitude)+ ","+ Math.toDegrees(latitude)+" ";
+        }
+        return coordinate;
+    }
     private String getISSFile(AppCompatActivity activity,String lon,String lat,String alti) {
         System.out.println(lon+" "+lat+ " "+alti);
         String kml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
@@ -364,6 +383,17 @@ public class ActionController {
                 "\t\t\t\t<coordinates>"+lon +","+lat +",800000</coordinates>\n" +
                 "\t\t\t</Point>\n" +
                 "\t\t</Placemark>\n" +
+                "\t\t<Placemark>\n" +
+                "\t\t\t<name>Circle</name>\n" +
+                "\t\t\t<styleUrl>#inline0</styleUrl>\n" +
+                "\t\t\t<LineString>\n" +
+                "\t\t\t\t<tessellate>1</tessellate>\n" +
+                "\t\t\t\t<altitudeMode>absolute</altitudeMode>\n" +
+                "\t\t\t\t<coordinates>\n" +
+                "\t\t\t\t\t"+generateCircle(lon,lat,alti)+"\n"+
+                "\t\t\t\t</coordinates>\n" +
+                "\t\t\t</LineString>\n" +
+                "\t\t</Placemark>\n" +
                 "\t\t<gx:Tour>\n" +
                 "             <name>Orbit</name>\n" +
                 "             <gx:Playlist>\n" +
@@ -385,6 +415,7 @@ public class ActionController {
                 "    </gx:Tour>\n" +
                 "</Document>\n" +
                 "</kml>\n";
+        System.out.println(kml);
         File file = new File(activity.getFilesDir() + "/ISS.kml");
         if (file.exists()) file.delete();
         File file1 = new File(activity.getFilesDir() + "/ISS.kml");
