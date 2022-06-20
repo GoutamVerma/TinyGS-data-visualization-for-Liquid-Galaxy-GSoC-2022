@@ -378,6 +378,33 @@ public class ActionBuildCommandUtility {
         return command.toString();
     }
 
+    public static String command_orbit(String longitude,String latitude,String altitude) {
+        double heading = 0.0;
+        double fovy = 0.0;
+        int orbit = 0;
+        String command="";
+        while (orbit <= 36) {
+            if (heading >= 360) heading = heading - 360;
+            command += "    <gx:FlyTo>\n"+
+                    "    <gx:duration>1.2</gx:duration> \n"+
+                    "    <gx:flyToMode>smooth</gx:flyToMode> \n"+
+                    "     <LookAt> \n"+
+                    "      <longitude>"+longitude +"</longitude> \n"+
+                    "      <latitude>"+latitude+"</latitude> \n"+
+                    "      <altitude>"+"900000"+"</altitude> \n"+
+                    "      <heading>"+heading+"</heading> \n"+
+                    "      <tilt>90</tilt> \n"+
+                    "      <gx:fovy>"+fovy+"</gx:fovy> \n"+
+                    "      <range>100</range> \n"+
+                    "      <gx:altitudeMode>absolute</gx:altitudeMode> \n"+
+                    "      </LookAt> \n"+
+                    "    </gx:FlyTo> \n\n";
+            heading = heading + 10;
+            fovy += 10;
+            orbit++;
+        }
+        return command;
+    }
     private static void orbit(POI poi, StringBuilder command) {
         double heading = poi.getPoiCamera().getHeading();
         int orbit = 0;
