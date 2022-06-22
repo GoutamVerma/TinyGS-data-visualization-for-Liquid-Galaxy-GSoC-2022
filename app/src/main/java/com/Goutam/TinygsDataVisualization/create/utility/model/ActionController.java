@@ -106,11 +106,11 @@ public class ActionController {
         startOrbit(null);
     }
 
-    public void sendISSfile(AppCompatActivity activity,String lon,String lat,String alti) {
+    public void sendISSfile(AppCompatActivity activity,String lon,String lat,String alti,String des,String name) {
         createResourcesFolder();
         cleanFileKMLs(0);
 
-        String imagePath = getISSFile(activity,lon,lat,alti);
+        String imagePath = getISSFile(activity,lon,lat,alti,des,name);
         Log.w(TAG_DEBUG, "ISS KML FILEPATH: " + imagePath);
         LGConnectionSendFile lgConnectionSendFile = LGConnectionSendFile.getInstance();
         lgConnectionSendFile.addPath(imagePath);
@@ -313,7 +313,7 @@ public class ActionController {
                 "\t\t<IconStyle>\n" +
                 "\t\t\t<scale>3</scale>\n" +
                 "\t\t\t<Icon>\n" +
-                "\t\t\t\t<href>sat.png</href>\n" +
+                "\t\t\t\t<href>https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/FP_Satellite_icon.svg/1200px-FP_Satellite_icon.svg.png</href>\n" +
                 "\t\t\t</Icon>\n" +
                 "\t\t\t<hotSpot x=\"0.5\" y=\"0.5\" xunits=\"fraction\" yunits=\"fraction\"/>\n" +
                 "\t\t</IconStyle>\n" +
@@ -367,11 +367,12 @@ public class ActionController {
                 "\t\t</Style>\n";
     }
 
-    private String getISSFile(AppCompatActivity activity,String lon,String lat,String alti) {
+    private String getISSFile(AppCompatActivity activity,String lon,String lat,String alti,String description,String name) {
         System.out.println(lon+" "+lat+ " "+alti);
         String kml = generateStyle()+
                 "\t\t<Placemark>\n" +
-                "\t\t\t<name>Norby</name>\n" +
+                "\t\t\t<name>"+name+"</name>\n" +
+                "<description>"+description+"</description>"+
                 "\t\t\t<LookAt>\n" +
                 "\t\t\t\t<longitude>"+lon+"</longitude>\n" +
                 "\t\t\t\t<latitude>"+lat+"</latitude>\n" +
@@ -381,7 +382,7 @@ public class ActionController {
                 "\t\t\t\t<range>4880964.396775676</range>\n" +
                 "\t\t\t\t<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>\n" +
                 "\t\t\t</LookAt>\n" +
-                "\t\t\t<styleUrl>#m_ylw-pushpin</styleUrl>\n" +
+                "\t\t\t<styleUrl>#s_ylw-pushpin</styleUrl>\n" +
                 "\t\t\t<Point>\n" +
                 "\t\t\t\t<extrude>1</extrude>\n" +
                 "\t\t\t\t<altitudeMode>absolute</altitudeMode>\n" +
@@ -402,8 +403,24 @@ public class ActionController {
                 "\t\t<gx:Tour>\n" +
                 "             <name>Orbit</name>\n" +
                 "             <gx:Playlist>\n" +
+
                 "        <gx:FlyTo>\n" +
-                "        <gx:duration>1.2</gx:duration>\n" +
+                "        <gx:duration>2.2</gx:duration>\n" +
+                "        <gx:flyToMode>smooth</gx:flyToMode>\n" +
+                "         \t\t\t<LookAt>\n" +
+                "                   \t\t\t\t<longitude>"+lon+"</longitude>\n" +
+                "                   \t\t\t\t<latitude>"+lat+"</latitude>\n" +
+                "                   \t\t\t\t<altitude>80000000</altitude>\n" +
+                "                   \t\t\t\t<heading>0</heading>\n" +
+                "                   \t\t\t\t <gx:fovy>0</gx:fovy>\n" +
+                "                   \t\t\t\t<tilt>0</tilt>\n" +
+                "                   \t\t\t\t<range>4880964.396775676</range>\n" +
+                "                   \t\t\t\t<gx:altitudeMode>absolute</gx:altitudeMode>\n" +
+                "                   \t\t\t</LookAt>\n" +
+                "                 </gx:FlyTo>\n" +
+
+                "        <gx:FlyTo>\n" +
+                "        <gx:duration>3.2</gx:duration>\n" +
                 "        <gx:flyToMode>smooth</gx:flyToMode>\n" +
                 "         \t\t\t<LookAt>\n" +
                 "                   \t\t\t\t<longitude>"+lon+"</longitude>\n" +
@@ -416,7 +433,6 @@ public class ActionController {
                 "                   \t\t\t\t<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>\n" +
                 "                   \t\t\t</LookAt>\n" +
                 "                 </gx:FlyTo>\n" +
-//                ActionBuildCommandUtility.command_orbit(lon,lat,alti)+
                 "     </gx:Playlist>\n" +
                 "    </gx:Tour>\n" +
                 "</Document>\n" +
