@@ -7,6 +7,8 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.Goutam.TinygsDataVisualization.Packets.PacketsActivity;
+
 public class SplashScreen extends AppCompatActivity {
 
     @Override

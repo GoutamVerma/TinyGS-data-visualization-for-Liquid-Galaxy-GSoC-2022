@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -14,11 +15,14 @@ import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.core.content.ContextCompat;
+
 import com.Goutam.TinygsDataVisualization.R;
 import com.Goutam.TinygsDataVisualization.Satelite.SateliteActivity;
 import com.Goutam.TinygsDataVisualization.TopBarActivity;
 import com.Goutam.TinygsDataVisualization.create.utility.model.ActionController;
 import com.Goutam.TinygsDataVisualization.dialog.CustomDialogUtility;
+import com.Goutam.TinygsDataVisualization.utility.ConstantPrefs;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -41,6 +45,7 @@ public class PacketsActivity extends TopBarActivity {
     public ProgressDialog progressDialog;
     public String [] id = new String[50];
     public HashMap<Integer,List<String>> packets = new HashMap<Integer, List<String>>();
+    private TextView connectionStatus;
     public GridView grid;
     ArrayList<packet_card_model> packetcardmodelArrayList = new ArrayList<packet_card_model>();
 
@@ -51,6 +56,7 @@ public class PacketsActivity extends TopBarActivity {
         View topBar = findViewById(R.id.top_bar);
         buttSpaceports = topBar.findViewById(R.id.butt_spaceports);
         grid = findViewById(R.id.GridviewPakcets);
+        connectionStatus = findViewById(R.id.connection_status);
         ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
         if(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
                 connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
@@ -80,7 +86,6 @@ public class PacketsActivity extends TopBarActivity {
                             "\uD83C\uDF21 Solar Array X-: -8ºC X+: -9ºC\n" +
                             "\uD83D\uDCE6: 2045.26784";
                     data.setText(description);
-//                    data.setText("\n"+packets.get(i).get(0)+"@"+ packets.get(i).get(1) + packets.get(i).get(12)+"\n\n\uD83D\uDCFB" + packets.get(i).get(6) +"mW \uD83C\uDF21 "+packets.get(i).get(8)+"ºC \uD83D\uDEF0 "+packets.get(i).get(10)+"\nmV ⛽️ not avaiable mW \uD83C\uDF21"+packets.get(i).get(8)+"ºC ☀️notavaiable \uD83D\uDD0B notavaiable mAh \uD83D\uDD0C "+packets.get(i).get(9)+"mW \uD83C\uDF21 Board PMM: "+packets.get(i).get(2)+"ºC PAM: 5ºC PDM: notavaiableºC"+ "\n\nSatellite position \n" + packets.get(i).get(11));
                     Button btn = findViewById(R.id.test);
                     String sat = packets.get(i).get(11);
                     String pos[]= sat.split(",");
@@ -96,7 +101,18 @@ public class PacketsActivity extends TopBarActivity {
         }
 
     }
+    
+    private void loadConnectionStatus(SharedPreferences sharedPreferences) {
+        boolean isConnected = sharedPreferences.getBoolean(ConstantPrefs.IS_CONNECTED.name(), false);
+        if (isConnected) {
+            connectionStatus.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_status_connection_green));
+        } else {
+            connectionStatus.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_status_connection_red));
+        }
+    }
     public void get_Data() {
+        SharedPreferences sharedPreferences = getSharedPreferences(ConstantPrefs.SHARED_PREFS.name(), MODE_PRIVATE);
+        loadConnectionStatus(sharedPreferences);
         Thread t1 = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -160,7 +176,14 @@ public class PacketsActivity extends TopBarActivity {
 
 
     public void sendISS(View view,String longi,String lat,String alti,String des,String name) {
-        ActionController.getInstance().sendISSfile(PacketsActivity.this,longi,lat,alti, des,name);
+        SharedPreferences sharedPreferences = getSharedPreferences(ConstantPrefs.SHARED_PREFS.name(), MODE_PRIVATE);
+        boolean isConnected = sharedPreferences.getBoolean(ConstantPrefs.IS_CONNECTED.name(), false);
+        if (isConnected) {
+            ActionController.getInstance().sendISSfile(PacketsActivity.this,longi,lat,alti, des,name);
+        }else{
+            CustomDialogUtility.showDialog(this, "Liquid Galaxy is not connected!");
+            return;
+        }
     }
 
 
