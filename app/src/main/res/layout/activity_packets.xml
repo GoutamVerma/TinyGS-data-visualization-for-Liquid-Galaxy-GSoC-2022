@@ -53,6 +53,15 @@
             app:layout_constraintStart_toEndOf="@+id/GridviewPakcets"
             tools:ignore="MissingConstraints"
             tools:layout_editor_absoluteY="202dp" />
+
+        <Button
+            android:id="@+id/refresh"
+            android:layout_width="64dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="35dp"
+            android:layout_marginTop="38dp"
+            android:text="🔃"
+            android:textSize="20dp" />
     </LinearLayout>
 
 

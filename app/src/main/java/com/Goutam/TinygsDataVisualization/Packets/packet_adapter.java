@@ -6,13 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.Goutam.TinygsDataVisualization.R;
-import com.Goutam.TinygsDataVisualization.Packets.packet_card_model;
 
 import java.util.ArrayList;
 
@@ -35,8 +33,8 @@ public class packet_adapter extends ArrayAdapter<packet_card_model> {
         TextView station = listitemView.findViewById(R.id.station_received);
         TextView completedata = listitemView.findViewById(R.id.packet_brief_data);
 
-        courseTV.setText("\uD83D\uDEF0 "+packetcardmodel.getCourse_name());
-        courseTVd.setText(packetcardmodel.getCourse_data());
+        courseTV.setText("\uD83D\uDEF0 "+packetcardmodel.getPacket_name());
+        courseTVd.setText(packetcardmodel.getPacket_mode());
         station.setText(packetcardmodel.get_station()+" Stations");
         completedata.setText(packetcardmodel.get_satelite_data());
 

@@ -292,7 +292,7 @@ public class ActionController {
         return  "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                 "<kml xmlns=\"http://www.opengis.net/kml/2.2\" xmlns:gx=\"http://www.google.com/kml/ext/2.2\" xmlns:kml=\"http://www.opengis.net/kml/2.2\" xmlns:atom=\"http://www.w3.org/2005/Atom\">\n" +
                 "<Document>\n" +
-                "\t<name>My Places.kml</name>\n" +
+                "\t<name>My Places.kml</name>\n"+
                 "\t<Style id=\"inline1\">\n" +
                 "\t\t<LineStyle>\n" +
                 "\t\t\t<color>ff0000ff</color>\n" +
@@ -365,6 +365,7 @@ public class ActionController {
                 "\t\t\t\t<maxSnippetLines>2</maxSnippetLines>\n" +
                 "\t\t\t</ListStyle>\n" +
                 "\t\t</Style>\n";
+
     }
 
     private String getISSFile(AppCompatActivity activity,String lon,String lat,String alti,String description,String name) {
@@ -410,11 +411,11 @@ public class ActionController {
                 "         \t\t\t<LookAt>\n" +
                 "                   \t\t\t\t<longitude>"+lon+"</longitude>\n" +
                 "                   \t\t\t\t<latitude>"+lat+"</latitude>\n" +
-                "                   \t\t\t\t<altitude>80000000</altitude>\n" +
+                "                   \t\t\t\t<altitude>800000</altitude>\n" +
                 "                   \t\t\t\t<heading>0</heading>\n" +
                 "                   \t\t\t\t <gx:fovy>0</gx:fovy>\n" +
                 "                   \t\t\t\t<tilt>0</tilt>\n" +
-                "                   \t\t\t\t<range>4880964.396775676</range>\n" +
+                "                   \t\t\t\t<range>0</range>\n" +
                 "                   \t\t\t\t<gx:altitudeMode>absolute</gx:altitudeMode>\n" +
                 "                   \t\t\t</LookAt>\n" +
                 "                 </gx:FlyTo>\n" +
@@ -426,8 +427,8 @@ public class ActionController {
                 "                   \t\t\t\t<longitude>"+lon+"</longitude>\n" +
                 "                   \t\t\t\t<latitude>"+lat+"</latitude>\n" +
                 "                   \t\t\t\t<altitude>0</altitude>\n" +
-                "                   \t\t\t\t<heading>-5.029091935818897</heading>\n" +
-                "                   \t\t\t\t <gx:fovy>70</gx:fovy>\n" +
+                "                   \t\t\t\t<heading>0</heading>\n" +
+                "                   \t\t\t\t <gx:fovy>0</gx:fovy>\n" +
                 "                   \t\t\t\t<tilt>20</tilt>\n" +
                 "                   \t\t\t\t<range>4880964.396775676</range>\n" +
                 "                   \t\t\t\t<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>\n" +
