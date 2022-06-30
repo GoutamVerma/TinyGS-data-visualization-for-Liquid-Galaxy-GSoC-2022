@@ -1,7 +1,11 @@
 package com.Goutam.TinygsDataVisualization.Satelite;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
@@ -23,9 +27,20 @@ import com.Goutam.TinygsDataVisualization.R;
 import com.Goutam.TinygsDataVisualization.TopBarActivity;
 import com.Goutam.TinygsDataVisualization.create.utility.model.Action;
 import com.Goutam.TinygsDataVisualization.create.utility.model.ActionController;
+import com.Goutam.TinygsDataVisualization.dialog.CustomDialogUtility;
+import com.Goutam.TinygsDataVisualization.utility.ConstantPrefs;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -41,7 +56,10 @@ public class SateliteActivity extends TopBarActivity {
     public GridView grid;
     private Button buttDemo;
     GridView coursesGV;
+    private ProgressDialog progressDialog;
     ArrayList<packet_card_model> packetcardmodelArrayList = new ArrayList<packet_card_model>();
+    public HashMap<Integer,List<String>> packet = new HashMap<Integer, List<String>>();
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -102,6 +120,7 @@ public class SateliteActivity extends TopBarActivity {
                 TextView title = findViewById(R.id.satelite_title);
                 TextView description = findViewById(R.id.satelite_description);
                 ImageView sat_img = findViewById(R.id.satelite_image);
+                GridView gr = findViewById(R.id.GridviewPakcets_sat);
                 description.setMovementMethod(new ScrollingMovementMethod());
 
                 switch (i) {
@@ -109,6 +128,7 @@ public class SateliteActivity extends TopBarActivity {
                         title.setText(R.string.norby_title);
                         description.setText(R.string.norby);
                         sat_img.setImageResource(R.drawable.norby);
+                        gr.setAdapter(updatefrommap());
                         break;
                     }
                     case 1: {
@@ -346,8 +366,7 @@ public class SateliteActivity extends TopBarActivity {
                 }
             });
         }
-
-            public HashMap<Integer, List<String>> getHashMap(String key) {
+        public HashMap<Integer, List<String>> getHashMap(String key) {
                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(SateliteActivity.this);
                 Gson gson = new Gson();
                 String json = prefs.getString(key, "");
@@ -357,4 +376,80 @@ public class SateliteActivity extends TopBarActivity {
                 return obj;
             }
 
+        private packet_adapter updatefrommap(){
+            packet_adapter adapter = new packet_adapter(this, packetcardmodelArrayList);
+            HashMap<Integer,List<String>> packet  = getHashMap("1");;
+            System.out.println("map se data aaya hai");
+            if(packet==null){
+                get_Api_Data();
+            }
+            runOnUiThread(new Runnable() {
+                @Override
+            public void run() {
+                for(int i=0;i<50;i++) {
+                      packetcardmodelArrayList.add(new packet_card_model(packet.get(i).get(5), packet.get(i).get(0)+"@"+packet.get(i).get(1),packet.get(i).get(12),"\uD83D\uDCFB "+packet.get(i).get(6)+"mW \uD83C\uDF21 "+packet.get(i).get(8)+"ºC \uD83D\uDEF0 "+packet.get(i).get(10)+"mV ⛽️ not avaiable mW \uD83C\uDF21"+packet.get(i).get(8)+"ºC ☀️notavaiable \uD83D\uDD0B notavaiable mAh \uD83D\uDD0C "+packet.get(i).get(9)+"mW \uD83C\uDF21 Board PMM: "+packet.get(i).get(2)+"ºC PAM: 5ºC PDM: notavaiableºC"));
+                }
+             }
+        });
+            return adapter;
+        }
+
+    public void saveHashMap(String key , Object obj) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(SateliteActivity.this);
+        SharedPreferences.Editor editor = prefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(obj);
+        editor.putString(key,json);
+        editor.apply();
     }
+
+
+    public void get_Api_Data() {
+        Thread t1 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    System.out.println("Tiny GS api");
+                    StringBuilder content = new StringBuilder();
+                    String output = "https://api.tinygs.com/v1/packets";
+                    URL url = new URL(output); // creating a url object
+                    URLConnection urlConnection = url.openConnection(); // creating a urlconnection object
+                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+                    String line;
+                    while ((line = bufferedReader.readLine()) != null) {
+                        content.append(line + "\n");
+                    }
+                    bufferedReader.close();
+                    JSONObject obj = (JSONObject) JSONValue.parse(content.toString());
+                    JSONArray arr = (JSONArray) obj.get("packets");
+                    for (int i = 0; i < 50; i++) {
+                        List<String> data = new ArrayList<String>();
+                        JSONObject obj1 = (JSONObject) JSONValue.parse(arr.get(i).toString());
+                        JSONObject arr1 = (JSONObject) obj1.get("parsed");
+                        JSONObject pay = (JSONObject) arr1.get("payload");
+                        boolean mode = obj1.get("mode") == null ? data.add("null") : data.add(obj1.get("mode").toString());
+                        boolean freq = obj1.get("freq") == null ? data.add("null") : data.add(obj1.get("freq").toString());
+                        boolean sf = obj1.get("sf") == null ? data.add("null") : data.add(obj1.get("sf").toString());
+                        boolean bw = obj1.get("bw") == null ? data.add("null") : data.add(obj1.get("bw").toString());
+                        boolean cr = obj1.get("cr") == null ? data.add("null") : data.add(obj1.get("cr").toString());
+                        boolean name = obj1.get("satDisplayName") == null ? data.add("null") : data.add(obj1.get("satDisplayName").toString());
+                        boolean loadpower = pay.get("tinygsTxPower") == null ? data.add("null") : data.add(pay.get("tinygsTxPower").toString());
+                        boolean txpower = pay.get("tinygsTxPower") == null ? data.add("null") : data.add(pay.get("tinygsTxPower").toString());
+                        boolean gstemp = pay.get("tinygsTemp") == null ? data.add("null") : data.add(pay.get("tinygsTemp").toString());
+                        boolean chargepower = pay.get("tinygsChargePower") == null ? data.add("null") : data.add(pay.get("tinygsChargePower").toString());
+                        boolean mainvolt = pay.get("tinygsMainVoltage") == null ? data.add("null") : data.add(pay.get("tinygsMainVoltage").toString());
+                        boolean sat = obj1.get("satPos") == null ? data.add("null") : data.add(obj1.get("satPos").toString());
+                        boolean number = obj1.get("stationNumber") == null ? data.add("null") : data.add(obj1.get("stationNumber").toString());
+                        packet.put(i, data);
+                        System.out.println(i + "  " + data);
+                    }
+                } catch (IOException e) {
+
+                }
+                saveHashMap("1",packet);
+            }
+        });
+        t1.start();
+    }
+
+}

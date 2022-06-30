@@ -133,7 +133,7 @@ public class PacketsActivity extends TopBarActivity {
         }
     }
 
-    private void get_Api_Data() {
+    public void get_Api_Data() {
         SharedPreferences sharedPreferences = getSharedPreferences(ConstantPrefs.SHARED_PREFS.name(), MODE_PRIVATE);
         loadConnectionStatus(sharedPreferences);
         Thread t1 = new Thread(new Runnable() {
