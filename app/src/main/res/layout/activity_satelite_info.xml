@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:layout_editor_absoluteX="917dp"
+    tools:layout_editor_absoluteY="470dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="vertical"
+    android:overScrollMode="always"
     android:background="@color/background">
 
     <include
@@ -14,17 +22,17 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="742dp"
-        android:layout_height="640dp"
+        android:layout_width="869dp"
+        android:layout_height="471dp"
         android:orientation="vertical"
         android:padding="16dp"
         android:scrollbars="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.114"
+        app:layout_constraintHorizontal_bias="0.038"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/top_bar"
-        app:layout_constraintVertical_bias="0.376"
+        app:layout_constraintVertical_bias="0.016"
         tools:ignore="MissingConstraints">
 
         <!-- Title, secondary and supporting text -->
@@ -50,20 +58,6 @@
             android:textAppearance="?attr/textAppearanceBody2"
             android:textColor="@color/textColorClick"
             android:textSize="@dimen/primary_text_font_size" />
-        <GridView
-            android:id="@+id/GridviewPakcets_sat"
-            android:layout_width="927dp"
-            android:layout_height="430dp"
-            android:layout_marginTop="28dp"
-            android:horizontalSpacing="5dp"
-            android:numColumns="1"
-            android:verticalSpacing="10dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.505"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/top_bar"
-            app:layout_constraintVertical_bias="0.358" />
 
     </LinearLayout>
 
@@ -71,11 +65,11 @@
         android:id="@+id/button_paket_test"
         android:layout_width="184dp"
         android:layout_height="68dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="28dp"
         android:background="@drawable/button_primary"
         android:text="TEST"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintHorizontal_bias="0.341"
         app:layout_constraintStart_toEndOf="@+id/linearLayout"
         app:layout_constraintTop_toBottomOf="@+id/top_bar" />
 
@@ -85,11 +79,23 @@
         android:layout_height="205dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.512"
+        app:layout_constraintHorizontal_bias="0.414"
         app:layout_constraintStart_toEndOf="@+id/linearLayout"
         app:layout_constraintTop_toBottomOf="@+id/button_paket_test"
-        app:layout_constraintVertical_bias="0.135"
-        />
+        app:layout_constraintVertical_bias="0.049" />
 
+    <GridView
+        android:id="@+id/GridviewPakcets_sat"
+        android:layout_width="1198dp"
+        android:layout_height="940dp"
+        android:layout_marginTop="516dp"
+        android:horizontalSpacing="5dp"
+        android:numColumns="1"
+        android:verticalSpacing="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/top_bar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
