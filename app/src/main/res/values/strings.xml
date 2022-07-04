@@ -243,9 +243,9 @@
     <string name="text_search">Type and Search</string>
 
     //About
-    <string name="my_name">Orbit Satellite Visualizer for Liquid Galaxy, Google Summer of Code 2021</string>
+    <string name="my_name">TinyGS Data Visualization Tool for Liquid Galaxy, Google Summer of Code 2022</string>
     <string name="linked_id">Project based on the previous GSoC "SimpleCMS for Liquid Galaxy" by Diego Riveros</string>
-    <string name="github_account">Coded by Albert Morea</string>
+    <string name="github_account">Developed by Goutam Verma with the help of mentor Merul Dhiman</string>
 
     //Demo
     <string name="start_demo">Check out your Liquid Galaxy \n Running Barranquilla, Colombia Demo</string>

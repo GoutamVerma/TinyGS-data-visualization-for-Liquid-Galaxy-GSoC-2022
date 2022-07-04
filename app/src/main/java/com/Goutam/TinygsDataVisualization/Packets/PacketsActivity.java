@@ -11,6 +11,7 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -63,12 +64,16 @@ public class PacketsActivity extends TopBarActivity {
         grid = findViewById(R.id.GridviewPakcets);
         connectionStatus = findViewById(R.id.connection_status);
         System.out.println("get hashmap first time "+ getHashMap("1"));
+        SharedPreferences sharedPreferences = getSharedPreferences(ConstantPrefs.SHARED_PREFS.name(), MODE_PRIVATE);
+        loadConnectionStatus(sharedPreferences);
+
         if(getHashMap("1")==null){
             activity_handler();
         }else{
             updatefrommap();
         }
 
+        HashMap<Integer,List<String>> packet = getHashMap("1");
         buttRefresh.setOnClickListener(view -> activity_handler());
 
     }
@@ -88,7 +93,8 @@ public class PacketsActivity extends TopBarActivity {
             grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    loadContent(i,view);
+                Log.d("grid biew chala hai","hai");
+                loadContent(i,view);
                 }
             });
         }
@@ -99,15 +105,16 @@ public class PacketsActivity extends TopBarActivity {
 
     private void loadContent(int i,View view){
         setContentView(R.layout.activity_packets_info);
+        HashMap<Integer,List<String>> packet = getHashMap("1");
         TextView name = findViewById(R.id.packet_name);
         TextView data = findViewById(R.id.packet_description);
-        name.setText(packets.get(i).get(5));
+        name.setText(packet.get(i).get(5));
         String description = "Received on:\n" +
-                "LoRa "+ packets.get(i).get(1)+" Mhz SF: "+packets.get(i).get(2)+" CR: "+packets.get(i).get(4)+" BW: "+packets.get(i).get(3)+" kHz\n" +
+                "LoRa "+ packet.get(i).get(1)+" Mhz SF: "+packet.get(i).get(2)+" CR: "+packet.get(i).get(4)+" BW: "+packet.get(i).get(3)+" kHz\n" +
                 "Sat in Umbra \uD83C\uDF0C Eclipse Depth: 40.85º\n" +
                 "Theoretical coverage 5174 km\n" +
                 "\n" +
-                "\uD83D\uDCFB 2000mW \uD83C\uDF21 "+packets.get(i).get(8)+"ºC\n" +
+                "\uD83D\uDCFB 2000mW \uD83C\uDF21 "+packet.get(i).get(8)+"ºC\n" +
                 "\uD83D\uDEF0 8256mV ⛽️ 1385mW \uD83C\uDF2122ºC\n" +
                 "☀️0mW \uD83D\uDD0B13828mAh \uD83D\uDD0C -1949mW\n" +
                 "\uD83C\uDF21 Board PMM: 11ºC PAM: 10ºC PDM: 8ºC\n" +
@@ -115,15 +122,15 @@ public class PacketsActivity extends TopBarActivity {
                 "\uD83D\uDCE6: 2045.26784";
         data.setText(description);
         Button btn = findViewById(R.id.test);
-        String sat = packets.get(i).get(11);
+        String sat = packet.get(i).get(11);
         String pos[]= sat.split(",");
         String lon[]= pos[0].split(":");
         String alti[]= pos[1].split(":");
         String lat[]= pos[2].split(":");
-        btn.setOnClickListener(view1 -> sendPacket(view, lon[1], lat[1].substring(0, lat[1].length() - 1), alti[1], description, packets.get(i).get(5)));
+        btn.setOnClickListener(view1 -> sendPacket(view, lon[1], lat[1].substring(0, lat[1].length() - 1), alti[1], description, packet.get(i).get(5)));
 
     }
-    
+
     private void loadConnectionStatus(SharedPreferences sharedPreferences) {
         boolean isConnected = sharedPreferences.getBoolean(ConstantPrefs.IS_CONNECTED.name(), false);
         if (isConnected) {
@@ -210,6 +217,13 @@ public class PacketsActivity extends TopBarActivity {
                 }
                 packet_adapter adapter = new packet_adapter(PacketsActivity.this, packetcardmodelArrayList);
                 grid.setAdapter(adapter);
+                grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        Log.d("grid biew chala hai","hai");
+                        loadContent(i,view);
+                    }
+                });
             }
         });
     }
