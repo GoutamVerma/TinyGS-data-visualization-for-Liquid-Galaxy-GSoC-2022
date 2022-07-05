@@ -62,7 +62,7 @@ public class SateliteActivity extends TopBarActivity {
     private ProgressDialog progressDialog;
     ArrayList<packet_card_model> packetcardmodelArrayList = new ArrayList<packet_card_model>();
     public HashMap<Integer,List<String>> packet = new HashMap<Integer, List<String>>();
-
+    public HashMap<Integer,List<String>> temp_packet = new HashMap<Integer, List<String>>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -406,7 +406,6 @@ public class SateliteActivity extends TopBarActivity {
                         Toast.makeText(SateliteActivity.this, "Unexpected error found!", Toast.LENGTH_SHORT).show();
 
                 }
-
                 gr.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -415,7 +414,7 @@ public class SateliteActivity extends TopBarActivity {
                 });
             }
         });
-    }
+        }
 
     private void loadConnectionStatus(SharedPreferences sharedPreferences) {
         boolean isConnected = sharedPreferences.getBoolean(ConstantPrefs.IS_CONNECTED.name(), false);
@@ -426,17 +425,17 @@ public class SateliteActivity extends TopBarActivity {
         }
     }
 
-    public  void loadContent(int i,View view){
+    public void loadContent(int i,View view){
         setContentView(R.layout.activity_packets_info);
         TextView name = findViewById(R.id.packet_name);
         TextView data = findViewById(R.id.packet_description);
-        name.setText(packet.get(i).get(5));
+        name.setText(temp_packet.get(i).get(5));
         String description = "Received on:\n" +
-                "LoRa "+ packet.get(i).get(1)+" Mhz SF: "+packet.get(i).get(2)+" CR: "+packet.get(i).get(4)+" BW: "+packet.get(i).get(3)+" kHz\n" +
+                "LoRa "+ temp_packet.get(i).get(1)+" Mhz SF: "+temp_packet.get(i).get(2)+" CR: "+temp_packet.get(i).get(4)+" BW: "+temp_packet.get(i).get(3)+" kHz\n" +
                 "Sat in Umbra \uD83C\uDF0C Eclipse Depth: 40.85º\n" +
                 "Theoretical coverage 5174 km\n" +
                 "\n" +
-                "\uD83D\uDCFB 2000mW \uD83C\uDF21 "+packet.get(i).get(8)+"ºC\n" +
+                "\uD83D\uDCFB 2000mW \uD83C\uDF21 "+temp_packet.get(i).get(8)+"ºC\n" +
                 "\uD83D\uDEF0 8256mV ⛽️ 1385mW \uD83C\uDF2122ºC\n" +
                 "☀️0mW \uD83D\uDD0B13828mAh \uD83D\uDD0C -1949mW\n" +
                 "\uD83C\uDF21 Board PMM: 11ºC PAM: 10ºC PDM: 8ºC\n" +
@@ -444,14 +443,14 @@ public class SateliteActivity extends TopBarActivity {
                 "\uD83D\uDCE6: 2045.26784";
         data.setText(description);
         Button btn = findViewById(R.id.test);
-        String sat = packet.get(i).get(11);
+        String sat = temp_packet.get(i).get(11);
         String pos[]= sat.split(",");
         String lon[]= pos[0].split(":");
         String alti[]= pos[1].split(":");
         String lat[]= pos[2].split(":");
-        btn.setOnClickListener(view1 -> sendPacket(view, lon[1], lat[1].substring(0, lat[1].length() - 1), alti[1], description, packet.get(i).get(5)));
-
+        btn.setOnClickListener(view1 -> sendPacket(view, lon[1], lat[1].substring(0, lat[1].length() - 1), alti[1], description, temp_packet.get(i).get(5)));
     }
+
     public void sendPacket(View view,String longi,String lat,String alti,String des,String name) {
         Dialog dialog = getDialog(this, "Setting Files");
         dialog.show();
@@ -468,33 +467,44 @@ public class SateliteActivity extends TopBarActivity {
         }
 
     }
-        public HashMap<Integer, List<String>> getHashMap(String key) {
-                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(SateliteActivity.this);
-                Gson gson = new Gson();
-                String json = prefs.getString(key, "");
-                java.lang.reflect.Type type = new TypeToken<HashMap<Integer, List<String>>>() {
-                }.getType();
-                HashMap<Integer, List<String>> obj = gson.fromJson(json, type);
-                return obj;
-            }
+
+    public HashMap<Integer, List<String>> getHashMap(String key) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(SateliteActivity.this);
+        Gson gson = new Gson();
+        String json = prefs.getString(key, "");
+        java.lang.reflect.Type type = new TypeToken<HashMap<Integer, List<String>>>() {
+        }.getType();
+        HashMap<Integer, List<String>> obj = gson.fromJson(json, type);
+        return obj;
+    }
 
     private packet_adapter updatefrommap(String satellite){
         packet_adapter adapter = new packet_adapter(this, packetcardmodelArrayList);
         packet  = getHashMap("1");;
-        System.out.println("map se data aaya hai");
         if(packet==null){
             get_Api_Data();
         }
-        System.out.print("Api data is "+packet);
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                for(int i=0;i<50;i++) {
-                    if(packet.get(i).get(5).equals(satellite))
-                        packetcardmodelArrayList.add(new packet_card_model(packet.get(i).get(5), packet.get(i).get(0)+"@"+packet.get(i).get(1),packet.get(i).get(12),"\uD83D\uDCFB "+packet.get(i).get(6)+"mW \uD83C\uDF21 "+packet.get(i).get(8)+"ºC \uD83D\uDEF0 "+packet.get(i).get(10)+"mV ⛽️ not avaiable mW \uD83C\uDF21"+packet.get(i).get(8)+"ºC ☀️notavaiable \uD83D\uDD0B notavaiable mAh \uD83D\uDD0C "+packet.get(i).get(9)+"mW \uD83C\uDF21 Board PMM: "+packet.get(i).get(2)+"ºC PAM: 5ºC PDM: notavaiableºC"));
-                }
-            }
-        });
+        int count =0;
+        for(int i=0;i<50;i++) {
+                    List<String> temp = new ArrayList<>();
+                    if (packet.get(i).get(5).equals(satellite)){
+                        temp.add(packet.get(i).get(0));
+                    temp.add(packet.get(i).get(1));
+                    temp.add(packet.get(i).get(2));
+                    temp.add(packet.get(i).get(3));
+                    temp.add(packet.get(i).get(4));
+                    temp.add(packet.get(i).get(5));
+                    temp.add(packet.get(i).get(6));
+                    temp.add(packet.get(i).get(7));
+                    temp.add(packet.get(i).get(8));
+                    temp.add(packet.get(i).get(9));
+                    temp.add(packet.get(i).get(10));
+                    temp.add(packet.get(i).get(11));
+                    packetcardmodelArrayList.add(new packet_card_model(packet.get(i).get(5), packet.get(i).get(0) + "@" + packet.get(i).get(1), packet.get(i).get(12), "\uD83D\uDCFB " + packet.get(i).get(6) + "mW \uD83C\uDF21 " + packet.get(i).get(8) + "ºC \uD83D\uDEF0 " + packet.get(i).get(10) + "mV ⛽️ not avaiable mW \uD83C\uDF21" + packet.get(i).get(8) + "ºC ☀️notavaiable \uD83D\uDD0B notavaiable mAh \uD83D\uDD0C " + packet.get(i).get(9) + "mW \uD83C\uDF21 Board PMM: " + packet.get(i).get(2) + "ºC PAM: 5ºC PDM: notavaiableºC"));
+                    temp_packet.put(count,temp);
+                    count++;
+                    }
+        }
         return adapter;
     }
 
