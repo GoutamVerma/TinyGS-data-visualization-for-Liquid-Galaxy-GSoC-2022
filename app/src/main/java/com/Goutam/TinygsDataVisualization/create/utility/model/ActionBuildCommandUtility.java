@@ -391,16 +391,14 @@ public class ActionBuildCommandUtility {
                     "     <LookAt> \n"+
                     "      <longitude>"+longitude +"</longitude> \n"+
                     "      <latitude>"+latitude+"</latitude> \n"+
-                    "      <altitude>"+"900000"+"</altitude> \n"+
                     "      <heading>"+heading+"</heading> \n"+
-                    "      <tilt>90</tilt> \n"+
-                    "      <gx:fovy>"+fovy+"</gx:fovy> \n"+
+                    "      <tilt>60</tilt> \n"+
+                    "      <gx:fovy>35</gx:fovy> \n"+
                     "      <range>100</range> \n"+
                     "      <gx:altitudeMode>absolute</gx:altitudeMode> \n"+
                     "      </LookAt> \n"+
                     "    </gx:FlyTo> \n\n";
             heading = heading + 10;
-            fovy += 10;
             orbit++;
         }
         return command;

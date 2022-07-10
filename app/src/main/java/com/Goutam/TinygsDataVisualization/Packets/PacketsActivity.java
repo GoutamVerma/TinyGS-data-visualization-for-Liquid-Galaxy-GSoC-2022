@@ -122,13 +122,14 @@ public class PacketsActivity extends TopBarActivity {
                 "\uD83D\uDCE6: 2045.26784";
         data.setText(description);
         Button btn = findViewById(R.id.test);
+        Button orbit = findViewById(R.id.orbit_test);
         String sat = packet.get(i).get(11);
         String pos[]= sat.split(",");
         String lon[]= pos[0].split(":");
         String alti[]= pos[1].split(":");
         String lat[]= pos[2].split(":");
         btn.setOnClickListener(view1 -> sendPacket(view, lon[1], lat[1].substring(0, lat[1].length() - 1), alti[1], description, packet.get(i).get(5)));
-
+        orbit.setOnClickListener(view1 -> sendOrbit(view, lon[1], lat[1].substring(0, lat[1].length() - 1), alti[1], description, packet.get(i).get(5)));
     }
 
     private void loadConnectionStatus(SharedPreferences sharedPreferences) {
@@ -247,7 +248,6 @@ public class PacketsActivity extends TopBarActivity {
         return obj;
     }
 
-
     public void sendPacket(View view,String longi,String lat,String alti,String des,String name) {
         Dialog dialog = getDialog(this, "Setting Files");
         dialog.show();
@@ -255,8 +255,24 @@ public class PacketsActivity extends TopBarActivity {
         boolean isConnected = sharedPreferences.getBoolean(ConstantPrefs.IS_CONNECTED.name(), false);
         if (isConnected) {
             dialog.dismiss();
-            CustomDialogUtility.showDialog(this, "Testing the storyboard.");
+            CustomDialogUtility.showDialog(this, "Testing the Packet");
             ActionController.getInstance().sendISSfile(PacketsActivity.this, longi, lat, alti, des, name);
+        } else {
+            dialog.dismiss();
+            CustomDialogUtility.showDialog(this, "LG is not connected, Please visit connect tab.");
+            return;
+        }
+
+    }
+    public void sendOrbit(View view,String longi,String lat,String alti,String des,String name) {
+        Dialog dialog = getDialog(this, "Setting Files");
+        dialog.show();
+        SharedPreferences sharedPreferences = getSharedPreferences(ConstantPrefs.SHARED_PREFS.name(), MODE_PRIVATE);
+        boolean isConnected = sharedPreferences.getBoolean(ConstantPrefs.IS_CONNECTED.name(), false);
+        if (isConnected) {
+            dialog.dismiss();
+            CustomDialogUtility.showDialog(this, "Testing the Packet");
+            ActionController.getInstance().sendOribitfile(PacketsActivity.this, longi, lat, alti,des,name);
         } else {
             dialog.dismiss();
             CustomDialogUtility.showDialog(this, "LG is not connected, Please visit connect tab.");

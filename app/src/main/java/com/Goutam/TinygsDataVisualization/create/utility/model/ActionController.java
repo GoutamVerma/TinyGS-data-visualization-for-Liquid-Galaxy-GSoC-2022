@@ -6,9 +6,11 @@ import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.Goutam.TinygsDataVisualization.Satelite.SateliteActivity;
 import com.Goutam.TinygsDataVisualization.connection.LGCommand;
 import com.Goutam.TinygsDataVisualization.connection.LGConnectionManager;
 import com.Goutam.TinygsDataVisualization.connection.LGConnectionSendFile;
+import com.Goutam.TinygsDataVisualization.dialog.CustomDialogUtility;
 import com.neosensory.tlepredictionengine.TlePredictionEngine;
 
 import org.jsoup.Jsoup;
@@ -128,8 +130,32 @@ public class ActionController {
         }, 2000);
 
         startOrbit(null);
-
     }
+
+    public void sendOribitfile(AppCompatActivity activity,String lon,String lat,String alti,String des,String name) {
+        createResourcesFolder();
+        cleanFileKMLs(0);
+
+        String imagePath = command_orbit(activity,lon,lat,alti,des,name);
+        Log.w(TAG_DEBUG, "ISS KML FILEPATH: " + imagePath);
+        LGConnectionSendFile lgConnectionSendFile = LGConnectionSendFile.getInstance();
+        lgConnectionSendFile.addPath(imagePath);
+        lgConnectionSendFile.startConnection();
+
+
+
+        handler.postDelayed(() -> {
+            LGCommand lgCommand = new LGCommand(ActionBuildCommandUtility.buildWriteISSFile(),
+                    LGCommand.CRITICAL_MESSAGE, (String result) -> {
+            });
+            LGConnectionManager lgConnectionManager = LGConnectionManager.getInstance();
+            lgConnectionManager.startConnection();
+            lgConnectionManager.addCommandToLG(lgCommand);
+        }, 2000);
+
+        startOrbit(null);
+    }
+
 
     public void sendEnxanetaFile(AppCompatActivity activity) {
         createResourcesFolder();
@@ -453,7 +479,90 @@ public class ActionController {
                 Log.w(TAG_DEBUG, "ERROR: " + e.getMessage());
             }
         }
-        return file1.getPath();
+    return kml;
+    }
+
+    public String command_orbit(AppCompatActivity activity,String lon,String lat,String alti,String description,String name) {
+        System.out.println(lon+" "+lat+ " "+alti);
+        String kml = generateStyle()+
+                "\t\t<Placemark>\n" +
+                "\t\t\t<name>"+name+"</name>\n" +
+                "<description>"+description+"</description>"+
+                "\t\t\t<LookAt>\n" +
+                "\t\t\t\t<longitude>"+lon+"</longitude>\n" +
+                "\t\t\t\t<latitude>"+lat+"</latitude>\n" +
+                "\t\t\t\t<altitude>0</altitude>\n" +
+                "\t\t\t\t<heading>-5.029091935818897</heading>\n" +
+                "\t\t\t\t<tilt>0</tilt>\n" +
+                "\t\t\t\t<range>4880964.396775676</range>\n" +
+                "\t\t\t\t<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>\n" +
+                "\t\t\t</LookAt>\n" +
+                "\t\t\t<styleUrl>#s_ylw-pushpin</styleUrl>\n" +
+                "\t\t\t<Point>\n" +
+                "\t\t\t\t<extrude>1</extrude>\n" +
+                "\t\t\t\t<altitudeMode>absolute</altitudeMode>\n" +
+                "\t\t\t\t<gx:drawOrder>1</gx:drawOrder>\n" +
+                "\t\t\t\t<coordinates>"+lon +","+lat +",800000</coordinates>\n" +
+                "\t\t\t</Point>\n" +
+                "\t\t</Placemark>\n" +
+                "<Placemark>\n" +
+                "\t\t<name>Circle Measure</name>\n" +
+                "\t\t<styleUrl>#inline1</styleUrl>\n" +
+                "\t\t<LineString>\n" +
+                "\t\t\t<tessellate>1</tessellate>\n" +
+                "\t\t\t<altitudeMode>absolute</altitudeMode>\n" +
+                "\t\t\t<coordinates>\n" +
+                "\t\t\t"+generateCircle(lon,lat,alti) +" </coordinates>\n" +
+                "\t\t</LineString>\n" +
+                "\t</Placemark>"+
+                "\t\t<gx:Tour>\n" +
+                "             <name>Orbit</name>\n" +
+                "             <gx:Playlist>\n" +
+                command_orbit(lon,lat,alti)+
+                "     </gx:Playlist>\n" +
+                "    </gx:Tour>\n" +
+                "</Document>\n" +
+                "</kml>\n";
+        System.out.println(kml);
+        File file = new File(activity.getFilesDir() + "/ISS.kml");
+        if (file.exists()) file.delete();
+        File file1 = new File(activity.getFilesDir() + "/ISS.kml");
+        if (!file1.exists()){
+            try {
+                byte[] buffer = kml.toString().getBytes(StandardCharsets.UTF_8);
+                FileOutputStream fos = new FileOutputStream(file1);
+                fos.write(buffer);
+                fos.close();
+                return file1.getPath();
+            } catch (Exception e) {
+                Log.w(TAG_DEBUG, "ERROR: " + e.getMessage());
+            }
+        }
+        return kml;
+    }
+    public static String command_orbit(String longitude,String latitude,String altitude) {
+        double heading = 0.0;
+        int orbit = 0;
+        String command="";
+        while (orbit <= 36) {
+            if (heading >= 360) heading = heading - 360;
+            command += "    <gx:FlyTo>\n"+
+                    "    <gx:duration>1.2</gx:duration> \n"+
+                    "    <gx:flyToMode>smooth</gx:flyToMode> \n"+
+                    "     <LookAt> \n"+
+                    "      <longitude>"+longitude +"</longitude> \n"+
+                    "      <latitude>"+latitude+"</latitude> \n"+
+                    "      <heading>"+heading+"</heading> \n"+
+                    "      <tilt>60</tilt> \n"+
+                    "      <gx:fovy>35</gx:fovy> \n"+
+                    "      <range>100</range> \n"+
+                    "      <gx:altitudeMode>absolute</gx:altitudeMode> \n"+
+                    "      </LookAt> \n"+
+                    "    </gx:FlyTo> \n\n";
+            heading = heading + 10;
+            orbit++;
+        }
+        return command;
     }
 
 
