@@ -67,8 +67,22 @@
         android:layout_height="68dp"
         android:layout_marginTop="28dp"
         android:background="@drawable/button_primary"
-        android:text="TEST"
+        android:text="Test"
         android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.341"
+        app:layout_constraintStart_toEndOf="@+id/linearLayout"
+        app:layout_constraintTop_toBottomOf="@+id/top_bar" />
+
+    <Button
+        android:id="@+id/button_paket_stop"
+        android:layout_width="184dp"
+        android:layout_height="68dp"
+        android:layout_marginTop="28dp"
+        android:background="@drawable/button_primary"
+        android:text="Stop"
+        android:textColor="@color/white"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.341"
         app:layout_constraintStart_toEndOf="@+id/linearLayout"

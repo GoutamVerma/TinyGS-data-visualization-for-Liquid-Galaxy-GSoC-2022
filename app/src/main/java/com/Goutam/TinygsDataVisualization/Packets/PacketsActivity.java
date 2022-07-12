@@ -46,7 +46,7 @@ public class PacketsActivity extends TopBarActivity {
     private static final String TAG_DEBUG = "PacketsActivity";
     public static final String EXTRA_MESSAGE = "com.example.tinygsdatavisualizer.MESSAGE";
     private Dialog dialog;
-    private Button buttRefresh;
+    public Button buttRefresh,buttStop,buttTest;
     private ProgressDialog progressDialog;
     public HashMap<Integer,List<String>> packets = new HashMap<Integer, List<String>>();
 
@@ -93,7 +93,6 @@ public class PacketsActivity extends TopBarActivity {
             grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Log.d("grid biew chala hai","hai");
                 loadContent(i,view);
                 }
             });
@@ -121,18 +120,28 @@ public class PacketsActivity extends TopBarActivity {
                 "\uD83C\uDF21 Solar Array X-: -8ºC X+: -9ºC\n" +
                 "\uD83D\uDCE6: 2045.26784";
         data.setText(description);
-        Button btn = findViewById(R.id.test);
+        buttTest = findViewById(R.id.test);
+        buttStop = findViewById(R.id.stop);
+        buttStop.setVisibility(view.INVISIBLE);
         Button orbit = findViewById(R.id.orbit_test);
         String sat = packet.get(i).get(11);
         String pos[]= sat.split(",");
         String lon[]= pos[0].split(":");
         String alti[]= pos[1].split(":");
         String lat[]= pos[2].split(":");
-        btn.setOnClickListener(view1 -> sendPacket(view, lon[1], lat[1].substring(0, lat[1].length() - 1), alti[1], description, packet.get(i).get(5)));
+        buttTest.setOnClickListener(view1 -> sendPacket(view, lon[1], lat[1].substring(0, lat[1].length() - 1), alti[1], description, packet.get(i).get(5)));
+        buttStop.setOnClickListener(view1 -> stopTestStoryBoard());
         orbit.setOnClickListener(view1 -> sendOrbit(view, lon[1], lat[1].substring(0, lat[1].length() - 1), alti[1], description, packet.get(i).get(5)));
     }
 
-    private void loadConnectionStatus(SharedPreferences sharedPreferences) {
+    private void stopTestStoryBoard() {
+        ActionController actionController = ActionController.getInstance();
+        actionController.exitTour();
+        buttTest.setVisibility(View.VISIBLE);
+        buttStop.setVisibility(View.INVISIBLE);
+        }
+
+        private void loadConnectionStatus(SharedPreferences sharedPreferences) {
         boolean isConnected = sharedPreferences.getBoolean(ConstantPrefs.IS_CONNECTED.name(), false);
         if (isConnected) {
             connectionStatus.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_status_connection_green));
@@ -249,20 +258,21 @@ public class PacketsActivity extends TopBarActivity {
     }
 
     public void sendPacket(View view,String longi,String lat,String alti,String des,String name) {
+        Button test = findViewById(R.id.test);
         Dialog dialog = getDialog(this, "Setting Files");
         dialog.show();
         SharedPreferences sharedPreferences = getSharedPreferences(ConstantPrefs.SHARED_PREFS.name(), MODE_PRIVATE);
         boolean isConnected = sharedPreferences.getBoolean(ConstantPrefs.IS_CONNECTED.name(), false);
         if (isConnected) {
-            dialog.dismiss();
-            CustomDialogUtility.showDialog(this, "Testing the Packet");
             ActionController.getInstance().sendISSfile(PacketsActivity.this, longi, lat, alti, des, name);
+            test.setVisibility(view.INVISIBLE);
+            buttStop.setVisibility(view.VISIBLE);
         } else {
             dialog.dismiss();
             CustomDialogUtility.showDialog(this, "LG is not connected, Please visit connect tab.");
             return;
         }
-
+        dialog.dismiss();
     }
     public void sendOrbit(View view,String longi,String lat,String alti,String des,String name) {
         Dialog dialog = getDialog(this, "Setting Files");

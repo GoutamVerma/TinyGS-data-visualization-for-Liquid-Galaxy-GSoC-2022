@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -57,7 +58,7 @@ public class SateliteActivity extends TopBarActivity {
     private TextView connectionStatus;
     private List<Action> actionsSaved = new ArrayList<>();
     public GridView grid;
-    private Button buttDemo;
+    private Button buttStop,buttTest,buttDemo;
     GridView coursesGV;
     private ProgressDialog progressDialog;
     ArrayList<packet_card_model> packetcardmodelArrayList = new ArrayList<packet_card_model>();
@@ -121,19 +122,21 @@ public class SateliteActivity extends TopBarActivity {
         coursesGV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 setContentView(R.layout.activity_satelite_info);
-                Button btn_test = findViewById(R.id.button_paket_test);
+                buttTest = findViewById(R.id.button_paket_test);
+                buttStop = findViewById(R.id.button_paket_stop);
                 TextView title = findViewById(R.id.satelite_title);
                 TextView description = findViewById(R.id.satelite_description);
                 ImageView sat_img = findViewById(R.id.satelite_image);
                 GridView gr = findViewById(R.id.GridviewPakcets_sat);
+                buttStop.setOnClickListener(view1 -> stopTestStoryBoard());
                 description.setMovementMethod(new ScrollingMovementMethod());
-
                 switch (i) {
                     case 0: {
                         title.setText(R.string.norby_title);
                         description.setText(R.string.norby);
                         sat_img.setImageResource(R.drawable.norby);
                         gr.setAdapter(updatefrommap("Norby"));
+                        buttTest.setOnClickListener(view1->{sendSatellite(view,"Norby");});
                         break;
                     }
                     case 1: {
@@ -141,6 +144,7 @@ public class SateliteActivity extends TopBarActivity {
                         description.setText(R.string.fees);
                         sat_img.setImageResource(R.drawable.fees);
                         gr.setAdapter(updatefrommap("FEES"));
+                        buttTest.setOnClickListener(view1->{sendSatellite(view,"FEES");});
                         break;
                     }
                     case 2: {
@@ -148,6 +152,7 @@ public class SateliteActivity extends TopBarActivity {
                         description.setText(R.string.satlla_2b);
                         sat_img.setImageResource(R.drawable.satlla_2b);
                         gr.setAdapter(updatefrommap("SATLLA-2B"));
+                        buttTest.setOnClickListener(view1->{sendSatellite(view,"SATLLA-2B");});
                         break;
                     }
                     case 3: {
@@ -155,6 +160,7 @@ public class SateliteActivity extends TopBarActivity {
                         description.setText(R.string.fees2);
                         sat_img.setImageResource(R.drawable.fees2);
                         gr.setAdapter(updatefrommap("FEES2"));
+                        buttTest.setOnClickListener(view1->{sendSatellite(view,"FEES2");});
                         break;
                     }
                     case 4: {
@@ -162,6 +168,7 @@ public class SateliteActivity extends TopBarActivity {
                         description.setText(R.string.fossasat_2e1);
                         sat_img.setImageResource(R.drawable.na);
                         gr.setAdapter(updatefrommap("FossaSat-2E1"));
+                        buttTest.setOnClickListener(view1->{sendSatellite(view,"FossaSat-2E1");});
                         break;
                     }
                     case 5: {
@@ -169,6 +176,7 @@ public class SateliteActivity extends TopBarActivity {
                         description.setText(R.string.fossasat_2e2);
                         sat_img.setImageResource(R.drawable.na);
                         gr.setAdapter(updatefrommap("FossaSat-2E2"));
+                        buttTest.setOnClickListener(view1->{sendSatellite(view,"FossaSat-2E2");});
                         break;
                     }
                     case 6: {
@@ -176,6 +184,7 @@ public class SateliteActivity extends TopBarActivity {
                         description.setText(R.string.fossasat_2e3);
                         sat_img.setImageResource(R.drawable.na);
                         gr.setAdapter(updatefrommap("FossaSat-2E3"));
+                        buttTest.setOnClickListener(view1->{sendSatellite(view,"FossaSat-2E3");});
                         break;
                     }
                     case 7: {
@@ -183,6 +192,7 @@ public class SateliteActivity extends TopBarActivity {
                         description.setText(R.string.fossasat_2e4);
                         sat_img.setImageResource(R.drawable.na);
                         gr.setAdapter(updatefrommap("FossaSat-2E4"));
+                        buttTest.setOnClickListener(view1->{sendSatellite(view,"FossaSat-2E4");});
                         break;
                     }
                     case 8: {
@@ -190,6 +200,7 @@ public class SateliteActivity extends TopBarActivity {
                         description.setText(R.string.fossasat_2e5);
                         sat_img.setImageResource(R.drawable.na);
                         gr.setAdapter(updatefrommap("FossaSat-2E5"));
+                        buttTest.setOnClickListener(view1->{sendSatellite(view,"FossaSat-2E5");});
                         break;
                     }
                     case 9: {
@@ -197,6 +208,7 @@ public class SateliteActivity extends TopBarActivity {
                         description.setText(R.string.fossasat_2e6);
                         sat_img.setImageResource(R.drawable.na);
                         gr.setAdapter(updatefrommap("FossaSat-2E6"));
+                        buttTest.setOnClickListener(view1->{sendSatellite(view,"FossaSat-2E6");});
                         break;
                     }
                     case 10: {
@@ -204,6 +216,7 @@ public class SateliteActivity extends TopBarActivity {
                         description.setText(R.string.fossasat_2e7);
                         sat_img.setImageResource(R.drawable.na);
                         gr.setAdapter(updatefrommap("FossaSat-2E7"));
+                        buttTest.setOnClickListener(view1->{sendSatellite(view,"FossaSat-2E7");});
                         break;
                     }
                     case 11: {
@@ -211,6 +224,7 @@ public class SateliteActivity extends TopBarActivity {
                         description.setText(R.string.fossasat_2e8);
                         sat_img.setImageResource(R.drawable.na);
                         gr.setAdapter(updatefrommap("FossaSat-2E8"));
+                        buttTest.setOnClickListener(view1->{sendSatellite(view,"FossaSat-2E8");});
                         break;
                     }
                     case 12: {
@@ -218,6 +232,7 @@ public class SateliteActivity extends TopBarActivity {
                         description.setText(R.string.fossasat_2e9);
                         sat_img.setImageResource(R.drawable.na);
                         gr.setAdapter(updatefrommap("FossaSat-2E9"));
+                        buttTest.setOnClickListener(view1->{sendSatellite(view,"FossaSat-2E9");});
                         break;
                     }
                     case 13: {
@@ -225,6 +240,7 @@ public class SateliteActivity extends TopBarActivity {
                         description.setText(R.string.fossasat_2e10);
                         sat_img.setImageResource(R.drawable.na);
                         gr.setAdapter(updatefrommap("FossaSat-2E10"));
+                        buttTest.setOnClickListener(view1->{sendSatellite(view,"FossaSat-2E10");});
                         break;
                     }
                     case 14: {
@@ -232,6 +248,7 @@ public class SateliteActivity extends TopBarActivity {
                         description.setText(R.string.fossasat_2e11);
                         sat_img.setImageResource(R.drawable.na);
                         gr.setAdapter(updatefrommap("FossaSat-2E11"));
+                        buttTest.setOnClickListener(view1->{sendSatellite(view,"FossaSat-2E11");});
                         break;
                     }
                     case 15: {
@@ -239,6 +256,7 @@ public class SateliteActivity extends TopBarActivity {
                         description.setText(R.string.fossasat_2e12);
                         sat_img.setImageResource(R.drawable.na);
                         gr.setAdapter(updatefrommap("FossaSat-2E12"));
+                        buttTest.setOnClickListener(view1->{sendSatellite(view,"FossaSat-2E12");});
                         break;
                     }
                     case 16: {
@@ -246,6 +264,7 @@ public class SateliteActivity extends TopBarActivity {
                         description.setText(R.string.fossasat_2e13);
                         sat_img.setImageResource(R.drawable.na);
                         gr.setAdapter(updatefrommap("FossaSat-2E13"));
+                        buttTest.setOnClickListener(view1->{sendSatellite(view,"FossaSat-2E13");});
                         break;
                     }
                     case 17: {
@@ -253,6 +272,7 @@ public class SateliteActivity extends TopBarActivity {
                         description.setText(R.string.vr2x_a_littlefoot);
                         sat_img.setImageResource(R.drawable.vr3x_a_littlefoot);
                         gr.setAdapter(updatefrommap("VR3X-A Littlefoot"));
+                        buttTest.setOnClickListener(view1->{sendSatellite(view,"VR3X-A Littlefoot");});
                         break;
                     }
                     case 18: {
@@ -260,6 +280,7 @@ public class SateliteActivity extends TopBarActivity {
                         description.setText(R.string.vr3x_b_petrio);
                         sat_img.setImageResource(R.drawable.vr3x_b_petrie);
                         gr.setAdapter(updatefrommap("VR3X-B Petrie"));
+                        buttTest.setOnClickListener(view1->{sendSatellite(view,"VR3X-B Petrie");});
                         break;
                     }
                     case 19: {
@@ -267,6 +288,7 @@ public class SateliteActivity extends TopBarActivity {
                         description.setText(R.string.vr3x_c_cera);
                         sat_img.setImageResource(R.drawable.vr3x_c_cera);
                         gr.setAdapter(updatefrommap("VR3X-C Cera"));
+                        buttTest.setOnClickListener(view1->{sendSatellite(view,"VR3X-C Cera");});
                         break;
                     }
                     case 20: {
@@ -274,6 +296,7 @@ public class SateliteActivity extends TopBarActivity {
                         description.setText(R.string.satish_dhawan_satelite);
                         sat_img.setImageResource(R.drawable.satish);
                         gr.setAdapter(updatefrommap("Satish Dhawan Satellite"));
+                        buttTest.setOnClickListener(view1->{sendSatellite(view,"Satish Dhawan Satellite");});
                         break;
                     }
                     case 21: {
@@ -281,6 +304,7 @@ public class SateliteActivity extends TopBarActivity {
                         description.setText(R.string.fossasat_1);
                         sat_img.setImageResource(R.drawable.fosssat_1);
                         gr.setAdapter(updatefrommap("FossaSat-1"));
+                        buttTest.setOnClickListener(view1->{sendSatellite(view,"FossaSat-1");});
                         break;
                     }
                     case 22: {
@@ -288,6 +312,7 @@ public class SateliteActivity extends TopBarActivity {
                         description.setText(R.string.mdqubesat_1);
                         sat_img.setImageResource(R.drawable.mdqubesat_1);
                         gr.setAdapter(updatefrommap("MDQubeSAT-1"));
+                        buttTest.setOnClickListener(view1->{sendSatellite(view,"MDQubeSAT-1");});
                         break;
                     }
                     case 23: {
@@ -295,6 +320,7 @@ public class SateliteActivity extends TopBarActivity {
                         description.setText(R.string.pycubed_1);
                         sat_img.setImageResource(R.drawable.pycubed);
                         gr.setAdapter(updatefrommap("PyCubed-1"));
+                        buttTest.setOnClickListener(view1->{sendSatellite(view,"PyCubed-1");});
                         break;
                     }
                     case 24: {
@@ -302,6 +328,7 @@ public class SateliteActivity extends TopBarActivity {
                         description.setText(R.string.thingsat);
                         sat_img.setImageResource(R.drawable.thingsat);
                         gr.setAdapter(updatefrommap("ThingSat"));
+                        buttTest.setOnClickListener(view1->{sendSatellite(view,"ThingSat");});
                         break;
                     }
                     case 25: {
@@ -309,6 +336,7 @@ public class SateliteActivity extends TopBarActivity {
                         description.setText(R.string.wisa_woodsat);
                         sat_img.setImageResource(R.drawable.wisa_woodsat);
                         gr.setAdapter(updatefrommap("WISA Woodsat"));
+                        buttTest.setOnClickListener(view1->{sendSatellite(view,"WISA Woodsat");});
                         break;
                     }
                     case 26: {
@@ -316,6 +344,7 @@ public class SateliteActivity extends TopBarActivity {
                         description.setText(R.string.gossamer);
                         sat_img.setImageResource(R.drawable.gossamer);
                         gr.setAdapter(updatefrommap("Gossamer"));
+                        buttTest.setOnClickListener(view1->{sendSatellite(view,"Gossamer");});
                         break;
                     }
                     case 27: {
@@ -323,6 +352,7 @@ public class SateliteActivity extends TopBarActivity {
                         description.setText(R.string.sbudnic);
                         sat_img.setImageResource(R.drawable.sbudnic);
                         gr.setAdapter(updatefrommap("SBUDNIC"));
+                        buttTest.setOnClickListener(view1->{sendSatellite(view,"SBUDNIC");});
                         break;
                     }
                     case 28: {
@@ -330,6 +360,7 @@ public class SateliteActivity extends TopBarActivity {
                         description.setText(R.string.satlla_2a);
                         sat_img.setImageResource(R.drawable.satlla_2a);
                         gr.setAdapter(updatefrommap("SATLLA-2A"));
+                        buttTest.setOnClickListener(view1->{sendSatellite(view,"SATLLA-2A");});
                         break;
                     }
                     case 29: {
@@ -337,6 +368,7 @@ public class SateliteActivity extends TopBarActivity {
                         description.setText(R.string.vzlusat_2);
                         sat_img.setImageResource(R.drawable.vzlusat_2);
                         gr.setAdapter(updatefrommap("VZLUSAT-2"));
+                        buttTest.setOnClickListener(view1->{sendSatellite(view,"VZLUSAT-2");});
                         break;
                     }
                     case 30: {
@@ -344,6 +376,7 @@ public class SateliteActivity extends TopBarActivity {
                         description.setText(R.string.grizu_263a);
                         sat_img.setImageResource(R.drawable.grizu_263a);
                         gr.setAdapter(updatefrommap("Grizu-263A"));
+                        buttTest.setOnClickListener(view1->{sendSatellite(view,"Grizu-263A");});
                         break;
                     }
                     case 31: {
@@ -351,6 +384,7 @@ public class SateliteActivity extends TopBarActivity {
                         description.setText(R.string.platform_1);
                         sat_img.setImageResource(R.drawable.platform);
                         gr.setAdapter(updatefrommap("Platform-1"));
+                        buttTest.setOnClickListener(view1->{sendSatellite(view,"Platform-1");});
                         break;
                     }
                     case 32: {
@@ -358,6 +392,7 @@ public class SateliteActivity extends TopBarActivity {
                         description.setText(R.string.bz_lora_5);
                         sat_img.setImageResource(R.drawable.bz_lora_5);
                         gr.setAdapter(updatefrommap("BZ-LORA-5"));
+                        buttTest.setOnClickListener(view1->{sendSatellite(view,"BZ-LORA-5");});
                         break;
                     }
                     case 33: {
@@ -365,6 +400,7 @@ public class SateliteActivity extends TopBarActivity {
                         description.setText(R.string.bz_lora_6);
                         sat_img.setImageResource(R.drawable.bz_lora_6);
                         gr.setAdapter(updatefrommap("BZ-LORA-6"));
+                        buttTest.setOnClickListener(view1->{sendSatellite(view,"BZ-LORA-6");});
                         break;
                     }
                     case 34: {
@@ -372,6 +408,7 @@ public class SateliteActivity extends TopBarActivity {
                         description.setText(R.string.lw_lora_1);
                         sat_img.setImageResource(R.drawable.lw_lora_1);
                         gr.setAdapter(updatefrommap("LW-LORA-1"));
+                        buttTest.setOnClickListener(view1->{sendSatellite(view,"LW-LORA-1");});
                         break;
                     }
                     case 35: {
@@ -379,6 +416,7 @@ public class SateliteActivity extends TopBarActivity {
                         description.setText(R.string.fossa_sat_b1);
                         sat_img.setImageResource(R.drawable.fosssat_b1);
                         gr.setAdapter(updatefrommap("FossaSat-1B"));
+                        buttTest.setOnClickListener(view1->{sendSatellite(view,"FossaSat-1B");});
                         break;
                     }
                     case 36: {
@@ -386,6 +424,7 @@ public class SateliteActivity extends TopBarActivity {
                         description.setText(R.string.fossa_sat_2);
                         sat_img.setImageResource(R.drawable.fosssat_2);
                         gr.setAdapter(updatefrommap("FossaSat-2"));
+                        buttTest.setOnClickListener(view1->{sendSatellite(view,"FossaSat-2");});
                         break;
                     }
                     case 37: {
@@ -393,6 +432,7 @@ public class SateliteActivity extends TopBarActivity {
                         description.setText(R.string.iris_a);
                         sat_img.setImageResource(R.drawable.iris);
                         gr.setAdapter(updatefrommap("IRIS-A"));
+                        buttTest.setOnClickListener(view1->{sendSatellite(view,"IRIS-A");});
                         break;
                     }
                     case 38: {
@@ -400,6 +440,7 @@ public class SateliteActivity extends TopBarActivity {
                         description.setText(R.string.test_satellite);
                         sat_img.setImageResource(R.drawable.test_sat);
                         gr.setAdapter(updatefrommap("Test satellite ISM 433.3"));
+                        buttTest.setOnClickListener(view1->{sendSatellite(view,"Test satellite ISM 433.3");});
                         break;
                     }
                     default:
@@ -415,6 +456,12 @@ public class SateliteActivity extends TopBarActivity {
             }
         });
         }
+    private void stopTestStoryBoard() {
+        ActionController actionController = ActionController.getInstance();
+        actionController.exitTour();
+        buttTest.setVisibility(View.VISIBLE);
+        buttStop.setVisibility(View.INVISIBLE);
+    }
 
     private void loadConnectionStatus(SharedPreferences sharedPreferences) {
         boolean isConnected = sharedPreferences.getBoolean(ConstantPrefs.IS_CONNECTED.name(), false);
@@ -451,6 +498,37 @@ public class SateliteActivity extends TopBarActivity {
         btn.setOnClickListener(view1 -> sendPacket(view, lon[1], lat[1].substring(0, lat[1].length() - 1), alti[1], description, temp_packet.get(i).get(5)));
     }
 
+    public void sendSatellite(View view,String satellite_name){
+        boolean found = false;
+        for(int i=0;i<50;i++) {
+            if (packet.get(i).get(5).equals(satellite_name)){
+                found = true;
+                String description = "Received on:\n" +
+                        "LoRa "+ temp_packet.get(i).get(1)+" Mhz SF: "+temp_packet.get(i).get(2)+" CR: "+temp_packet.get(i).get(4)+" BW: "+temp_packet.get(i).get(3)+" kHz\n" +
+                        "Sat in Umbra \uD83C\uDF0C Eclipse Depth: 40.85º\n" +
+                        "Theoretical coverage 5174 km\n" +
+                        "\n" +
+                        "\uD83D\uDCFB 2000mW \uD83C\uDF21 "+temp_packet.get(i).get(8)+"ºC\n" +
+                        "\uD83D\uDEF0 8256mV ⛽️ 1385mW \uD83C\uDF2122ºC\n" +
+                        "☀️0mW \uD83D\uDD0B13828mAh \uD83D\uDD0C -1949mW\n" +
+                        "\uD83C\uDF21 Board PMM: 11ºC PAM: 10ºC PDM: 8ºC\n" +
+                        "\uD83C\uDF21 Solar Array X-: -8ºC X+: -9ºC\n" +
+                        "\uD83D\uDCE6: 2045.26784";
+
+                String sat = temp_packet.get(i).get(11);
+                String pos[]= sat.split(",");
+                String lon[]= pos[0].split(":");
+                String alti[]= pos[1].split(":");
+                String lat[]= pos[2].split(":");
+                sendPacket(view, lon[1], lat[1].substring(0, lat[1].length() - 1), alti[1], description, temp_packet.get(i).get(5));
+                return;
+            }
+        }
+        if(found == false){
+            CustomDialogUtility.showDialog(this, "No packet found!");
+        }
+    }
+
     public void sendPacket(View view,String longi,String lat,String alti,String des,String name) {
         Dialog dialog = getDialog(this, "Setting Files");
         dialog.show();
@@ -458,8 +536,9 @@ public class SateliteActivity extends TopBarActivity {
         boolean isConnected = sharedPreferences.getBoolean(ConstantPrefs.IS_CONNECTED.name(), false);
         if (isConnected) {
             dialog.dismiss();
-            CustomDialogUtility.showDialog(this, "Testing the storyboard.");
             ActionController.getInstance().sendISSfile(SateliteActivity.this, longi, lat, alti, des, name);
+            buttTest.setVisibility(view.INVISIBLE);
+            buttStop.setVisibility(view.VISIBLE);
         } else {
             dialog.dismiss();
             CustomDialogUtility.showDialog(this, "LG is not connected, Please visit connect tab.");

@@ -491,7 +491,7 @@ public class ActionController {
                 "\t\t\t<LookAt>\n" +
                 "\t\t\t\t<longitude>"+lon+"</longitude>\n" +
                 "\t\t\t\t<latitude>"+lat+"</latitude>\n" +
-                "\t\t\t\t<altitude>0</altitude>\n" +
+                "\t\t\t\t<altitude>500000</altitude>\n" +
                 "\t\t\t\t<heading>-5.029091935818897</heading>\n" +
                 "\t\t\t\t<tilt>0</tilt>\n" +
                 "\t\t\t\t<range>4880964.396775676</range>\n" +
@@ -552,6 +552,7 @@ public class ActionController {
                     "     <LookAt> \n"+
                     "      <longitude>"+longitude +"</longitude> \n"+
                     "      <latitude>"+latitude+"</latitude> \n"+
+                    "      <altitude>800000</altitude> \n"+
                     "      <heading>"+heading+"</heading> \n"+
                     "      <tilt>60</tilt> \n"+
                     "      <gx:fovy>35</gx:fovy> \n"+

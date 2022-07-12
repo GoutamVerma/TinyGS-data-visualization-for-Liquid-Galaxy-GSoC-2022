@@ -62,13 +62,13 @@
     <string name="status_of_connection_off">Image Unavailable on screen</string>
 
     // Top Bar
-    <string name="menu_help">Help</string>
-    <string name="menu_packets">Packets</string>
+    <string name="menu_help">ℹ️Help</string>
+    <string name="menu_packets">📦Packets</string>
     <string name="menu_constellations">Satellite Constellations</string>
     <string name="menu_rocket">Rockets</string>
-    <string name="menu_satelite">Satellite</string>
-    <string name="menu_connect">Connect</string>
-    <string name="menu_about">About</string>
+    <string name="menu_satelite">🛰Satellite</string>
+    <string name="menu_connect">🌎Connect</string>
+    <string name="menu_about">📄About</string>
 
 
     <string name="account_username">Username</string>
