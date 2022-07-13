@@ -41,7 +41,6 @@ public class CatalogActivity extends TopBarActivity {
         setContentView(R.layout.activity_catalog);
         View topBar = findViewById(R.id.top_bar);
         buttCatalog = topBar.findViewById(R.id.butt_scn);
-        buttDemo = topBar.findViewById(R.id.butt_demo);
         connectionStatus = findViewById(R.id.connection_status);
         SharedPreferences sharedPreferences = getSharedPreferences(ConstantPrefs.SHARED_PREFS.name(), MODE_PRIVATE);
     }
