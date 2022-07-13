@@ -504,23 +504,23 @@ public class SateliteActivity extends TopBarActivity {
             if (packet.get(i).get(5).equals(satellite_name)){
                 found = true;
                 String description = "Received on:\n" +
-                        "LoRa "+ temp_packet.get(i).get(1)+" Mhz SF: "+temp_packet.get(i).get(2)+" CR: "+temp_packet.get(i).get(4)+" BW: "+temp_packet.get(i).get(3)+" kHz\n" +
+                        "LoRa "+ packet.get(i).get(1)+" Mhz SF: "+packet.get(i).get(2)+" CR: "+packet.get(i).get(4)+" BW: "+packet.get(i).get(3)+" kHz\n" +
                         "Sat in Umbra \uD83C\uDF0C Eclipse Depth: 40.85º\n" +
                         "Theoretical coverage 5174 km\n" +
                         "\n" +
-                        "\uD83D\uDCFB 2000mW \uD83C\uDF21 "+temp_packet.get(i).get(8)+"ºC\n" +
+                        "\uD83D\uDCFB 2000mW \uD83C\uDF21 "+packet.get(i).get(8)+"ºC\n" +
                         "\uD83D\uDEF0 8256mV ⛽️ 1385mW \uD83C\uDF2122ºC\n" +
                         "☀️0mW \uD83D\uDD0B13828mAh \uD83D\uDD0C -1949mW\n" +
                         "\uD83C\uDF21 Board PMM: 11ºC PAM: 10ºC PDM: 8ºC\n" +
                         "\uD83C\uDF21 Solar Array X-: -8ºC X+: -9ºC\n" +
                         "\uD83D\uDCE6: 2045.26784";
 
-                String sat = temp_packet.get(i).get(11);
+                String sat = packet.get(i).get(11);
                 String pos[]= sat.split(",");
                 String lon[]= pos[0].split(":");
                 String alti[]= pos[1].split(":");
                 String lat[]= pos[2].split(":");
-                sendPacket(view, lon[1], lat[1].substring(0, lat[1].length() - 1), alti[1], description, temp_packet.get(i).get(5));
+                sendPacket(view, lon[1], lat[1].substring(0, lat[1].length() - 1), alti[1], description, packet.get(i).get(5));
                 return;
             }
         }
