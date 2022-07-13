@@ -94,9 +94,6 @@ public class PointRecyclerAdapter extends RecyclerView.Adapter<PointRecyclerAdap
                    MyLatitudeTextListener myLatitudeTextListener, MyAltitudeTextListener myAltitudeTextListener) {
             super(itemView);
             this.textView = itemView.findViewById(R.id.textView);
-            this.longitude = itemView.findViewById(R.id.longitude);
-            this.latitude = itemView.findViewById(R.id.latitude);
-            this.altitude = itemView.findViewById(R.id.altitude);
 
             this.myLongitudeTextListener = myLongitudeTextListener;
             this.myLatitudeTextListener = myLatitudeTextListener;
