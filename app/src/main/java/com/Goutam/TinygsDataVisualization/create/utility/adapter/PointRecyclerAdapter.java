@@ -50,7 +50,7 @@ public class PointRecyclerAdapter extends RecyclerView.Adapter<PointRecyclerAdap
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_create_storyboard_action_balloon_point, parent, false);
+        View view = null;
         return new ViewHolder(view, new MyLongitudeTextListener(), new MyLatitudeTextListener(), new MyAltitudeTextListener());
     }
 
