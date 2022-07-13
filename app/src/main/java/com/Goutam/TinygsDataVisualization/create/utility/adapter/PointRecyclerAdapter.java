@@ -50,7 +50,7 @@ public class PointRecyclerAdapter extends RecyclerView.Adapter<PointRecyclerAdap
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_create_storyboard_action_balloon_point, parent, false);
+        View view = null;
         return new ViewHolder(view, new MyLongitudeTextListener(), new MyLatitudeTextListener(), new MyAltitudeTextListener());
     }
 
@@ -94,9 +94,6 @@ public class PointRecyclerAdapter extends RecyclerView.Adapter<PointRecyclerAdap
                    MyLatitudeTextListener myLatitudeTextListener, MyAltitudeTextListener myAltitudeTextListener) {
             super(itemView);
             this.textView = itemView.findViewById(R.id.textView);
-            this.longitude = itemView.findViewById(R.id.longitude);
-            this.latitude = itemView.findViewById(R.id.latitude);
-            this.altitude = itemView.findViewById(R.id.altitude);
 
             this.myLongitudeTextListener = myLongitudeTextListener;
             this.myLatitudeTextListener = myLatitudeTextListener;
