@@ -225,6 +225,24 @@ public class ActionBuildCommandUtility {
         return coordinate;
     }
 
+    private static String POICommand(String lon,String lat,String alti) {
+        String command =  "     <gx:FlyTo>\n" +
+                "      <gx:duration>" + "10" + "</gx:duration>\n" +
+                "      <gx:flyToMode>bounce</gx:flyToMode>\n" +
+                "      <LookAt>\n" +
+                "       <longitude>" + lon + "</longitude>\n" +
+                "       <latitude>" + lat + "</latitude>\n" +
+                "       <altitude>" + "800000" + "</altitude>\n" +
+                "       <heading>" + "35.236" + "</heading>\n" +
+                "       <tilt>" + "60" + "</tilt>\n" +
+                "       <range>" + "56" + "</range>\n" +
+                "       <gx:altitudeMode>" + "absolute" + "</gx:altitudeMode>\n" +
+                "     </LookAt>\n" +
+                "    </gx:FlyTo>\n\n";
+        Log.w(TAG_DEBUG, "POI COMMAND: " + command);
+        return  command;
+    }
+
     /**
      * Build the command to paint a balloon in Liquid Galaxy
      * @return String with command
