@@ -38,6 +38,12 @@ public class ActionBuildCommandUtility {
         return command;
     }
 
+    public static String buildCommandStartTour() {
+        String command = "echo \"playtour=TestTour\" > /tmp/query.txt";
+        Log.w(TAG_DEBUG, "command: " + command);
+        return command;
+    }
+
     public static String buildCommandTour(String lon,String lat,String alti,String des,String name){
         String startCommand = "echo '" +
                 "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
