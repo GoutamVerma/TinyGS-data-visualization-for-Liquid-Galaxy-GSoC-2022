@@ -30,6 +30,14 @@ public class ActionBuildCommandUtility {
         return "mkdir -p " + RESOURCES_FOLDER_PATH;
     }
 
+    public static String buildCommandwriteStartTourFile(){
+        String command = "echo \"http://lg1:81/Tour.kml\"  > " +
+                BASE_PATH +
+                "kmls.txt";
+        Log.w(TAG_DEBUG, "command: " + command);
+        return command;
+    }
+
     public static String buildCommandTour(String lon,String lat,String alti,String des,String name){
         String startCommand = "echo '" +
                 "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
