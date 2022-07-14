@@ -205,6 +205,26 @@ public class ActionBuildCommandUtility {
         return animate + wait + animateClose;
     }
 
+    private static String generateCircle(String longi, String lati, String alti){
+        double centerLat = Math.toRadians(Double.parseDouble(lati));
+        double centerLng = Math.toRadians(Double.parseDouble(longi));
+        double diameter = 800; // diameter of circle in km
+        double dist = diameter / 6371.0;
+
+        // start generating KML
+
+        String coordinate="";
+        for (int x = 0; x <= 360; x ++)
+        {
+            double brng = Math.toRadians(x);
+            double latitude = Math.asin(Math.sin(centerLat) * Math.cos(dist) + Math.cos(centerLat) * Math.sin(dist) * Math.cos(brng));
+            double longitude = centerLng + Math.atan2(Math.sin(brng) * Math.sin(dist)* Math.cos(centerLat), Math.cos(dist) - Math.sin(centerLat)
+                    * Math.sin(latitude)) ;
+            coordinate +=  Math.toDegrees(longitude)+ ","+ Math.toDegrees(latitude)+","+"800000 ";
+        }
+        return coordinate;
+    }
+
     /**
      * Build the command to paint a balloon in Liquid Galaxy
      * @return String with command
