@@ -141,6 +141,70 @@ public class ActionBuildCommandUtility {
 
     }
 
+    private static String buildTour(StringBuilder folderBalloonShapes,String lon,String lat,String alti,String des,String name) {
+        StringBuilder command = new StringBuilder();
+        Action action;
+        command.append(POICommand(lon,lat,alti));
+        command.append(BalloonCommand(folderBalloonShapes,lon,lat,alti,des,name));
+
+        return command.toString();
+    }
+    private static String BalloonCommand(StringBuilder folderBalloonShapes,String lon,String lat,String alti,String des,String name) {
+
+        String animate = "    <gx:AnimatedUpdate>\n" +
+                "    <gx:duration>0</gx:duration>\n" +
+                "     <Update>\n" +
+                "      <targetHref/>\n" +
+                "      <Change>\n" +
+                "       <Placemark targetId=\"" +  "ballon1"  + "\">\n" +
+                "        <gx:balloonVisibility>1</gx:balloonVisibility>\n" +
+                "       </Placemark>\n" +
+                "      </Change>\n" +
+                "     </Update>\n" +
+                "    </gx:AnimatedUpdate>\n\n";
+
+        String startCommand = "    <Placemark id=\"" + "ballon1" + "\">\n" +
+                "     <name>" + name + "</name>\n" +
+                "     <description>";
+        String description = "";
+        description = des;
+        String endCommand =
+                "      </description>\n" +
+                        "      <styleUrl>#s_ylw-pushpin</styleUrl>\n" +
+                        "      <Point>\n" +
+                        "      <extrude>1</extrude>\n" +
+                        "      <gx:drawOrder>1</gx:drawOrder>\n" +
+                        "      <coordinates>" + lon + "," + lat +"," + "800000" + "</coordinates>\n"+
+                        "      <gx:altitudeMode>" + "absolute" + "</gx:altitudeMode>\n" +
+                        "      </Point>\n" +
+                        "    </Placemark>\n\n"+
+                        "<Placemark>\n" +
+                        "<name>Circle Measure</name>\n" +
+                        "<styleUrl>#inline1</styleUrl>\n" +
+                        "<LineString>\n" +
+                        "<tessellate>1</tessellate>\n" +
+                        "<altitudeMode>absolute</altitudeMode>\n" +
+                        "<coordinates>" + generateCircle(lon,lat,alti) +" </coordinates>\n" +
+                        "</LineString>\n" +
+                        "</Placemark>";
+
+        folderBalloonShapes.append(startCommand + description + endCommand);
+        Log.w(TAG_DEBUG, "BALLOON: " + folderBalloonShapes);
+        String animateClose = "    <gx:AnimatedUpdate>\n" +
+                "    <gx:duration>0</gx:duration>\n" +
+                "     <Update>\n" +
+                "      <targetHref/>\n" +
+                "      <Change>\n" +
+                "       <Placemark targetId=\"" +  "ballon1"  + "\">\n" +
+                "        <gx:balloonVisibility>0</gx:balloonVisibility>\n" +
+                "       </Placemark>\n" +
+                "      </Change>\n" +
+                "     </Update>\n" +
+                "    </gx:AnimatedUpdate>\n\n";
+        String wait = "4";
+        return animate + wait + animateClose;
+    }
+
     /**
      * Build the command to paint a balloon in Liquid Galaxy
      * @return String with command
