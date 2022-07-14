@@ -65,6 +65,82 @@ public class ActionBuildCommandUtility {
         return startCommand + middleCommand + endCommand + folderBalloonShapes.toString();
     }
 
+    private static String stylekml(){
+        return   "\t<Style id=\"inline1\">\n" +
+                "\t\t<LineStyle>\n" +
+                "\t\t\t<color>ff0000ff</color>\n" +
+                "\t\t\t<width>2</width>\n" +
+                "\t\t</LineStyle>\n" +
+                "\t</Style>\n" +
+                "\t<StyleMap id=\"inline0\">\n" +
+                "\t\t<Pair>\n" +
+                "\t\t\t<key>normal</key>\n" +
+                "\t\t\t<styleUrl>#inline1</styleUrl>\n" +
+                "\t\t</Pair>\n" +
+                "\t\t<Pair>\n" +
+                "\t\t\t<key>highlight</key>\n" +
+                "\t\t\t<styleUrl>#inline</styleUrl>\n" +
+                "\t\t</Pair>\n" +
+                "\t</StyleMap>\n" +
+                "\t<Style id=\"s_ylw-pushpin\">\n" +
+                "\t\t<IconStyle>\n" +
+                "\t\t\t<scale>3</scale>\n" +
+                "\t\t\t<Icon>\n" +
+                "\t\t\t\t<href>https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/FP_Satellite_icon.svg/1200px-FP_Satellite_icon.svg.png</href>\n" +
+                "\t\t\t</Icon>\n" +
+                "\t\t\t<hotSpot x=\"0.5\" y=\"0.5\" xunits=\"fraction\" yunits=\"fraction\"/>\n" +
+                "\t\t</IconStyle>\n" +
+                "\t\t<LineStyle>\n" +
+                "\t\t\t<color>ff0000ff</color>\n" +
+                "\t\t</LineStyle>\n" +
+                "\t</Style>\n" +
+                "\t<Style id=\"inline\">\n" +
+                "\t\t<LineStyle>\n" +
+                "\t\t\t<color>ff0000ff</color>\n" +
+                "\t\t\t<width>2</width>\n" +
+                "\t\t</LineStyle>\n" +
+                "\t</Style>\n" +
+                "\t<Style id=\"s_ylw-pushpin_hl\">\n" +
+                "\t\t<IconStyle>\n" +
+                "\t\t\t<scale>3.54545</scale>\n" +
+                "\t\t\t<Icon>\n" +
+                "\t\t\t\t<href>"+"app/src/main/res/drawable/satellite_icon.png"+"</href>\n" +
+                "\t\t\t</Icon>\n" +
+                "\t\t\t<hotSpot x=\"0.5\" y=\"0.5\" xunits=\"fraction\" yunits=\"fraction\"/>\n" +
+                "\t\t</IconStyle>\n" +
+                "\t\t<LineStyle>\n" +
+                "\t\t\t<color>ff0000ff</color>\n" +
+                "\t\t</LineStyle>\n" +
+                "\t</Style>\n" +
+                "\t<StyleMap id=\"m_ylw-pushpin\">\n" +
+                "\t\t<Pair>\n" +
+                "\t\t\t<key>normal</key>\n" +
+                "\t\t\t<styleUrl>#s_ylw-pushpin</styleUrl>\n" +
+                "\t\t</Pair>\n" +
+                "\t\t<Pair>\n" +
+                "\t\t\t<key>highlight</key>\n" +
+                "\t\t\t<styleUrl>#s_ylw-pushpin_hl</styleUrl>\n" +
+                "\t\t</Pair>\n" +
+                "\t</StyleMap>\n" +
+                "\n" +
+                "\t\t<Style>\n" +
+                "\t\t\t<ListStyle>\n" +
+                "\t\t\t\t<listItemType>check</listItemType>\n" +
+                "\t\t\t\t<ItemIcon>\n" +
+                "\t\t\t\t\t<state>open</state>\n" +
+                "\t\t\t\t\t<href>:/mysavedplaces_open.png</href>\n" +
+                "\t\t\t\t</ItemIcon>\n" +
+                "\t\t\t\t<ItemIcon>\n" +
+                "\t\t\t\t\t<state>closed</state>\n" +
+                "\t\t\t\t\t<href>:/mysavedplaces_closed.png</href>\n" +
+                "\t\t\t\t</ItemIcon>\n" +
+                "\t\t\t\t<bgColor>00ffffff</bgColor>\n" +
+                "\t\t\t\t<maxSnippetLines>2</maxSnippetLines>\n" +
+                "\t\t\t</ListStyle>\n" +
+                "\t\t</Style>\n";
+
+    }
+
     /**
      * Build the command to paint a balloon in Liquid Galaxy
      * @return String with command
