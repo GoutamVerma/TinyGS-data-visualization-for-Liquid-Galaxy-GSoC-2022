@@ -132,6 +132,32 @@ public class ActionController {
         startOrbit(null);
     }
 
+    public void sendTour(LGCommand.Listener listener,String lon,String lat,String alti,String des,String name){
+        cleanFileKMLs(0);
+        handler.postDelayed(() -> {
+            LGCommand lgCommand = new LGCommand(ActionBuildCommandUtility.buildCommandTour(lon,lat,alti,des,name), LGCommand.CRITICAL_MESSAGE, (String result) -> {
+                if (listener != null) {
+                    listener.onResponse(result);
+                }
+            });
+            LGConnectionManager lgConnectionManager = LGConnectionManager.getInstance();
+            lgConnectionManager.startConnection();
+            lgConnectionManager.addCommandToLG(lgCommand);
+
+            LGCommand lgCommandWriteTour = new LGCommand(ActionBuildCommandUtility.buildCommandwriteStartTourFile(), LGCommand.CRITICAL_MESSAGE, (String result) -> {
+                if (listener != null) {
+                    listener.onResponse(result);
+                }
+            });
+            lgConnectionManager.addCommandToLG(lgCommandWriteTour);
+
+            LGCommand lgCommandStartTour = new LGCommand(ActionBuildCommandUtility.buildCommandStartTour(),
+                    LGCommand.CRITICAL_MESSAGE, (String result) -> {
+            });
+            handler2.postDelayed(() -> lgConnectionManager.addCommandToLG(lgCommandStartTour), 1500);
+        }, 1000);
+    }
+
     public void sendOribitfile(AppCompatActivity activity,String lon,String lat,String alti,String des,String name) {
         createResourcesFolder();
         cleanFileKMLs(0);

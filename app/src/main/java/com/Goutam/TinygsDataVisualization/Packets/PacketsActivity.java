@@ -264,7 +264,7 @@ public class PacketsActivity extends TopBarActivity {
         SharedPreferences sharedPreferences = getSharedPreferences(ConstantPrefs.SHARED_PREFS.name(), MODE_PRIVATE);
         boolean isConnected = sharedPreferences.getBoolean(ConstantPrefs.IS_CONNECTED.name(), false);
         if (isConnected) {
-            ActionController.getInstance().sendISSfile(PacketsActivity.this, longi, lat, alti, des, name);
+            ActionController.getInstance().sendTour( null, longi, lat, alti, des, name);
             test.setVisibility(view.INVISIBLE);
             buttStop.setVisibility(view.VISIBLE);
         } else {

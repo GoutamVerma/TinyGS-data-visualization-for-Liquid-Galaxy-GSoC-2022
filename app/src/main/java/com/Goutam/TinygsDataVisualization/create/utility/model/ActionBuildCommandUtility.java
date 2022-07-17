@@ -30,6 +30,233 @@ public class ActionBuildCommandUtility {
         return "mkdir -p " + RESOURCES_FOLDER_PATH;
     }
 
+    public static String buildCommandwriteStartTourFile(){
+        String command = "echo \"http://lg1:81/Tour.kml\"  > " +
+                BASE_PATH +
+                "kmls.txt";
+        Log.w(TAG_DEBUG, "command: " + command);
+        return command;
+    }
+
+    public static String buildCommandStartTour() {
+        String command = "echo \"playtour=TestTour\" > /tmp/query.txt";
+        Log.w(TAG_DEBUG, "command: " + command);
+        return command;
+    }
+
+    public static String buildCommandTour(String lon,String lat,String alti,String des,String name){
+        String startCommand = "echo '" +
+                "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
+                "<kml xmlns=\"http://www.opengis.net/kml/2.2\"\n" +
+                " xmlns:gx=\"http://www.google.com/kml/ext/2.2\">\n" +
+                "<Document>\n" +
+                "  <name>Tour</name>\n" +
+                "  <open>1</open>\n\n" +
+                "  <gx:Tour>\n" +
+                "    <name>TestTour</name>\n" +
+                "    <gx:Playlist>\n\n";
+
+        //Build the tour
+        StringBuilder folderBalloonShapes = new StringBuilder();
+        folderBalloonShapes.append("  <Folder>\n" +
+                        "   <name>Points and Shapes</name>\n\n")
+                .append("   <Style id=\"linestyleExample\">\n" +
+                        "    <LineStyle>\n" +
+                        "    <color>501400FF</color>\n" +
+                        "    <width>100</width>\n" +
+                        "    <gx:labelVisibility>1</gx:labelVisibility>\n" +
+                        "    </LineStyle>\n" +
+                        "   </Style>\n\n")
+                .append(stylekml());
+
+        String middleCommand = buildTour(folderBalloonShapes,lon,lat,alti,des,name);
+        folderBalloonShapes.append("  </Folder>\n");
+        folderBalloonShapes.append("</Document>\n" + "</kml> ' > ").append(BASE_PATH).append("Tour.kml");
+        Log.w(TAG_DEBUG, "FOLDER COMMAND: " + folderBalloonShapes.toString());
+        String endCommand = "    </gx:Playlist>\n" +
+                "  </gx:Tour>\n\n";
+        Log.w(TAG_DEBUG, "FINAL COMMAND: " + startCommand + middleCommand + folderBalloonShapes.toString() + endCommand);
+        return startCommand + middleCommand + endCommand + folderBalloonShapes.toString();
+    }
+
+    private static String stylekml(){
+        return   "\t<Style id=\"inline1\">\n" +
+                "\t\t<LineStyle>\n" +
+                "\t\t\t<color>ff0000ff</color>\n" +
+                "\t\t\t<width>2</width>\n" +
+                "\t\t</LineStyle>\n" +
+                "\t</Style>\n" +
+                "\t<StyleMap id=\"inline0\">\n" +
+                "\t\t<Pair>\n" +
+                "\t\t\t<key>normal</key>\n" +
+                "\t\t\t<styleUrl>#inline1</styleUrl>\n" +
+                "\t\t</Pair>\n" +
+                "\t\t<Pair>\n" +
+                "\t\t\t<key>highlight</key>\n" +
+                "\t\t\t<styleUrl>#inline</styleUrl>\n" +
+                "\t\t</Pair>\n" +
+                "\t</StyleMap>\n" +
+                "\t<Style id=\"s_ylw-pushpin\">\n" +
+                "\t\t<IconStyle>\n" +
+                "\t\t\t<scale>3</scale>\n" +
+                "\t\t\t<Icon>\n" +
+                "\t\t\t\t<href>https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/FP_Satellite_icon.svg/1200px-FP_Satellite_icon.svg.png</href>\n" +
+                "\t\t\t</Icon>\n" +
+                "\t\t\t<hotSpot x=\"0.5\" y=\"0.5\" xunits=\"fraction\" yunits=\"fraction\"/>\n" +
+                "\t\t</IconStyle>\n" +
+                "\t\t<LineStyle>\n" +
+                "\t\t\t<color>ff0000ff</color>\n" +
+                "\t\t</LineStyle>\n" +
+                "\t</Style>\n" +
+                "\t<Style id=\"inline\">\n" +
+                "\t\t<LineStyle>\n" +
+                "\t\t\t<color>ff0000ff</color>\n" +
+                "\t\t\t<width>2</width>\n" +
+                "\t\t</LineStyle>\n" +
+                "\t</Style>\n" +
+                "\t<Style id=\"s_ylw-pushpin_hl\">\n" +
+                "\t\t<IconStyle>\n" +
+                "\t\t\t<scale>3.54545</scale>\n" +
+                "\t\t\t<Icon>\n" +
+                "\t\t\t\t<href>"+"app/src/main/res/drawable/satellite_icon.png"+"</href>\n" +
+                "\t\t\t</Icon>\n" +
+                "\t\t\t<hotSpot x=\"0.5\" y=\"0.5\" xunits=\"fraction\" yunits=\"fraction\"/>\n" +
+                "\t\t</IconStyle>\n" +
+                "\t\t<LineStyle>\n" +
+                "\t\t\t<color>ff0000ff</color>\n" +
+                "\t\t</LineStyle>\n" +
+                "\t</Style>\n" +
+                "\t<StyleMap id=\"m_ylw-pushpin\">\n" +
+                "\t\t<Pair>\n" +
+                "\t\t\t<key>normal</key>\n" +
+                "\t\t\t<styleUrl>#s_ylw-pushpin</styleUrl>\n" +
+                "\t\t</Pair>\n" +
+                "\t\t<Pair>\n" +
+                "\t\t\t<key>highlight</key>\n" +
+                "\t\t\t<styleUrl>#s_ylw-pushpin_hl</styleUrl>\n" +
+                "\t\t</Pair>\n" +
+                "\t</StyleMap>\n" +
+                "\n" +
+                "\t\t<Style>\n" +
+                "\t\t\t<ListStyle>\n" +
+                "\t\t\t\t<listItemType>check</listItemType>\n" +
+                "\t\t\t\t<ItemIcon>\n" +
+                "\t\t\t\t\t<state>open</state>\n" +
+                "\t\t\t\t\t<href>:/mysavedplaces_open.png</href>\n" +
+                "\t\t\t\t</ItemIcon>\n" +
+                "\t\t\t\t<ItemIcon>\n" +
+                "\t\t\t\t\t<state>closed</state>\n" +
+                "\t\t\t\t\t<href>:/mysavedplaces_closed.png</href>\n" +
+                "\t\t\t\t</ItemIcon>\n" +
+                "\t\t\t\t<bgColor>00ffffff</bgColor>\n" +
+                "\t\t\t\t<maxSnippetLines>2</maxSnippetLines>\n" +
+                "\t\t\t</ListStyle>\n" +
+                "\t\t</Style>\n";
+
+    }
+
+    private static String buildTour(StringBuilder folderBalloonShapes,String lon,String lat,String alti,String des,String name) {
+        StringBuilder command = new StringBuilder();
+        Action action;
+        command.append(POICommand(lon,lat,alti));
+        command.append(BalloonCommand(folderBalloonShapes,lon,lat,alti,des,name));
+
+        return command.toString();
+    }
+    private static String BalloonCommand(StringBuilder folderBalloonShapes,String lon,String lat,String alti,String des,String name) {
+
+        String animate = "    <gx:AnimatedUpdate>\n" +
+                "    <gx:duration>0</gx:duration>\n" +
+                "     <Update>\n" +
+                "      <targetHref/>\n" +
+                "      <Change>\n" +
+                "       <Placemark targetId=\"" +  "ballon1"  + "\">\n" +
+                "        <gx:balloonVisibility>1</gx:balloonVisibility>\n" +
+                "       </Placemark>\n" +
+                "      </Change>\n" +
+                "     </Update>\n" +
+                "    </gx:AnimatedUpdate>\n\n";
+
+        String startCommand = "    <Placemark id=\"" + "ballon1" + "\">\n" +
+                "     <name>" + name + "</name>\n" +
+                "     <description>";
+        String description = "";
+        description = des;
+        String endCommand =
+                "      </description>\n" +
+                        "      <styleUrl>#s_ylw-pushpin</styleUrl>\n" +
+                        "      <Point>\n" +
+                        "      <extrude>1</extrude>\n" +
+                        "      <gx:drawOrder>1</gx:drawOrder>\n" +
+                        "      <coordinates>" + lon + "," + lat +"," + "800000" + "</coordinates>\n"+
+                        "      <gx:altitudeMode>" + "absolute" + "</gx:altitudeMode>\n" +
+                        "      </Point>\n" +
+                        "    </Placemark>\n\n"+
+                        "<Placemark>\n" +
+                        "<name>Circle Measure</name>\n" +
+                        "<styleUrl>#inline1</styleUrl>\n" +
+                        "<LineString>\n" +
+                        "<tessellate>1</tessellate>\n" +
+                        "<altitudeMode>absolute</altitudeMode>\n" +
+                        "<coordinates>" + generateCircle(lon,lat,alti) +" </coordinates>\n" +
+                        "</LineString>\n" +
+                        "</Placemark>";
+
+        folderBalloonShapes.append(startCommand + description + endCommand);
+        Log.w(TAG_DEBUG, "BALLOON: " + folderBalloonShapes);
+        String animateClose = "    <gx:AnimatedUpdate>\n" +
+                "    <gx:duration>0</gx:duration>\n" +
+                "     <Update>\n" +
+                "      <targetHref/>\n" +
+                "      <Change>\n" +
+                "       <Placemark targetId=\"" +  "ballon1"  + "\">\n" +
+                "        <gx:balloonVisibility>0</gx:balloonVisibility>\n" +
+                "       </Placemark>\n" +
+                "      </Change>\n" +
+                "     </Update>\n" +
+                "    </gx:AnimatedUpdate>\n\n";
+        String wait = "4";
+        return animate + wait + animateClose;
+    }
+
+    private static String generateCircle(String longi, String lati, String alti){
+        double centerLat = Math.toRadians(Double.parseDouble(lati));
+        double centerLng = Math.toRadians(Double.parseDouble(longi));
+        double diameter = 800; // diameter of circle in km
+        double dist = diameter / 6371.0;
+
+        // start generating KML
+
+        String coordinate="";
+        for (int x = 0; x <= 360; x ++)
+        {
+            double brng = Math.toRadians(x);
+            double latitude = Math.asin(Math.sin(centerLat) * Math.cos(dist) + Math.cos(centerLat) * Math.sin(dist) * Math.cos(brng));
+            double longitude = centerLng + Math.atan2(Math.sin(brng) * Math.sin(dist)* Math.cos(centerLat), Math.cos(dist) - Math.sin(centerLat)
+                    * Math.sin(latitude)) ;
+            coordinate +=  Math.toDegrees(longitude)+ ","+ Math.toDegrees(latitude)+","+"800000 ";
+        }
+        return coordinate;
+    }
+
+    private static String POICommand(String lon,String lat,String alti) {
+        String command =  "     <gx:FlyTo>\n" +
+                "      <gx:duration>" + "10" + "</gx:duration>\n" +
+                "      <gx:flyToMode>bounce</gx:flyToMode>\n" +
+                "      <LookAt>\n" +
+                "       <longitude>" + lon + "</longitude>\n" +
+                "       <latitude>" + lat + "</latitude>\n" +
+                "       <altitude>" + "800000" + "</altitude>\n" +
+                "       <heading>" + "35.236" + "</heading>\n" +
+                "       <tilt>" + "60" + "</tilt>\n" +
+                "       <range>" + "56" + "</range>\n" +
+                "       <gx:altitudeMode>" + "absolute" + "</gx:altitudeMode>\n" +
+                "     </LookAt>\n" +
+                "    </gx:FlyTo>\n\n";
+        Log.w(TAG_DEBUG, "POI COMMAND: " + command);
+        return  command;
+    }
+
     /**
      * Build the command to paint a balloon in Liquid Galaxy
      * @return String with command
