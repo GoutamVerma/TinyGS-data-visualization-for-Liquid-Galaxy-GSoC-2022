@@ -282,6 +282,15 @@ public class PacketsActivity extends TopBarActivity {
         }
         dialog.dismiss();
     }
+
+    /**
+     * @param longi Longitude of packets
+     * @param lat   Latitude of packets
+     * @param alti  Altitude of packets
+     * @param des   Description of satellite
+     * @param name  Name of satellite
+     * This function is in charge of sending animation(orbit) around satellite to Liquid Galaxy
+     */
     public void sendOrbit(View view,String longi,String lat,String alti,String des,String name) {
         Dialog dialog = getDialog(this, "Setting Files");
         dialog.show();
