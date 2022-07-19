@@ -257,6 +257,14 @@ public class PacketsActivity extends TopBarActivity {
         return obj;
     }
 
+    /**
+     * @param longi Longitude of packets
+     * @param lat   Latitude of packets
+     * @param alti  Altitude of packets
+     * @param des   Description of satellite
+     * @param name  Name of satellite
+     * This function is in charge of sending kml packets to Liquid Galaxy
+     */
     public void sendPacket(View view,String longi,String lat,String alti,String des,String name) {
         Button test = findViewById(R.id.test);
         Dialog dialog = getDialog(this, "Setting Files");
