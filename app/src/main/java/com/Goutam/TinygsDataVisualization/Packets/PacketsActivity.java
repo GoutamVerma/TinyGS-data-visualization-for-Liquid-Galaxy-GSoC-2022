@@ -78,6 +78,10 @@ public class PacketsActivity extends TopBarActivity {
 
     }
 
+    /**
+     * - Checks the internet connectivity of application
+     * - Display progressDialog until data is received from TinyGS API
+     */
     private void activity_handler(){
         ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
         if(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
