@@ -102,6 +102,12 @@ public class PacketsActivity extends TopBarActivity {
         }
     }
 
+    /**
+     *
+     * @param i  "i" stands for ID of satellite packets
+     * @param view
+     * This function is in charge of load content on layout activity_packets_info
+     */
     private void loadContent(int i,View view){
         setContentView(R.layout.activity_packets_info);
         HashMap<Integer,List<String>> packet = getHashMap("1");
