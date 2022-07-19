@@ -216,8 +216,10 @@ public class PacketsActivity extends TopBarActivity {
         });
         }
 
+    /**
+     * Updates UI with stored(SharedPreferences) packets
+     */
     private void updatefrommap(){
-        System.out.println("map se data aaya hai");
         HashMap<Integer,List<String>> packet = getHashMap("1");
         runOnUiThread(new Runnable() {
             @Override
@@ -230,7 +232,6 @@ public class PacketsActivity extends TopBarActivity {
                 grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                        Log.d("grid biew chala hai","hai");
                         loadContent(i,view);
                     }
                 });
