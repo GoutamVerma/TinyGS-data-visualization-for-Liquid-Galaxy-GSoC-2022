@@ -238,6 +238,11 @@ public class PacketsActivity extends TopBarActivity {
         });
     }
 
+    /**
+     * @param key
+     * @param obj
+     * This function saves tinyGS data in SharedPreferences in the form of HashMap object"
+     */
     public void saveHashMap(String key , Object obj) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(PacketsActivity.this);
         SharedPreferences.Editor editor = prefs.edit();
