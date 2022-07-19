@@ -150,6 +150,10 @@ public class PacketsActivity extends TopBarActivity {
         }
     }
 
+    /**
+     * return type: void
+     * This function gets data from TinyGS API in the form of JSON and parse JSON data in HashMap object
+     */
     public void get_Api_Data() {
         SharedPreferences sharedPreferences = getSharedPreferences(ConstantPrefs.SHARED_PREFS.name(), MODE_PRIVATE);
         loadConnectionStatus(sharedPreferences);
