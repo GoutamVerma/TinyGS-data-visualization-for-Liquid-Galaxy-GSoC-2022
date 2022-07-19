@@ -1,5 +1,8 @@
 package com.Goutam.TinygsDataVisualization.Packets;
 
+/**
+ * This class in charge of storing packets information in the form of model
+ */
 public class packet_card_model {
 
 
