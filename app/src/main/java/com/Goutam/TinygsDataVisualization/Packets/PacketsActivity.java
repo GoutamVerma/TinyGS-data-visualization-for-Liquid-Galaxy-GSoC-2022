@@ -42,6 +42,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * This class is in charge of Getting packets from TinyGS Api and sending visualizing command to Liquid Galaxy with the help of Action Controller
+ */
 public class PacketsActivity extends TopBarActivity {
     private static final String TAG_DEBUG = "PacketsActivity";
     public static final String EXTRA_MESSAGE = "com.example.tinygsdatavisualizer.MESSAGE";
