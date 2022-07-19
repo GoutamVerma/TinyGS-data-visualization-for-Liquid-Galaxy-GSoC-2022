@@ -200,6 +200,9 @@ public class PacketsActivity extends TopBarActivity {
         t1.start();
     }
 
+    /**
+     * This function runs on UI thread and update packet grid view with HashMap values"
+     */
     private void updater(){
         runOnUiThread(new Runnable() {
             @Override
