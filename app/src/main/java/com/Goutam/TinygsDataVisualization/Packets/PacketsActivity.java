@@ -247,6 +247,11 @@ public class PacketsActivity extends TopBarActivity {
         editor.apply();
     }
 
+    /**
+     * @param key The key "1" store all packets data including longitude,latitude,altitude,description,name,etc.
+     * @return Return hashmap that contains all the information about tinyGS packets
+     * This function is in charge of reading HashMap from SharedPreferences
+     */
 
     public HashMap<Integer,List<String>> getHashMap(String key) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(PacketsActivity.this);
