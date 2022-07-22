@@ -14,6 +14,9 @@ import com.Goutam.TinygsDataVisualization.R;
 
 import java.util.ArrayList;
 
+/**
+ * This class is extends ArrayAdapter
+ */
 public class packet_adapter extends ArrayAdapter<packet_card_model> {
     public packet_adapter(@NonNull Context context, ArrayList<packet_card_model> packetcardmodelArrayList) {
         super(context, 0, packetcardmodelArrayList);
