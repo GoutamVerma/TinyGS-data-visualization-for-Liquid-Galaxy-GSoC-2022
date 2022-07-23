@@ -61,7 +61,7 @@ public class SateliteActivity extends TopBarActivity {
     private TextView connectionStatus;
     private List<Action> actionsSaved = new ArrayList<>();
     public GridView grid;
-    private Button buttStop,buttTest,buttDemo;
+    private Button buttStop,buttTest,buttDemo,buttAnimate;
     GridView coursesGV;
     private ProgressDialog progressDialog;
     ArrayList<packet_card_model> packetcardmodelArrayList = new ArrayList<packet_card_model>();
@@ -511,7 +511,9 @@ public class SateliteActivity extends TopBarActivity {
         String lon[]= pos[0].split(":");
         String alti[]= pos[1].split(":");
         String lat[]= pos[2].split(":");
+        buttAnimate = findViewById(R.id.orbit_test);
         btn.setOnClickListener(view1 -> sendPacket(view, lon[1], lat[1].substring(0, lat[1].length() - 1), alti[1], description, temp_packet.get(i).get(5)));
+        buttAnimate.setOnClickListener(view1 -> sendOrbit(view, lon[1], lat[1].substring(0, lat[1].length() - 1), alti[1], description, temp_packet.get(i).get(5)));
     }
 
     /**
@@ -555,6 +557,29 @@ public class SateliteActivity extends TopBarActivity {
      * @param alti  Altitude of packets
      * @param des   Description of satellite
      * @param name  Name of satellite
+     * This function is in charge of sending animation(orbit) around satellite to Liquid Galaxy
+     */
+    public void sendOrbit(View view,String longi,String lat,String alti,String des,String name) {
+        Dialog dialog = getDialog(this, "Setting Files");
+        dialog.show();
+        SharedPreferences sharedPreferences = getSharedPreferences(ConstantPrefs.SHARED_PREFS.name(), MODE_PRIVATE);
+        boolean isConnected = sharedPreferences.getBoolean(ConstantPrefs.IS_CONNECTED.name(), false);
+        if (isConnected) {
+            dialog.dismiss();
+            CustomDialogUtility.showDialog(this, "Visualizing the animation!");
+            ActionController.getInstance().sendOribitfile(SateliteActivity.this, longi, lat, alti,des,name);
+        } else {
+            dialog.dismiss();
+            CustomDialogUtility.showDialog(this, "LG is not connected, Please visit connect tab.");
+            return;
+        }
+    }
+    /**
+     * @param longi Longitude of packets
+     * @param lat   Latitude of packets
+     * @param alti  Altitude of packets
+     * @param des   Description of satellite
+     * @param name  Name of satellite
      * This function is in charge of sending kml packets to Liquid Galaxy
      */
     public void sendPacket(View view,String longi,String lat,String alti,String des,String name) {
@@ -564,9 +589,10 @@ public class SateliteActivity extends TopBarActivity {
         boolean isConnected = sharedPreferences.getBoolean(ConstantPrefs.IS_CONNECTED.name(), false);
         if (isConnected) {
             dialog.dismiss();
-            ActionController.getInstance().sendISSfile(SateliteActivity.this, longi, lat, alti, des, name);
+            ActionController.getInstance().sendTour(null,longi,lat,alti,des,name);
             buttTest.setVisibility(view.INVISIBLE);
             buttStop.setVisibility(view.VISIBLE);
+            CustomDialogUtility.showDialog(this,"Visualizing Satellite on LG!");
         } else {
             dialog.dismiss();
             CustomDialogUtility.showDialog(this, "LG is not connected, Please visit connect tab.");
