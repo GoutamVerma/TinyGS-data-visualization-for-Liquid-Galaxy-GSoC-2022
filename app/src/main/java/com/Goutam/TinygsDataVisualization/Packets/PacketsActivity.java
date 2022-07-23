@@ -306,6 +306,7 @@ public class PacketsActivity extends TopBarActivity {
             ActionController.getInstance().sendTour( null, longi, lat, alti, des, name);
             test.setVisibility(view.INVISIBLE);
             buttStop.setVisibility(view.VISIBLE);
+            CustomDialogUtility.showDialog(this, "Visualizing the packet!");
         } else {
             dialog.dismiss();
             CustomDialogUtility.showDialog(this, "LG is not connected, Please visit connect tab.");
@@ -329,7 +330,7 @@ public class PacketsActivity extends TopBarActivity {
         boolean isConnected = sharedPreferences.getBoolean(ConstantPrefs.IS_CONNECTED.name(), false);
         if (isConnected) {
             dialog.dismiss();
-            CustomDialogUtility.showDialog(this, "Testing the Packet");
+            CustomDialogUtility.showDialog(this, "Visualizing the animation!");
             ActionController.getInstance().sendOribitfile(PacketsActivity.this, longi, lat, alti,des,name);
         } else {
             dialog.dismiss();
