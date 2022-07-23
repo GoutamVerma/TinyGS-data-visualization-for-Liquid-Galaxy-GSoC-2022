@@ -42,6 +42,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * This class is in charge of Getting packets from TinyGS Api and sending visualizing command to Liquid Galaxy with the help of Action Controller
+ */
 public class PacketsActivity extends TopBarActivity {
     private static final String TAG_DEBUG = "PacketsActivity";
     public static final String EXTRA_MESSAGE = "com.example.tinygsdatavisualizer.MESSAGE";
@@ -78,6 +81,10 @@ public class PacketsActivity extends TopBarActivity {
 
     }
 
+    /**
+     * - Checks the internet connectivity of application
+     * - Display progressDialog until data is received from TinyGS API
+     */
     private void activity_handler(){
         ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
         if(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
@@ -102,6 +109,12 @@ public class PacketsActivity extends TopBarActivity {
         }
     }
 
+    /**
+     *
+     * @param i  "i" stands for ID of satellite packets
+     * @param view
+     * This function is in charge of load content on layout activity_packets_info
+     */
     private void loadContent(int i,View view){
         setContentView(R.layout.activity_packets_info);
         HashMap<Integer,List<String>> packet = getHashMap("1");
@@ -150,6 +163,10 @@ public class PacketsActivity extends TopBarActivity {
         }
     }
 
+    /**
+     * return type: void
+     * This function gets data from TinyGS API in the form of JSON and parse JSON data in HashMap object
+     */
     public void get_Api_Data() {
         SharedPreferences sharedPreferences = getSharedPreferences(ConstantPrefs.SHARED_PREFS.name(), MODE_PRIVATE);
         loadConnectionStatus(sharedPreferences);
@@ -200,6 +217,9 @@ public class PacketsActivity extends TopBarActivity {
         t1.start();
     }
 
+    /**
+     * This function runs on UI thread and update packet grid view with HashMap values"
+     */
     private void updater(){
         runOnUiThread(new Runnable() {
             @Override
@@ -216,8 +236,10 @@ public class PacketsActivity extends TopBarActivity {
         });
         }
 
+    /**
+     * Updates UI with stored(SharedPreferences) packets
+     */
     private void updatefrommap(){
-        System.out.println("map se data aaya hai");
         HashMap<Integer,List<String>> packet = getHashMap("1");
         runOnUiThread(new Runnable() {
             @Override
@@ -230,7 +252,6 @@ public class PacketsActivity extends TopBarActivity {
                 grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                        Log.d("grid biew chala hai","hai");
                         loadContent(i,view);
                     }
                 });
@@ -238,6 +259,11 @@ public class PacketsActivity extends TopBarActivity {
         });
     }
 
+    /**
+     * @param key
+     * @param obj
+     * This function saves tinyGS data in SharedPreferences in the form of HashMap object"
+     */
     public void saveHashMap(String key , Object obj) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(PacketsActivity.this);
         SharedPreferences.Editor editor = prefs.edit();
@@ -247,6 +273,11 @@ public class PacketsActivity extends TopBarActivity {
         editor.apply();
     }
 
+    /**
+     * @param key The key "1" store all packets data including longitude,latitude,altitude,description,name,etc.
+     * @return Return hashmap that contains all the information about tinyGS packets
+     * This function is in charge of reading HashMap from SharedPreferences
+     */
 
     public HashMap<Integer,List<String>> getHashMap(String key) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(PacketsActivity.this);
@@ -257,6 +288,14 @@ public class PacketsActivity extends TopBarActivity {
         return obj;
     }
 
+    /**
+     * @param longi Longitude of packets
+     * @param lat   Latitude of packets
+     * @param alti  Altitude of packets
+     * @param des   Description of satellite
+     * @param name  Name of satellite
+     * This function is in charge of sending kml packets to Liquid Galaxy
+     */
     public void sendPacket(View view,String longi,String lat,String alti,String des,String name) {
         Button test = findViewById(R.id.test);
         Dialog dialog = getDialog(this, "Setting Files");
@@ -274,6 +313,15 @@ public class PacketsActivity extends TopBarActivity {
         }
         dialog.dismiss();
     }
+
+    /**
+     * @param longi Longitude of packets
+     * @param lat   Latitude of packets
+     * @param alti  Altitude of packets
+     * @param des   Description of satellite
+     * @param name  Name of satellite
+     * This function is in charge of sending animation(orbit) around satellite to Liquid Galaxy
+     */
     public void sendOrbit(View view,String longi,String lat,String alti,String des,String name) {
         Dialog dialog = getDialog(this, "Setting Files");
         dialog.show();

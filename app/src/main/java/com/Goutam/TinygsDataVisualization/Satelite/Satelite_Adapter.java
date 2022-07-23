@@ -16,6 +16,9 @@ import com.Goutam.TinygsDataVisualization.Satelite.Satelite_card_model;
 
 import java.util.ArrayList;
 
+/**
+ * This class is an adapter for satellite
+ */
 public class Satelite_Adapter extends ArrayAdapter<Satelite_card_model> {
     public Satelite_Adapter(@NonNull Context context, ArrayList<Satelite_card_model> satelitecardmodelArrayList) {
         super(context, 0, satelitecardmodelArrayList);
