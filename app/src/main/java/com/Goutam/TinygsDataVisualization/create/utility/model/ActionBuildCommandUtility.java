@@ -159,6 +159,7 @@ public class ActionBuildCommandUtility {
         StringBuilder command = new StringBuilder();
         Action action;
         command.append(POICommand(lon,lat,alti));
+        command.append(BalloonCommand(folderBalloonShapes,name,des));
         command.append(BalloonCommand(folderBalloonShapes,lon,lat,alti,des,name));
 
         return command.toString();
@@ -216,6 +217,68 @@ public class ActionBuildCommandUtility {
                 "     </Update>\n" +
                 "    </gx:AnimatedUpdate>\n\n";
         String wait = "4";
+        return animate + wait + animateClose;
+    }
+
+    private static String BalloonCommand(StringBuilder folderBalloonShapes,String name,String des) {
+        String TEST_PLACE_MARK_ID = "balloon" + "32";
+
+        String animate = "    <gx:AnimatedUpdate>\n" +
+                "    <gx:duration>0</gx:duration>\n" +
+                "     <Update>\n" +
+                "      <targetHref/>\n" +
+                "      <Change>\n" +
+                "       <Placemark targetId=\"" +  TEST_PLACE_MARK_ID  + "\">\n" +
+                "        <gx:balloonVisibility>1</gx:balloonVisibility>\n" +
+                "       </Placemark>\n" +
+                "      </Change>\n" +
+                "     </Update>\n" +
+                "    </gx:AnimatedUpdate>\n\n";
+
+        String startCommand = "    <Placemark id=\"" + TEST_PLACE_MARK_ID + "\">\n" +
+                "     <name>" + name + "</name>\n" +
+                "     <description>\n" +
+                "      <![CDATA[\n" +
+                "      <head>\n" +
+                "      <!-- Required meta tags -->\n" +
+                "      <meta charset=\"UTF-8\">\n" +
+                "      <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\">\n" +
+                "\n" +
+                "      <!-- Bootstrap CSS -->\n" +
+                "      <link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css\" integrity=\"sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm\" crossorigin=\"anonymous\">\n" +
+                "\n" +
+                "      </head>\n" +
+                "      <body>\n" +
+                "       <div class=\"p-lg-5\" align=\"center\">\n" +
+                "\n";
+        String description = "";
+            description = "       <h5>" + des + "</h5>\n" +
+                    "       <br>\n";
+
+        String endCommand = "       </div>\n    <script src=\"https://code.jquery.com/jquery-3.2.1.slim.min.js\" integrity=\"sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN\" crossorigin=\"anonymous\"></script>\n" +
+                "       <script src=\"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js\" integrity=\"sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q\" crossorigin=\"anonymous\"></script>\n" +
+                "       <script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js\" integrity=\"sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl\" crossorigin=\"anonymous\"></script>\n" +
+                "       </body>\n" +
+                "       ]]>\n" +
+                "      </description>\n" +
+                "      <Point>\n" +
+                "       <coordinates>" + "32.2563256" + "," + "32.2563256" + "</coordinates>\n" +
+                "      </Point>\n" +
+                "    </Placemark>\n\n";
+        String wait = commandWait(50);
+        folderBalloonShapes.append(startCommand + description + endCommand);
+        Log.w(TAG_DEBUG, "BALLOON: " + folderBalloonShapes);
+        String animateClose = "    <gx:AnimatedUpdate>\n" +
+                "    <gx:duration>0</gx:duration>\n" +
+                "     <Update>\n" +
+                "      <targetHref/>\n" +
+                "      <Change>\n" +
+                "       <Placemark targetId=\"" +  TEST_PLACE_MARK_ID  + "\">\n" +
+                "        <gx:balloonVisibility>0</gx:balloonVisibility>\n" +
+                "       </Placemark>\n" +
+                "      </Change>\n" +
+                "     </Update>\n" +
+                "    </gx:AnimatedUpdate>\n\n";
         return animate + wait + animateClose;
     }
 
@@ -423,7 +486,6 @@ public class ActionBuildCommandUtility {
 
     /**
      * Get the absolute path of the file
-     * @param filePath The path of the file
      * @return the absolute path
      */
 

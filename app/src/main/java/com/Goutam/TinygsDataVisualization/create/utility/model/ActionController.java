@@ -1,5 +1,6 @@
 package com.Goutam.TinygsDataVisualization.create.utility.model;
 
+import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
@@ -131,6 +132,10 @@ public class ActionController {
 
         startOrbit(null);
     }
+    /**
+     * @param balloon  Balloon with the information to build command
+     * @param listener listener
+     */
 
     public void sendTour(LGCommand.Listener listener,String lon,String lat,String alti,String des,String name){
         cleanFileKMLs(0);
@@ -231,7 +236,7 @@ public class ActionController {
     private String generateCircle(String longi,String lati,String alti){
         double centerLat = Math.toRadians(Double.parseDouble(lati));
         double centerLng = Math.toRadians(Double.parseDouble(longi));
-        double diameter = 800; // diameter of circle in km
+        double diameter = 400; // diameter of circle in km
         double dist = diameter / 6371.0;
 
         // start generating KML
