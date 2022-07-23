@@ -246,6 +246,7 @@
     <string name="my_name">TinyGS Data Visualization Tool for Liquid Galaxy, Google Summer of Code 2022</string>
     <string name="linked_id">Project based on the previous GSoC "SimpleCMS for Liquid Galaxy" by Diego Riveros</string>
     <string name="github_account">Developed by Goutam Verma with the help of mentor Merul Dhiman</string>
+    <string name="application_intro">The aim of this android application is to gets information about satellites, stations and packets from the TinyGS and visualize all the information and images on Liquid Galaxy rigs with the help of SSH connection and Kmls. This apk is built with the help of java(android) and divided into three parts: getting data from TinyGS, Visualization of it over Liquid Galaxy rigs and building of local TinyGS.</string>
 
     //Demo
     <string name="start_demo">Check out your Liquid Galaxy \n Running Barranquilla, Colombia Demo</string>
