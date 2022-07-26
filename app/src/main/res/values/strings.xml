@@ -252,6 +252,7 @@
     <string name="user_description3">\n\n- Satellite, In this tab users can find all the information about Norby Satellites and including others. This tab content a brief introduction of satellites along with the beautiful pictures. Also have an ability to visualise satellite over LG rigs with the help of balloons and animate an orbit view around the satellite.</string>
     <string name="user_description4">\n\n- Under the satellite card, users will find all the information including pictures, recent packets and test button.</string>
     <string name="end">\n\nBy following above steps user can easily use TinyGS Data Visualization Tool. Apart from visualizing user can also establish their own TinyGS station(Click here for <a href="https://docs.google.com/document/d/1E8by4uHtNptyHq2-HsztP0aV5h2QkUUB2sfdV79hv4I/edit?usp=sharing">more</a>)</string>
+
     //Demo
     <string name="start_demo">Check out your Liquid Galaxy \n Running Barranquilla, Colombia Demo</string>
     <string name="stop_demo">Stop</string>
