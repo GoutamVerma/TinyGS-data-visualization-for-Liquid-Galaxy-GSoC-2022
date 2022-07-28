@@ -2,13 +2,14 @@
 <resources>
     <color name="white">#FFFFFF</color>
     <color name="background">#E0E0E0</color>
+    <color name="unknowm">#32612D</color>
     <color name="backgroundDialog">#E5E5E5</color>
     <color name="backgroundStoryBoard">#A8AEB4</color>
-    <color name="colorPrimary">#32612D </color>
-    <color name="purple_700">#32612D </color>
-    <color name="teal_200">#32612D </color>
-    <color name="teal_700">#32612D </color>
-    <color name="black">#32612D</color>
+    <color name="colorPrimary">#000000</color>
+    <color name="purple_700">#000000</color>
+    <color name="teal_200">#000000</color>
+    <color name="teal_700">#000000</color>
+    <color name="black">#000000</color>
     <color name="textColorPrimary">#F2F2F2</color>
     <color name="textColorClick">#000000</color>
     <color name="textcolordata">#808080</color>

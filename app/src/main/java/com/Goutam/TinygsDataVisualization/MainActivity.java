@@ -168,7 +168,6 @@ public class MainActivity extends TopBarActivity {
         connecting.setText(getResources().getString(R.string.connecting));
     }
 
-
     /**
      * Create a Dialog to inform the user if the connection to the liquid galaxy has fail or not
      * @param lgCommand The command send to liquid galaxy
