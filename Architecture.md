@@ -14,7 +14,7 @@ This application is spilt into three top-level projects:
 
 The entry point for `connection` is in `LGConnectionManager.java`, where we start sessions of SSH, for sending resources and data to Liquid Galaxy.
 
-## Application system overview
+## System overview
 
 Here is a high-level view of the hierarchy of some of the main performer in the system:
 
