@@ -31,9 +31,9 @@ public class packet_adapter extends ArrayAdapter<packet_card_model> {
             listitemView = LayoutInflater.from(getContext()).inflate(R.layout.packet_card, parent, false);
         }
         packet_card_model packetcardmodel = getItem(position);
-        TextView courseTV = listitemView.findViewById(R.id.listitemtitle);
-        TextView courseTVd = listitemView.findViewById(R.id.packet_mode);
-        TextView station = listitemView.findViewById(R.id.station_received);
+        TextView courseTV = listitemView.findViewById(R.id.stationname);
+        TextView courseTVd = listitemView.findViewById(R.id.autotunefield);
+        TextView station = listitemView.findViewById(R.id.listeningfield);
         TextView completedata = listitemView.findViewById(R.id.packet_brief_data);
 
         courseTV.setText("\uD83D\uDEF0 "+packetcardmodel.getPacket_name());

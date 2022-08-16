@@ -40,7 +40,7 @@
     </content>
     <orderEntry type="jdk" jdkName="Android API 30 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Gradle: D./git commit/libs/jsch-0.1.54.jar" level="project" />
+    <orderEntry type="library" name="Gradle: D./TinyGS-data-visualization-for-Liquid-Galaxy-GSoC-2022/libs/jsch-0.1.54.jar" level="project" />
     <orderEntry type="library" name="Gradle: C./Users/HP/Downloads/json-simple-1.1.1.jar" level="project" />
     <orderEntry type="library" name="Gradle: C./Users/HP/Downloads/gson-2.8.2.jar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.collection:collection:1.1.0" level="project" />

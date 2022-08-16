@@ -20,12 +20,29 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="915dp"
+        android:layout_height="504dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="208dp"
+        android:layout_marginBottom="164dp"
+        android:contentDescription="@string/label_logo"
+        android:scaleX=".5"
+        android:scaleY=".5"
+        android:src="@drawable/applogo"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/top_bar" />
+
     <TextView
         android:id="@+id/text_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="350dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:fontFamily="@font/roboto"
         android:minWidth="140dp"
         android:text="@string/account_username"
@@ -36,13 +53,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/username" />
 
-
     <EditText
         android:id="@+id/username"
         android:layout_width="0dp"
         android:layout_height="53dp"
         android:layout_marginEnd="416dp"
-        android:layout_marginBottom="104dp"
+        android:layout_marginBottom="92dp"
         android:autofillHints="@string/account_hint_username"
         android:background="@drawable/rectangle_insert_url"
         android:fontFamily="@font/roboto_thin"
@@ -63,7 +79,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="348dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="24dp"
         android:fontFamily="@font/roboto"
         android:minWidth="140dp"
         android:text="@string/account_password"
@@ -100,7 +116,7 @@
         android:id="@+id/text_insert_url"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="12dp"
         android:fontFamily="@font/roboto"
         android:minWidth="665dp"
         android:text="@string/insert_the_URL"
@@ -116,7 +132,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="370dp"
         android:layout_marginEnd="416dp"
-        android:layout_marginBottom="44dp"
+        android:layout_marginBottom="60dp"
         android:autofillHints="@string/example_to_connect"
         android:background="@drawable/rectangle_insert_url"
         android:fontFamily="@font/roboto_thin"
@@ -129,7 +145,7 @@
         android:textSize="@dimen/hint_text_font_size"
         app:layout_constraintBottom_toTopOf="@+id/butt_connect_liquid_galaxy"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="RtlCompat" />
 
@@ -139,7 +155,7 @@
         android:layout_height="63dp"
         android:layout_marginStart="370dp"
         android:layout_marginEnd="416dp"
-        android:layout_marginBottom="150dp"
+        android:layout_marginBottom="196dp"
         android:background="@drawable/button_primary"
         android:elevation="8dp"
         android:fontFamily="@font/roboto_light"
@@ -166,29 +182,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/butt_connect_liquid_galaxy" />
 
-    <ImageView
-        android:id="@+id/logo"
-        android:layout_width="693dp"
-        android:layout_height="495dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginEnd="316dp"
-        android:layout_marginBottom="120dp"
-        android:contentDescription="@string/label_logo"
-        android:scaleX=".5"
-        android:scaleY=".5"
-        android:src="@drawable/applogo"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
     <Button
         android:id="@+id/butt_try_again"
         android:layout_width="0dp"
         android:layout_height="63dp"
         android:layout_marginStart="370dp"
         android:layout_marginEnd="416dp"
-        android:layout_marginBottom="150dp"
+        android:layout_marginBottom="196dp"
         android:background="@drawable/button_primary"
         android:elevation="8dp"
         android:fontFamily="@font/roboto_light"
@@ -200,6 +200,76 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
+    <Button
+        android:id="@+id/restart"
+        android:layout_width="127dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="328dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/button_primary"
+        android:text="@string/restart"
+        android:textColor="@color/textColorPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/butt_connect_liquid_galaxy"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/power"
+        android:layout_width="127dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/button_primary"
+        android:text="@string/power"
+        android:textColor="@color/textColorPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/Clear"
+        app:layout_constraintTop_toBottomOf="@+id/butt_connect_liquid_galaxy"
+        app:layout_constraintVertical_bias="0.019" />
+
+    <Button
+        android:id="@+id/Clear"
+        android:layout_width="127dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/button_primary"
+        android:text="@string/clear"
+        android:textColor="@color/textColorPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/button4"
+        app:layout_constraintTop_toBottomOf="@+id/butt_connect_liquid_galaxy"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="127dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/button_primary"
+        android:text="@string/logo"
+        android:textColor="@color/textColorPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/restart"
+        app:layout_constraintTop_toBottomOf="@+id/butt_connect_liquid_galaxy"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/clean_logo"
+        android:layout_width="127dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/button_primary"
+        android:text="@string/clean_logo"
+        android:textColor="@color/textColorPrimary"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/restart"
+        app:layout_constraintTop_toBottomOf="@+id/butt_connect_liquid_galaxy"
+        app:layout_constraintVertical_bias="0.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>

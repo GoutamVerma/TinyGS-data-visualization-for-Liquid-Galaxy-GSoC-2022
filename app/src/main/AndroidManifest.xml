@@ -18,7 +18,7 @@
         android:roundIcon="@mipmap/aplogo"
         android:supportsRtl="true"
         android:theme="@style/TinyGSVisualizationTool">
-        <activity android:name=".DemoThread"></activity>
+<!--        <activity android:name=".DemoThread"></activity>-->
         <activity android:name="com.Goutam.TinygsDataVisualization.Packets.PacketsActivity" />
         <activity
             android:name="com.Goutam.TinygsDataVisualization.CatalogActivity"
@@ -26,25 +26,26 @@
         <activity android:name="com.Goutam.TinygsDataVisualization.create.action.CreateKMLActivity" />
         <activity android:name="com.Goutam.TinygsDataVisualization.AboutActivity" />
         <activity android:name="com.Goutam.TinygsDataVisualization.Satelite.SateliteActivity" />
+        <activity android:name="com.Goutam.TinygsDataVisualization.Station.StationActivity" />
         <activity android:name="com.Goutam.TinygsDataVisualization.TopBarActivity" />
         <activity android:name="com.Goutam.TinygsDataVisualization.Packets.packet_activity_test"/>
-        <activity android:name="com.Goutam.TinygsDataVisualization.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
 
         <activity android:screenOrientation="sensorLandscape" android:name="com.Goutam.TinygsDataVisualization.SplashScreen"
             android:theme="@style/SplashScreen"
             tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name="com.Goutam.TinygsDataVisualization.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

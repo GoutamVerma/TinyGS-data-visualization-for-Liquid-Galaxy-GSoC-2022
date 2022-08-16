@@ -63,15 +63,70 @@ public class ActionController {
     }
 
 
+    public void sendcleanlogo(AppCompatActivity activity){
+        createResourcesFolder();
+        LGConnectionSendFile lgConnectionSendFile = LGConnectionSendFile.getInstance();
+        lgConnectionSendFile.startConnection();
+
+        cleanFileKMLs(0);
+
+        handler.postDelayed(() -> {
+            LGCommand lgCommand = new LGCommand(ActionBuildCommandUtility.clean_logo(),
+                    LGCommand.CRITICAL_MESSAGE, (String result) -> {
+            });
+            LGConnectionManager lgConnectionManager = LGConnectionManager.getInstance();
+            lgConnectionManager.startConnection();
+            lgConnectionManager.addCommandToLG(lgCommand);
+        }, 2000);
+
+    }
+
+
+
+    public void sendshutdown(AppCompatActivity activity,String username){
+      createResourcesFolder();
+      LGConnectionSendFile lgConnectionSendFile = LGConnectionSendFile.getInstance();
+      lgConnectionSendFile.startConnection();
+
+      cleanFileKMLs(0);
+
+      handler.postDelayed(() -> {
+          LGCommand lgCommand = new LGCommand(ActionBuildCommandUtility.buildCommandshutdown(username),
+                  LGCommand.CRITICAL_MESSAGE, (String result) -> {
+          });
+          LGConnectionManager lgConnectionManager = LGConnectionManager.getInstance();
+          lgConnectionManager.startConnection();
+          lgConnectionManager.addCommandToLG(lgCommand);
+      }, 2000);
+
+  }
+
+
+  public void sendReboot(AppCompatActivity activity,String username){
+        createResourcesFolder();
+        LGConnectionSendFile lgConnectionSendFile = LGConnectionSendFile.getInstance();
+        lgConnectionSendFile.startConnection();
+
+        cleanFileKMLs(0);
+
+       handler.postDelayed(() -> {
+           LGCommand lgCommand = new LGCommand(ActionBuildCommandUtility.buildCommandReboot(username),
+                   LGCommand.CRITICAL_MESSAGE, (String result) -> {
+           });
+           LGConnectionManager lgConnectionManager = LGConnectionManager.getInstance();
+           lgConnectionManager.startConnection();
+           lgConnectionManager.addCommandToLG(lgCommand);
+       }, 2000);
+
+  }
+
     /**
      * Paint a balloon with the logos
      */
     public void sendBalloonWithLogos(AppCompatActivity activity) {
         createResourcesFolder();
 
-        String imagePath = getLogosFile(activity);
         LGConnectionSendFile lgConnectionSendFile = LGConnectionSendFile.getInstance();
-        lgConnectionSendFile.addPath(imagePath);
         lgConnectionSendFile.startConnection();
 
         cleanFileKMLs(0);
@@ -133,7 +188,6 @@ public class ActionController {
         startOrbit(null);
     }
     /**
-     * @param balloon  Balloon with the information to build command
      * @param listener listener
      */
 
@@ -141,6 +195,32 @@ public class ActionController {
         cleanFileKMLs(0);
         handler.postDelayed(() -> {
             LGCommand lgCommand = new LGCommand(ActionBuildCommandUtility.buildCommandTour(lon,lat,alti,des,name), LGCommand.CRITICAL_MESSAGE, (String result) -> {
+                if (listener != null) {
+                    listener.onResponse(result);
+                }
+            });
+            LGConnectionManager lgConnectionManager = LGConnectionManager.getInstance();
+            lgConnectionManager.startConnection();
+            lgConnectionManager.addCommandToLG(lgCommand);
+
+            LGCommand lgCommandWriteTour = new LGCommand(ActionBuildCommandUtility.buildCommandwriteStartTourFile(), LGCommand.CRITICAL_MESSAGE, (String result) -> {
+                if (listener != null) {
+                    listener.onResponse(result);
+                }
+            });
+            lgConnectionManager.addCommandToLG(lgCommandWriteTour);
+
+            LGCommand lgCommandStartTour = new LGCommand(ActionBuildCommandUtility.buildCommandStartTour(),
+                    LGCommand.CRITICAL_MESSAGE, (String result) -> {
+            });
+            handler2.postDelayed(() -> lgConnectionManager.addCommandToLG(lgCommandStartTour), 1500);
+        }, 1000);
+    }
+
+    public void sendTourStation(LGCommand.Listener listener,String lon,String lat,String alti,String des,String name){
+        cleanFileKMLs(0);
+        handler.postDelayed(() -> {
+            LGCommand lgCommand = new LGCommand(ActionBuildCommandUtility.buildCommandTourStation(lon,lat,alti,des,name), LGCommand.CRITICAL_MESSAGE, (String result) -> {
                 if (listener != null) {
                     listener.onResponse(result);
                 }
@@ -187,11 +267,59 @@ public class ActionController {
         startOrbit(null);
     }
 
+    public void sendOribitStation(AppCompatActivity activity,String lon,String lat,String alti,String des,String name) {
+        createResourcesFolder();
+        cleanFileKMLs(0);
+
+        String imagePath = command_orbit_station(activity,lon,lat,alti,des,name);
+        Log.w(TAG_DEBUG, "ISS KML FILEPATH: " + imagePath);
+        LGConnectionSendFile lgConnectionSendFile = LGConnectionSendFile.getInstance();
+        lgConnectionSendFile.addPath(imagePath);
+        lgConnectionSendFile.startConnection();
+
+
+
+        handler.postDelayed(() -> {
+            LGCommand lgCommand = new LGCommand(ActionBuildCommandUtility.buildWriteISSFile(),
+                    LGCommand.CRITICAL_MESSAGE, (String result) -> {
+            });
+            LGConnectionManager lgConnectionManager = LGConnectionManager.getInstance();
+            lgConnectionManager.startConnection();
+            lgConnectionManager.addCommandToLG(lgCommand);
+        }, 2000);
+
+        startOrbit(null);
+    }
+
+    public void sendZoomfile(AppCompatActivity activity,String lon,String lat,String alti,String des,String name) {
+        createResourcesFolder();
+        cleanFileKMLs(0);
+
+        String imagePath = command_zoom(activity,lon,lat,alti,des,name);
+        Log.w(TAG_DEBUG, "ISS KML FILEPATH: " + imagePath);
+        LGConnectionSendFile lgConnectionSendFile = LGConnectionSendFile.getInstance();
+        lgConnectionSendFile.addPath(imagePath);
+        lgConnectionSendFile.startConnection();
+
+
+
+        handler.postDelayed(() -> {
+            LGCommand lgCommand = new LGCommand(ActionBuildCommandUtility.buildWriteISSFile(),
+                    LGCommand.CRITICAL_MESSAGE, (String result) -> {
+            });
+            LGConnectionManager lgConnectionManager = LGConnectionManager.getInstance();
+            lgConnectionManager.startConnection();
+            lgConnectionManager.addCommandToLG(lgCommand);
+        }, 2000);
+
+        startOrbit(null);
+    }
+
     private String getLogosFile(AppCompatActivity activity) {
         File file = new File(activity.getCacheDir() + "/logos.png");
         if (!file.exists()) {
             try {
-                InputStream is = activity.getAssets().open("logos.png");
+                InputStream is = activity.getAssets().open("logos1.png");
                 int size = is.available();
                 Log.w(TAG_DEBUG, "SIZE: " + size);
                 byte[] buffer = new byte[size];
@@ -236,7 +364,7 @@ public class ActionController {
     private String generateCircle(String longi,String lati,String alti){
         double centerLat = Math.toRadians(Double.parseDouble(lati));
         double centerLng = Math.toRadians(Double.parseDouble(longi));
-        double diameter = 400; // diameter of circle in km
+        double diameter = 800; // diameter of circle in km
         double dist = diameter / 6371.0;
 
         // start generating KML
@@ -247,8 +375,8 @@ public class ActionController {
             double brng = Math.toRadians(x);
             double latitude = Math.asin(Math.sin(centerLat) * Math.cos(dist) + Math.cos(centerLat) * Math.sin(dist) * Math.cos(brng));
             double longitude = centerLng + Math.atan2(Math.sin(brng) * Math.sin(dist)* Math.cos(centerLat), Math.cos(dist) - Math.sin(centerLat)
-                            * Math.sin(latitude)) ;
-            coordinate +=  Math.toDegrees(longitude)+ ","+ Math.toDegrees(latitude)+","+"800000 ";
+                    * Math.sin(latitude)) ;
+            coordinate +=  Math.toDegrees(longitude)+ ","+ Math.toDegrees(latitude)+" ";
         }
         return coordinate;
     }
@@ -420,7 +548,7 @@ public class ActionController {
     return kml;
     }
 
-    public String command_orbit(AppCompatActivity activity,String lon,String lat,String alti,String description,String name) {
+    public String command_zoom(AppCompatActivity activity,String lon,String lat,String alti,String description,String name) {
         System.out.println(lon+" "+lat+ " "+alti);
         String kml = generateStyle()+
                 "\t\t<Placemark>\n" +
@@ -429,10 +557,7 @@ public class ActionController {
                 "\t\t\t<LookAt>\n" +
                 "\t\t\t\t<longitude>"+lon+"</longitude>\n" +
                 "\t\t\t\t<latitude>"+lat+"</latitude>\n" +
-                "\t\t\t\t<altitude>500000</altitude>\n" +
-                "\t\t\t\t<heading>-5.029091935818897</heading>\n" +
-                "\t\t\t\t<tilt>0</tilt>\n" +
-                "\t\t\t\t<range>4880964.396775676</range>\n" +
+                "\t\t\t\t<altitude>500000</altitude>\n"  +
                 "\t\t\t\t<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>\n" +
                 "\t\t\t</LookAt>\n" +
                 "\t\t\t<styleUrl>#s_ylw-pushpin</styleUrl>\n" +
@@ -444,15 +569,96 @@ public class ActionController {
                 "\t\t\t</Point>\n" +
                 "\t\t</Placemark>\n" +
                 "<Placemark>\n" +
-                "\t\t<name>Circle Measure</name>\n" +
-                "\t\t<styleUrl>#inline1</styleUrl>\n" +
-                "\t\t<LineString>\n" +
-                "\t\t\t<tessellate>1</tessellate>\n" +
-                "\t\t\t<altitudeMode>absolute</altitudeMode>\n" +
-                "\t\t\t<coordinates>\n" +
-                "\t\t\t"+generateCircle(lon,lat,alti) +" </coordinates>\n" +
-                "\t\t</LineString>\n" +
-                "\t</Placemark>"+
+                "<name>Circle Measure</name>\n" +
+                "<styleUrl>#inline1</styleUrl>\n" +
+                "<LineString>\n" +
+                "<tessellate>1</tessellate>\n" +
+                "<altitudeMode>absolute</altitudeMode>\n" +
+                "<coordinates>" + generateCircle(lon,lat,alti) +" </coordinates>\n" +
+                "</LineString>\n" +
+                "</Placemark>"+
+                "\t\t<gx:Tour>\n" +
+                "             <name>Orbit</name>\n" +
+                "             <gx:Playlist>\n" +
+                commandzoom(lon,lat)+
+                "     </gx:Playlist>\n" +
+                "    </gx:Tour>\n" +
+                "</Document>\n" +
+                "</kml>\n";
+        System.out.println(kml);
+        File file = new File(activity.getFilesDir() + "/ISS.kml");
+        if (file.exists()) file.delete();
+        File file1 = new File(activity.getFilesDir() + "/ISS.kml");
+        if (!file1.exists()){
+            try {
+                byte[] buffer = kml.toString().getBytes(StandardCharsets.UTF_8);
+                FileOutputStream fos = new FileOutputStream(file1);
+                fos.write(buffer);
+                fos.close();
+                return file1.getPath();
+            } catch (Exception e) {
+                Log.w(TAG_DEBUG, "ERROR: " + e.getMessage());
+            }
+        }
+        return kml;
+    }
+    public String commandzoom(String lon,String lat){
+        StringBuilder command = new StringBuilder();
+    command.append("    <gx:FlyTo>\n").append("    <gx:duration>7</gx:duration> \n")
+                .append("    <gx:flyToMode>bounce</gx:flyToMode> \n")
+                .append("     <LookAt> \n")
+                .append("      <longitude>").append(lon).append("</longitude> \n")
+                .append("      <latitude>").append(lat).append("</latitude> \n")
+                .append(" <altitude>8000000").append("</altitude>\n")
+                .append("      <heading>0").append("</heading> \n")
+                .append("      <tilt>0").append("</tilt> \n")
+                .append("      <range>1200").append("</range> \n")
+                .append("      <gx:altitudeMode>relativeToGround</gx:altitudeMode> \n")
+                .append("      </LookAt> \n")
+                .append("    </gx:FlyTo> \n\n")
+                .append("    <gx:FlyTo>\n").append("    <gx:duration>7</gx:duration> \n")
+                .append("    <gx:flyToMode>bounce</gx:flyToMode> \n")
+                .append("     <LookAt> \n")
+                .append("      <longitude>").append(lon).append("</longitude> \n")
+                .append("      <latitude>").append(lat).append("</latitude> \n")
+                .append(" <altitude>").append("800000").append("</altitude>\n")
+                .append("      <heading>0").append("</heading> \n")
+                .append("      <tilt>0").append("</tilt> \n")
+                .append("      <range>800").append("</range> \n")
+                .append("      <gx:altitudeMode>relativeToGround</gx:altitudeMode> \n")
+                .append("      </LookAt> \n")
+                .append("    </gx:FlyTo> \n\n");
+          return command.toString();
+    }
+    public String command_orbit(AppCompatActivity activity,String lon,String lat,String alti,String description,String name) {
+        System.out.println(lon+" "+lat+ " "+alti);
+        String kml = generateStyle()+
+                "\t\t<Placemark>\n" +
+                "\t\t\t<name>"+name+"</name>\n" +
+                "<description>"+description+"</description>"+
+                "\t\t\t<LookAt>\n" +
+                "\t\t\t\t<longitude>"+lon+"</longitude>\n" +
+                "\t\t\t\t<latitude>"+lat+"</latitude>\n" +
+                "\t\t\t\t<altitude>500000</altitude>\n"  +
+                "\t\t\t\t<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>\n" +
+                "\t\t\t</LookAt>\n" +
+                "\t\t\t<styleUrl>#s_ylw-pushpin</styleUrl>\n" +
+                "\t\t\t<Point>\n" +
+                "\t\t\t\t<extrude>1</extrude>\n" +
+                "\t\t\t\t<altitudeMode>absolute</altitudeMode>\n" +
+                "\t\t\t\t<gx:drawOrder>1</gx:drawOrder>\n" +
+                "\t\t\t\t<coordinates>"+lon +","+lat +",800000</coordinates>\n" +
+                "\t\t\t</Point>\n" +
+                "\t\t</Placemark>\n" +
+                "<Placemark>\n" +
+                "<name>Circle Measure</name>\n" +
+                "<styleUrl>#inline1</styleUrl>\n" +
+                "<LineString>\n" +
+                "<tessellate>1</tessellate>\n" +
+                "<altitudeMode>absolute</altitudeMode>\n" +
+                "<coordinates>" + generateCircle(lon,lat,alti) +" </coordinates>\n" +
+                "</LineString>\n" +
+                "</Placemark>"+
                 "\t\t<gx:Tour>\n" +
                 "             <name>Orbit</name>\n" +
                 "             <gx:Playlist>\n" +
@@ -478,6 +684,120 @@ public class ActionController {
         }
         return kml;
     }
+    public String generateStyleStation(){
+        return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
+                "<kml xmlns=\"http://www.opengis.net/kml/2.2\" xmlns:gx=\"http://www.google.com/kml/ext/2.2\" xmlns:kml=\"http://www.opengis.net/kml/2.2\" xmlns:atom=\"http://www.w3.org/2005/Atom\">\n" +
+                "<Document>\n" +
+                "\t<name>My Places.kml</name>\n"+
+               "<Style id=\"s_ylw-pushpin_hl\">\n" +
+                "\t\t<IconStyle>\n" +
+                "\t\t\t<scale>3.54545</scale>\n" +
+                "\t\t\t<Icon>\n" +
+                "\t\t\t\t<href>https://images.vexels.com/media/users/3/136801/isolated/preview/a4196f75c1ca34834f62f7a9994a3f39-satellite-antena-circle-icon.png</href>\n" +
+                "\t\t\t</Icon>\n" +
+                "\t\t\t<hotSpot x=\"20\" y=\"2\" xunits=\"pixels\" yunits=\"pixels\"/>\n" +
+                "\t\t</IconStyle>\n" +
+                "\t\t<LabelStyle>\n" +
+                "\t\t\t<scale>5</scale>\n" +
+                "\t\t</LabelStyle>\n" +
+                "\t</Style>\n" +
+                "\t<Style id=\"s_ylw-pushpin\">\n" +
+                "\t\t<IconStyle>\n" +
+                "\t\t\t<scale>3</scale>\n" +
+                "\t\t\t<Icon>\n" +
+                "\t\t\t\t<href>https://images.vexels.com/media/users/3/136801/isolated/preview/a4196f75c1ca34834f62f7a9994a3f39-satellite-antena-circle-icon.png</href>\n" +
+                "\t\t\t</Icon>\n" +
+                "\t\t\t<hotSpot x=\"20\" y=\"2\" xunits=\"pixels\" yunits=\"pixels\"/>\n" +
+                "\t\t</IconStyle>\n" +
+                "\t\t<LabelStyle>\n" +
+                "\t\t\t<scale>5</scale>\n" +
+                "\t\t</LabelStyle>\n" +
+                "\t</Style>\n" +
+                "\t<StyleMap id=\"m_ylw-pushpin\">\n" +
+                "\t\t<Pair>\n" +
+                "\t\t\t<key>normal</key>\n" +
+                "\t\t\t<styleUrl>#s_ylw-pushpin</styleUrl>\n" +
+                "\t\t</Pair>\n" +
+                "\t\t<Pair>\n" +
+                "\t\t\t<key>highlight</key>\n" +
+                "\t\t\t<styleUrl>#s_ylw-pushpin_hl</styleUrl>\n" +
+                "\t\t</Pair>\n" +
+                "\t</StyleMap>\n";
+    }
+
+    public String command_orbit_station(AppCompatActivity activity,String lon,String lat,String alti,String description,String name) {
+        System.out.println(lon+" "+lat+ " "+alti);
+        String kml = generateStyleStation()+
+                "<Placemark>\n" +
+                "\t\t<name>"+name+"</name>\n" +
+                "\t\t<LookAt>\n" +
+                "\t\t\t<longitude>"+lat+"</longitude>\n" +
+                "\t\t\t<latitude>"+lon+"</latitude>\n" +
+                "\t\t\t<altitude>0</altitude>\n" +
+                "\t\t\t<heading>3.665464581981053</heading>\n" +
+                "\t\t\t<tilt>60</tilt>\n" +
+                "\t\t\t<range>600</range>\n" +
+                "\t\t\t<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>\n" +
+                "\t\t</LookAt>\n" +
+                "\t\t<styleUrl>#m_ylw-pushpin</styleUrl>\n" +
+                "\t\t<Point>\n" +
+                "\t\t\t<gx:drawOrder>1</gx:drawOrder>\n" +
+                "\t\t\t<coordinates>"+lat+","+lon+",0</coordinates>\n" +
+                "\t\t</Point>\n" +
+                "\t</Placemark>\n"+
+                "\t\t<gx:Tour>\n" +
+                "             <name>Orbit</name>\n" +
+                "             <gx:Playlist>\n" +
+                command_orbit_station(lat,lon,alti)+
+                "     </gx:Playlist>\n" +
+                "    </gx:Tour>\n" +
+                "</Document>\n" +
+                "</kml>\n";
+
+
+        System.out.println(kml);
+        File file = new File(activity.getFilesDir() + "/ISS.kml");
+        if (file.exists()) file.delete();
+        File file1 = new File(activity.getFilesDir() + "/ISS.kml");
+        if (!file1.exists()){
+            try {
+                byte[] buffer = kml.toString().getBytes(StandardCharsets.UTF_8);
+                FileOutputStream fos = new FileOutputStream(file1);
+                fos.write(buffer);
+                fos.close();
+                return file1.getPath();
+            } catch (Exception e) {
+                Log.w(TAG_DEBUG, "ERROR: " + e.getMessage());
+            }
+        }
+        return kml;
+    }
+
+
+    public static String command_orbit_station(String longitude,String latitude,String altitude) {
+        double heading = 0.0;
+        int orbit = 0;
+        String command="";
+        while (orbit <= 36) {
+            if (heading >= 360) heading = heading - 360;
+            command += "    <gx:FlyTo>\n"+
+                    "    <gx:duration>1.2</gx:duration> \n"+
+                    "    <gx:flyToMode>smooth</gx:flyToMode> \n"+
+                    "     <LookAt> \n"+
+                    "      <longitude>"+longitude +"</longitude> \n"+
+                    "      <latitude>"+latitude+"</latitude> \n"+
+                    "      <heading>"+heading+"</heading> \n"+
+                    "      <tilt>60</tilt> \n"+
+                    "      <gx:fovy>35</gx:fovy> \n"+
+                    "      <range>1000</range> \n"+
+                    "      <gx:altitudeMode>absolute</gx:altitudeMode> \n"+
+                    "      </LookAt> \n"+
+                    "    </gx:FlyTo> \n\n";
+            heading = heading + 10;
+            orbit++;
+        }
+        return command;
+    }
     public static String command_orbit(String longitude,String latitude,String altitude) {
         double heading = 0.0;
         int orbit = 0;
@@ -492,9 +812,9 @@ public class ActionController {
                     "      <latitude>"+latitude+"</latitude> \n"+
                     "      <altitude>800000</altitude> \n"+
                     "      <heading>"+heading+"</heading> \n"+
-                    "      <tilt>60</tilt> \n"+
-                    "      <gx:fovy>35</gx:fovy> \n"+
-                    "      <range>100</range> \n"+
+                    "      <tilt>45</tilt> \n"+
+                    "      <gx:fovy>60</gx:fovy> \n"+
+                    "      <range>8000</range> \n"+
                     "      <gx:altitudeMode>absolute</gx:altitudeMode> \n"+
                     "      </LookAt> \n"+
                     "    </gx:FlyTo> \n\n";

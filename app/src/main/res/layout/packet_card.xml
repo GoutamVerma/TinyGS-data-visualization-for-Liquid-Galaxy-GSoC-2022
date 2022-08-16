@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="70dp"
+    android:background="@color/white"
     android:elevation="5dp"
     >
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -13,57 +14,60 @@
         android:background="@color/white">
 
         <TextView
-            android:id="@+id/listitemtitle"
-            android:layout_width="229dp"
-            android:layout_height="36dp"
+            android:id="@+id/stationname"
+            android:layout_width="228dp"
+            android:layout_height="34dp"
             android:layout_marginTop="16dp"
+            android:textColor="@color/textColorClick"
             android:padding="5dp"
             android:text="Norby"
             android:textAppearance="?attr/textAppearanceHeadline6"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textView4"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/mode"
+            android:id="@+id/autotune"
             android:layout_width="170dp"
             android:layout_height="wrap_content"
             android:padding="5dp"
             android:text="Mode"
             android:textSize="13dp"
-            app:layout_constraintStart_toEndOf="@+id/listitemtitle"
+            android:textColor="@color/grey"
+            app:layout_constraintStart_toEndOf="@+id/stationname"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/recieved"
+            android:id="@+id/listening"
             android:layout_width="135dp"
             android:layout_height="29dp"
             android:padding="5dp"
+            android:textColor="@color/grey"
             android:text="Recieved By"
             android:textSize="13dp"
-            app:layout_constraintStart_toEndOf="@+id/mode"
+            app:layout_constraintStart_toEndOf="@+id/autotune"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/packet_mode"
+            android:id="@+id/autotunefield"
             android:layout_width="170dp"
             android:layout_height="43dp"
             android:text="TextView"
             android:textColor="@color/textColorClick"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/listitemtitle"
-            app:layout_constraintTop_toBottomOf="@+id/mode"
+            app:layout_constraintStart_toEndOf="@+id/stationname"
+            app:layout_constraintTop_toBottomOf="@+id/autotune"
             app:layout_constraintVertical_bias="1.0"
             tools:ignore="MissingConstraints" />
 
         <TextView
-            android:id="@+id/station_received"
+            android:id="@+id/listeningfield"
             android:layout_width="135dp"
             android:layout_height="40dp"
             android:text="TextView"
             android:textColor="@color/textColorClick"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/packet_mode"
-            app:layout_constraintTop_toBottomOf="@+id/recieved"
+            app:layout_constraintStart_toEndOf="@+id/autotunefield"
+            app:layout_constraintTop_toBottomOf="@+id/listening"
             app:layout_constraintVertical_bias="0.727" />
 
         <TextView
@@ -76,9 +80,19 @@
             android:padding="15dp"
             android:textSize="12dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/station_received"
+            app:layout_constraintStart_toEndOf="@+id/listeningfield"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="10dp"
+            android:layout_height="match_parent"
+            android:text=""
+            android:background="@color/sidebar"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

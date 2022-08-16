@@ -17,5 +17,7 @@
     <color name="button">#618AAD</color>
     <color name="buttonAlt">#C4C4C4</color>
     <color name="colorSecondary">#9fa8da</color>
+    <color name="sidebar">#088F8F</color>
     <color name="colorSeekAndSwitchBackground">#DFEFF6</color>
+    <color name="grey">#808080</color>
 </resources>
