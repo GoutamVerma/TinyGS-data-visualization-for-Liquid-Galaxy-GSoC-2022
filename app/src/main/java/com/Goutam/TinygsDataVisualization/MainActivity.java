@@ -4,12 +4,15 @@ import android.app.Dialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.StrictMode;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.Goutam.TinygsDataVisualization.create.utility.model.Action;
 import com.Goutam.TinygsDataVisualization.dialog.CustomDialogUtility;
 import com.Goutam.TinygsDataVisualization.utility.ConstantPrefs;
 
@@ -17,15 +20,20 @@ import com.Goutam.TinygsDataVisualization.connection.LGCommand;
 import com.Goutam.TinygsDataVisualization.connection.LGConnectionManager;
 import com.Goutam.TinygsDataVisualization.connection.LGConnectionSendFile;
 import com.Goutam.TinygsDataVisualization.create.utility.model.ActionController;
+import com.jcraft.jsch.Channel;
+import com.jcraft.jsch.ChannelExec;
+import com.jcraft.jsch.JSch;
+import com.jcraft.jsch.Session;
 
 
+import java.io.InputStream;
 import java.util.regex.Pattern;
 
 public class MainActivity extends TopBarActivity {
 
     private static final Pattern HOST_PORT = Pattern.compile("^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]):[0-9]+$");
 
-    private Button buttConnectMenu, buttConnectLiquidGalaxy, buttTryAgain;
+    private Button buttConnectMenu, buttConnectLiquidGalaxy, buttTryAgain,restart,send_logo,clear,power,clean_logo;
     private TextView connecting, textUsername, textPassword, textInsertUrl;
     private EditText URI, username, password;
     private ImageView logo;
@@ -52,6 +60,12 @@ public class MainActivity extends TopBarActivity {
         logo = findViewById(R.id.logo);
         buttTryAgain = findViewById(R.id.butt_try_again);
 
+        restart = findViewById(R.id.restart);
+        send_logo = findViewById(R.id.button4);
+        clear = findViewById(R.id.Clear);
+        power = findViewById(R.id.power);
+        clean_logo= findViewById(R.id.clean_logo);
+
         buttConnectLiquidGalaxy.setOnClickListener((view) -> connectionTest());
         buttTryAgain.setOnClickListener((view) -> {
             changeToMainView();
@@ -59,6 +73,12 @@ public class MainActivity extends TopBarActivity {
             editor.putBoolean(ConstantPrefs.IS_CONNECTED.name(), false);
             editor.apply();
         });
+
+        clear.setOnClickListener(view -> ClearKML());
+        send_logo.setOnClickListener(view -> sendLogo());
+        restart.setOnClickListener(view -> reboot());
+        power.setOnClickListener(view -> shutdown());
+        clean_logo.setOnClickListener(view-> clean_logo());
     }
 
 
@@ -238,4 +258,73 @@ public class MainActivity extends TopBarActivity {
     private boolean isValidHostNPort(String hostPort) {
         return HOST_PORT.matcher(hostPort).matches();
     }
+    private void ClearKML() {
+        SharedPreferences sharedPreferences = getSharedPreferences(ConstantPrefs.SHARED_PREFS.name(), MODE_PRIVATE);
+        boolean isConnected = sharedPreferences.getBoolean(ConstantPrefs.IS_CONNECTED.name(), false);
+        if (isConnected) {
+            CustomDialogUtility.showDialog(MainActivity.this, "Clean all kml screens!");
+            ActionController actionController = ActionController.getInstance();
+            actionController.exitTour();
+        }else{
+            CustomDialogUtility.showDialog(MainActivity.this,"LG is not connected, Please connect first!");
+        }
+    }
+
+    private void sendLogo(){
+        SharedPreferences sharedPreferences = getSharedPreferences(ConstantPrefs.SHARED_PREFS.name(), MODE_PRIVATE);
+        boolean isConnected = sharedPreferences.getBoolean(ConstantPrefs.IS_CONNECTED.name(), false);
+        if (isConnected) {
+            CustomDialogUtility.showDialog(MainActivity.this,"Send Logo to Liquid Galaxy!");
+            ActionController.getInstance().sendBalloonWithLogos(MainActivity.this);
+            clean_logo.setVisibility(View.VISIBLE);
+            send_logo.setVisibility(View.INVISIBLE);
+        }else{
+            CustomDialogUtility.showDialog(MainActivity.this,"LG is not connected,Please connect first!");
+        }
+
+    }
+
+
+    private void reboot(){
+        SharedPreferences sharedPreferences = getSharedPreferences(ConstantPrefs.SHARED_PREFS.name(), MODE_PRIVATE);
+        String users = sharedPreferences.getString(ConstantPrefs.USER_NAME.name(), "");
+        Log.d("TAG DEBUG",users);
+        boolean isConnected = sharedPreferences.getBoolean(ConstantPrefs.IS_CONNECTED.name(), false);
+        if (isConnected) {
+            CustomDialogUtility.showDialog(MainActivity.this,"Reboot Liquid Galaxy!");
+            ActionController.getInstance().sendReboot(MainActivity.this,users);
+        }else{
+            CustomDialogUtility.showDialog(MainActivity.this,"LG is not connected,Please connect first!");
+        }
+    }
+
+    private void shutdown(){
+
+        SharedPreferences sharedPreferences = getSharedPreferences(ConstantPrefs.SHARED_PREFS.name(), MODE_PRIVATE);
+        String users = sharedPreferences.getString(ConstantPrefs.USER_NAME.name(), "");
+        Log.d("TAG DEBUG",users);
+        boolean isConnected = sharedPreferences.getBoolean(ConstantPrefs.IS_CONNECTED.name(), false);
+        if (isConnected) {
+            CustomDialogUtility.showDialog(MainActivity.this,"Shutdown Liquid Galaxy!");
+            ActionController.getInstance().sendshutdown(MainActivity.this,users);
+        }else{
+            CustomDialogUtility.showDialog(MainActivity.this,"LG is not connected,Please connect first!");
+        }
+    }
+
+    private void clean_logo(){
+
+        SharedPreferences sharedPreferences = getSharedPreferences(ConstantPrefs.SHARED_PREFS.name(), MODE_PRIVATE);
+        boolean isConnected = sharedPreferences.getBoolean(ConstantPrefs.IS_CONNECTED.name(), false);
+        if (isConnected) {
+            CustomDialogUtility.showDialog(MainActivity.this,"Clean logo from Liquid Galaxy!");
+            ActionController.getInstance().sendcleanlogo(MainActivity.this);
+            send_logo.setVisibility(View.VISIBLE);
+            clean_logo.setVisibility(View.INVISIBLE);
+        }else{
+            CustomDialogUtility.showDialog(MainActivity.this,"LG is not connected,Please connect first!");
+        }
+    }
+
+
 }

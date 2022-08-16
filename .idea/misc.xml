@@ -44,13 +44,18 @@
         <entry key="..\:/TinyGS-data-visualization-for-Liquid-Galaxy-GSoC-2022/app/src/main/res/layout/activity_create_kml.xml" value="0.25416666666666665" />
         <entry key="..\:/TinyGS-data-visualization-for-Liquid-Galaxy-GSoC-2022/app/src/main/res/layout/activity_demo.xml" value="0.264" />
         <entry key="..\:/TinyGS-data-visualization-for-Liquid-Galaxy-GSoC-2022/app/src/main/res/layout/activity_demo_thread.xml" value="0.264" />
-        <entry key="..\:/TinyGS-data-visualization-for-Liquid-Galaxy-GSoC-2022/app/src/main/res/layout/activity_main.xml" value="0.11200000000000002" />
-        <entry key="..\:/TinyGS-data-visualization-for-Liquid-Galaxy-GSoC-2022/app/src/main/res/layout/activity_packets_info.xml" value="0.1" />
+        <entry key="..\:/TinyGS-data-visualization-for-Liquid-Galaxy-GSoC-2022/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/TinyGS-data-visualization-for-Liquid-Galaxy-GSoC-2022/app/src/main/res/layout/activity_packets.xml" value="0.13164777680906714" />
+        <entry key="..\:/TinyGS-data-visualization-for-Liquid-Galaxy-GSoC-2022/app/src/main/res/layout/activity_packets_info.xml" value="0.2" />
         <entry key="..\:/TinyGS-data-visualization-for-Liquid-Galaxy-GSoC-2022/app/src/main/res/layout/activity_satelite_info.xml" value="0.1" />
-        <entry key="..\:/TinyGS-data-visualization-for-Liquid-Galaxy-GSoC-2022/app/src/main/res/layout/activity_top_bar.xml" value="0.1" />
+        <entry key="..\:/TinyGS-data-visualization-for-Liquid-Galaxy-GSoC-2022/app/src/main/res/layout/activity_stations.xml" value="0.1" />
+        <entry key="..\:/TinyGS-data-visualization-for-Liquid-Galaxy-GSoC-2022/app/src/main/res/layout/activity_top_bar.xml" value="0.128" />
+        <entry key="..\:/TinyGS-data-visualization-for-Liquid-Galaxy-GSoC-2022/app/src/main/res/layout/drop_down_animate.xml" value="0.12708333333333333" />
         <entry key="..\:/TinyGS-data-visualization-for-Liquid-Galaxy-GSoC-2022/app/src/main/res/layout/layout_create_storyboard_action_balloon_point.xml" value="0.264" />
         <entry key="..\:/TinyGS-data-visualization-for-Liquid-Galaxy-GSoC-2022/app/src/main/res/layout/newcard.xml" value="0.12708333333333333" />
-        <entry key="..\:/TinyGS-data-visualization-for-Liquid-Galaxy-GSoC-2022/app/src/main/res/layout/packet_card.xml" value="0.152" />
+        <entry key="..\:/TinyGS-data-visualization-for-Liquid-Galaxy-GSoC-2022/app/src/main/res/layout/packet_card.xml" value="0.2" />
+        <entry key="..\:/TinyGS-data-visualization-for-Liquid-Galaxy-GSoC-2022/app/src/main/res/layout/spinner_item.xml" value="0.1" />
+        <entry key="..\:/TinyGS-data-visualization-for-Liquid-Galaxy-GSoC-2022/app/src/main/res/layout/station_card.xml" value="0.264" />
         <entry key="..\:/Users/HP/AndroidStudioProjects/TinyGS-data-visualization-for-Liquid-Galaxy-GSoC-2022/app/src/main/res/drawable/background_splashscreen.xml" value="0.10400000000000001" />
         <entry key="..\:/Users/HP/AndroidStudioProjects/TinyGS-data-visualization-for-Liquid-Galaxy-GSoC-2022/app/src/main/res/layout/activity_packets.xml" value="0.10400000000000001" />
         <entry key="..\:/Users/HP/AndroidStudioProjects/TinyGS-data-visualization-for-Liquid-Galaxy-GSoC-2022/app/src/main/res/layout/activity_satelite.xml" value="0.16" />

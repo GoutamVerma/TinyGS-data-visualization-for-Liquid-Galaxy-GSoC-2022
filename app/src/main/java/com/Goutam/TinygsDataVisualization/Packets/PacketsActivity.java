@@ -11,17 +11,17 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
 
 import com.Goutam.TinygsDataVisualization.R;
-import com.Goutam.TinygsDataVisualization.Satelite.SateliteActivity;
 import com.Goutam.TinygsDataVisualization.TopBarActivity;
 import com.Goutam.TinygsDataVisualization.create.utility.model.ActionController;
 import com.Goutam.TinygsDataVisualization.dialog.CustomDialogUtility;
@@ -52,7 +52,8 @@ public class PacketsActivity extends TopBarActivity {
     public Button buttRefresh,buttStop,buttTest;
     private ProgressDialog progressDialog;
     public HashMap<Integer,List<String>> packets = new HashMap<Integer, List<String>>();
-
+    public String[] mode = { "Fly-To","Orbit","Zoom-To"};
+    private Spinner spin;
     private TextView connectionStatus;
     public GridView grid;
     private Handler handler = new Handler();
@@ -115,7 +116,7 @@ public class PacketsActivity extends TopBarActivity {
      * @param view
      * This function is in charge of load content on layout activity_packets_info
      */
-    private void loadContent(int i,View view){
+    public void loadContent(int i,View view){
         setContentView(R.layout.activity_packets_info);
         HashMap<Integer,List<String>> packet = getHashMap("1");
         TextView name = findViewById(R.id.packet_name);
@@ -136,17 +137,44 @@ public class PacketsActivity extends TopBarActivity {
         buttTest = findViewById(R.id.test);
         buttStop = findViewById(R.id.stop);
         buttStop.setVisibility(view.INVISIBLE);
-        Button orbit = findViewById(R.id.orbit_test);
+        spin = findViewById(R.id.orbit_test);
         String sat = packet.get(i).get(11);
         String pos[]= sat.split(",");
         String lon[]= pos[0].split(":");
         String alti[]= pos[1].split(":");
         String lat[]= pos[2].split(":");
-        buttTest.setOnClickListener(view1 -> sendPacket(view, lon[1], lat[1].substring(0, lat[1].length() - 1), alti[1], description, packet.get(i).get(5)));
-        buttStop.setOnClickListener(view1 -> stopTestStoryBoard());
-        orbit.setOnClickListener(view1 -> sendOrbit(view, lon[1], lat[1].substring(0, lat[1].length() - 1), alti[1], description, packet.get(i).get(5)));
-    }
+        buttTest.setOnClickListener(view2 -> sendPacket(view, lon[1], lat[1].substring(0, lat[1].length() - 1), alti[1], description, packet.get(i).get(5)));
+        buttStop.setOnClickListener(view2 -> stopTestStoryBoard());
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.spinner_item, mode);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spin.setAdapter(adapter);
+        spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if(mode[i].equals("Fly-To")){
+                    buttTest.setVisibility(View.VISIBLE);
+                    buttStop.setVisibility(View.INVISIBLE);
+                    buttTest.setOnClickListener(view2 -> sendPacket(view, lon[1], lat[1].substring(0, lat[1].length() - 1), alti[1], description, packet.get(i).get(5)));
+                    buttStop.setOnClickListener(view2 -> stopTestStoryBoard());
+                }
+                else if(mode[i].equals("Orbit")){
+                    buttTest.setVisibility(View.VISIBLE);
+                    buttStop.setVisibility(View.INVISIBLE);
+                    buttTest.setOnClickListener(view1 -> sendOrbit(view, lon[1], lat[1].substring(0, lat[1].length() - 1), alti[1], description, packet.get(i).get(5)));
+                    buttStop.setOnClickListener(view1 -> stopTestStoryBoard());
+                }else if(mode[i].equals("Zoom-To")){
+                    buttTest.setVisibility(View.VISIBLE);
+                    buttStop.setVisibility(View.INVISIBLE);
+                    buttTest.setOnClickListener(view1 -> sendZoomTo(view, lon[1], lat[1].substring(0, lat[1].length() - 1), alti[1], description, packet.get(i).get(5)));
+                    buttStop.setOnClickListener(view1 -> stopTestStoryBoard());
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
 
+            }
+        });
+    }
     private void stopTestStoryBoard() {
         ActionController actionController = ActionController.getInstance();
         actionController.exitTour();
@@ -306,7 +334,7 @@ public class PacketsActivity extends TopBarActivity {
             ActionController.getInstance().sendTour( null, longi, lat, alti, des, name);
             test.setVisibility(view.INVISIBLE);
             buttStop.setVisibility(view.VISIBLE);
-            CustomDialogUtility.showDialog(this, "Visualizing the packet!");
+            CustomDialogUtility.showDialog(this, "Visualizing Satellite on LG!");
         } else {
             dialog.dismiss();
             CustomDialogUtility.showDialog(this, "LG is not connected, Please visit connect tab.");
@@ -321,21 +349,42 @@ public class PacketsActivity extends TopBarActivity {
      * @param alti  Altitude of packets
      * @param des   Description of satellite
      * @param name  Name of satellite
-     * This function is in charge of sending animation(orbit) around satellite to Liquid Galaxy
+     * @return
      */
-    public void sendOrbit(View view,String longi,String lat,String alti,String des,String name) {
+    public void sendOrbit(View view, String longi, String lat, String alti, String des, String name) {
+        Button test = findViewById(R.id.test);
         Dialog dialog = getDialog(this, "Setting Files");
         dialog.show();
         SharedPreferences sharedPreferences = getSharedPreferences(ConstantPrefs.SHARED_PREFS.name(), MODE_PRIVATE);
         boolean isConnected = sharedPreferences.getBoolean(ConstantPrefs.IS_CONNECTED.name(), false);
         if (isConnected) {
             dialog.dismiss();
-            CustomDialogUtility.showDialog(this, "Visualizing the animation!");
+            CustomDialogUtility.showDialog(this, "Visualizing Orbit animation on LG!");
             ActionController.getInstance().sendOribitfile(PacketsActivity.this, longi, lat, alti,des,name);
+            test.setVisibility(view.INVISIBLE);
+            buttStop.setVisibility(view.VISIBLE);
         } else {
             dialog.dismiss();
             CustomDialogUtility.showDialog(this, "LG is not connected, Please visit connect tab.");
-            return;
+        }
+
+    }
+    public void sendZoomTo(View view, String longi, String lat, String alti, String des, String name) {
+        Button test = findViewById(R.id.test);
+        Dialog dialog = getDialog(this, "Setting Files");
+        dialog.show();
+        SharedPreferences sharedPreferences = getSharedPreferences(ConstantPrefs.SHARED_PREFS.name(), MODE_PRIVATE);
+        boolean isConnected = sharedPreferences.getBoolean(ConstantPrefs.IS_CONNECTED.name(), false);
+        if (isConnected) {
+            dialog.dismiss();
+            CustomDialogUtility.showDialog(this, "Visualizing Zoom-To animation on LG!");
+            ActionController.getInstance().sendZoomfile(PacketsActivity.this, longi, lat, alti,des,name);
+            test.setVisibility(view.INVISIBLE);
+            buttStop.setVisibility(view.VISIBLE);
+
+        } else {
+            dialog.dismiss();
+            CustomDialogUtility.showDialog(this, "LG is not connected, Please visit connect tab.");
         }
 
     }

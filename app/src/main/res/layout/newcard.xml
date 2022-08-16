@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="433dp"
         android:orientation="vertical"
+        android:background="@color/white"
         tools:ignore="MissingConstraints">
 
         <!-- Media -->
@@ -20,6 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="170dp"
             android:contentDescription="image"
+            android:background="@color/white"
             android:scaleType="centerCrop"
             android:src="@drawable/norby" />
 
@@ -27,6 +29,7 @@
             android:id="@+id/listitemTextView1"
             android:layout_width="228dp"
             android:layout_height="wrap_content"
+            android:background="@color/white"
             android:padding="7dp"
             android:text="Norby"
             android:textAppearance="?attr/textAppearanceHeadline6" />
@@ -35,6 +38,7 @@
             android:id="@+id/Data"
             android:layout_width="match_parent"
             android:layout_height="110dp"
+            android:background="@color/white"
             android:layout_marginTop="0dp"
             android:padding="5dp"
             android:text="@string/norby_b"

@@ -5,7 +5,6 @@ package com.Goutam.TinygsDataVisualization.Packets;
  */
 public class packet_card_model {
 
-
     private String packet_name, packet_mode,station,satelite_data;
 
     public packet_card_model(String packet_name, String mode, String station,String data) {
