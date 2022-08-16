@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context=".AboutActivity">
+
+
+    <include
+        android:id="@+id/top_bar"
+        layout="@layout/activity_top_bar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="142dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="1150dp"
+        android:layout_height="708dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.946"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/top_bar"
+        app:layout_constraintVertical_bias="0.0">
+
+        <GridView
+            android:id="@+id/Gridviewstation"
+            android:layout_width="930dp"
+            android:layout_height="553dp"
+            android:layout_marginTop="28dp"
+            android:background="@color/white"
+            android:horizontalSpacing="3dp"
+            android:numColumns="1"
+            android:verticalSpacing="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.505"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/top_bar"
+            app:layout_constraintVertical_bias="0.358" />
+
+        <TextView
+            android:id="@+id/connection_status"
+            android:layout_width="48dp"
+            android:layout_height="47dp"
+            android:layout_marginLeft="35dp"
+            android:layout_marginTop="28dp"
+            android:background="@drawable/ic_status_connection_red"
+            android:fontFamily="@font/roboto"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.425"
+            app:layout_constraintStart_toEndOf="@+id/GridviewPakcets"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteY="202dp" />
+
+        <Button
+            android:id="@+id/refresh"
+            android:layout_width="64dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="35dp"
+            android:layout_marginTop="38dp"
+            android:text="🔃"
+            android:textSize="20dp" />
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
