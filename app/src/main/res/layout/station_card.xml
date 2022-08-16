@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    android:elevation="5dp"
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/stationname"
+            android:layout_width="170dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:textColor="@color/textColorClick"
+            android:padding="5dp"
+            android:text="Norby"
+            android:textAppearance="?attr/textAppearanceHeadline6"
+            app:layout_constraintStart_toEndOf="@+id/textView2"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/autotune"
+            android:layout_width="113dp"
+            android:layout_height="30dp"
+            android:padding="5dp"
+            android:textColor="@color/grey"
+            android:text="AutoTune"
+            android:textSize="13dp"
+            app:layout_constraintStart_toEndOf="@+id/stationname"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/listening"
+            android:layout_width="104dp"
+            android:layout_height="30dp"
+            android:padding="5dp"
+            android:textColor="@color/grey"
+            android:text="Listening"
+            android:textSize="13dp"
+            app:layout_constraintStart_toEndOf="@+id/autotune"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/autotunefield"
+            android:layout_width="113dp"
+            android:layout_height="40dp"
+            android:text="TextView"
+            android:textColor="@color/textColorClick"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/stationname"
+            app:layout_constraintTop_toBottomOf="@+id/autotune"
+            app:layout_constraintVertical_bias="1.0"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/listeningfield"
+            android:layout_width="106dp"
+            android:layout_height="40dp"
+            android:text="TextView"
+            android:textColor="@color/textColorClick"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/autotunefield"
+            app:layout_constraintTop_toBottomOf="@+id/listening"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/version"
+            android:layout_width="102dp"
+            android:layout_height="29dp"
+            android:text="Version"
+            android:textColor="@color/grey"
+            app:layout_constraintStart_toEndOf="@+id/listening"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="101dp"
+            android:layout_height="40dp"
+            android:text="TextView"
+            android:textColor="@color/textColorClick"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/listeningfield"
+            app:layout_constraintTop_toBottomOf="@+id/version"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <TextView
+            android:id="@+id/cnf_packet"
+            android:layout_width="143dp"
+            android:layout_height="29dp"
+            android:text="Confirmed"
+            android:textColor="@color/grey"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/version"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="142dp"
+            android:layout_height="40dp"
+            android:text="TextView"
+            android:textColor="@color/textColorClick"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/textView3"
+            app:layout_constraintTop_toBottomOf="@+id/cnf_packet"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="8dp"
+            android:layout_height="70dp"
+            android:text=""
+            android:background="@color/sidebar"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/station_orbit"
+            android:layout_width="102dp"
+            android:layout_height="44dp"
+            android:layout_marginStart="20dp"
+            android:text="Orbit"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textView5"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/station_orbit_Stop"
+            android:layout_width="102dp"
+            android:layout_height="44dp"
+            android:layout_marginStart="20dp"
+            android:text="Stop"
+            android:textColor="@color/white"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textView5"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/station_show"
+            android:layout_width="114dp"
+            android:layout_height="42dp"
+            android:layout_marginStart="16dp"
+            android:text="Visualize"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/station_orbit"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.533" />
+
+        <Button
+            android:id="@+id/station_show_stop"
+            android:layout_width="114dp"
+            android:layout_height="42dp"
+            android:layout_marginStart="16dp"
+            android:text="Clear"
+            android:textColor="@color/white"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/station_orbit"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.533" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
