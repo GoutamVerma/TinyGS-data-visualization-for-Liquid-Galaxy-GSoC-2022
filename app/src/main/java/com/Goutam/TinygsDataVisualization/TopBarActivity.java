@@ -9,6 +9,7 @@ import android.view.Window;
 
 import com.Goutam.TinygsDataVisualization.Packets.PacketsActivity;
 import com.Goutam.TinygsDataVisualization.Satelite.SateliteActivity;
+import com.Goutam.TinygsDataVisualization.Station.StationActivity;
 
 public class TopBarActivity extends AppCompatActivity {
 
@@ -31,6 +32,10 @@ public class TopBarActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void buttStation(View view) {
+        Intent intent = new Intent(getApplicationContext(), StationActivity.class);
+        startActivity(intent);
+    }
     /**
      * Pass form the actual activity to the activity Demo
      *
