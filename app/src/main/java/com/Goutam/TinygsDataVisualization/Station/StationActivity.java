@@ -134,6 +134,7 @@ public class StationActivity extends TopBarActivity {
                         List<String> data = new ArrayList<String>();
                         JSONObject obj1 = (JSONObject) JSONValue.parse(obj.get(i).toString());
                         data.add((String) obj1.get("name"));
+                        System.out.println((String) obj1.get("name"));
                         data.add(obj1.get("userId").toString());
                         data.add(obj1.get("version").toString());
                         data.add(obj1.get("location").toString());

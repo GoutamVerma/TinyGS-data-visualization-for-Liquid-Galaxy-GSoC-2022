@@ -19,6 +19,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/connection_status"
+        android:layout_width="48dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="72dp"
+        android:layout_marginEnd="100dp"
+        android:background="@drawable/ic_status_connection_red"
+        android:fontFamily="@font/roboto"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.567"
+        app:layout_constraintStart_toEndOf="@+id/username"
+        app:layout_constraintTop_toBottomOf="@+id/top_bar"
+        tools:ignore="MissingConstraints" />
 
     <ImageView
         android:id="@+id/logo"
@@ -58,7 +71,7 @@
         android:layout_width="0dp"
         android:layout_height="53dp"
         android:layout_marginEnd="416dp"
-        android:layout_marginBottom="92dp"
+        android:layout_marginBottom="140dp"
         android:autofillHints="@string/account_hint_username"
         android:background="@drawable/rectangle_insert_url"
         android:fontFamily="@font/roboto_thin"
@@ -93,7 +106,7 @@
         android:layout_width="0dp"
         android:layout_height="53dp"
         android:layout_marginEnd="416dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="40dp"
         android:autofillHints="@string/account_hint_password"
         android:background="@drawable/rectangle_insert_url"
         android:fontFamily="@font/roboto_thin"
@@ -110,7 +123,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/text_password"
         app:layout_constraintTop_toBottomOf="@+id/username"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.285" />
 
     <TextView
         android:id="@+id/text_insert_url"
@@ -132,7 +145,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="370dp"
         android:layout_marginEnd="416dp"
-        android:layout_marginBottom="60dp"
+        android:layout_marginBottom="16dp"
         android:autofillHints="@string/example_to_connect"
         android:background="@drawable/rectangle_insert_url"
         android:fontFamily="@font/roboto_thin"
@@ -202,74 +215,120 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <TextView
+        android:id="@+id/lg_rigs_txt"
+        android:layout_width="138dp"
+        android:layout_height="31dp"
+        android:layout_marginStart="348dp"
+        android:fontFamily="@font/roboto"
+        android:minWidth="140dp"
+        android:text="Total LG rigs"
+        android:textColor="@color/textColorClick"
+        android:textSize="@dimen/primary_text_font_size"
+        app:layout_constraintBottom_toTopOf="@+id/text_insert_url"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/password"
+        app:layout_constraintVertical_bias="0.619"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/lg_rig"
+        android:layout_width="372dp"
+        android:layout_height="53dp"
+        android:ems="10"
+        android:inputType="number"
+        android:background="@drawable/rectangle_insert_url"
+        android:fontFamily="@font/roboto_thin"
+        android:hint="5"
+        android:maxLength="20"
+        android:singleLine="true"
+        android:textAlignment="center"
+        android:textColor="@color/textColorClick"
+        android:textColorHint="@color/hintColor"
+        android:textSize="@dimen/primary_text_font_size"
+        app:layout_constraintBottom_toTopOf="@+id/text_insert_url"
+        app:layout_constraintStart_toEndOf="@+id/lg_rigs_txt"
+        app:layout_constraintTop_toBottomOf="@+id/password" />
+
     <Button
-        android:id="@+id/restart"
-        android:layout_width="127dp"
-        android:layout_height="51dp"
-        android:layout_marginStart="328dp"
-        android:layout_marginTop="40dp"
+        android:id="@+id/shutdown"
+        android:layout_width="130dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="12dp"
+        android:text="Shutdown"
         android:background="@drawable/button_primary"
-        android:text="@string/restart"
+        android:elevation="8dp"
+        android:fontFamily="@font/roboto_light"
+        android:textAllCaps="false"
+        android:textColor="@color/textColorPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/reboot"
+        app:layout_constraintTop_toBottomOf="@+id/butt_connect_liquid_galaxy"
+        app:layout_constraintVertical_bias="0.198" />
+
+    <Button
+        android:id="@+id/clear_kml"
+        android:layout_width="130dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:text="Clear KMLs"
+        android:background="@drawable/button_primary"
+        android:elevation="8dp"
+        android:fontFamily="@font/roboto_light"
+        android:textAllCaps="false"
+        android:textColor="@color/textColorPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/clean_logo"
+        app:layout_constraintTop_toBottomOf="@+id/butt_connect_liquid_galaxy"
+        app:layout_constraintVertical_bias="0.194" />
+
+    <Button
+        android:id="@+id/relaunch"
+        android:layout_width="130dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:text="Relauch"
+        android:background="@drawable/button_primary"
+        android:elevation="8dp"
+        android:fontFamily="@font/roboto_light"
+        android:textAllCaps="false"
+        android:textColor="@color/textColorPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/clear_kml"
+        app:layout_constraintTop_toBottomOf="@+id/butt_connect_liquid_galaxy"
+        app:layout_constraintVertical_bias="0.188" />
+
+    <Button
+        android:id="@+id/reboot"
+        android:layout_width="130dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:text="Reboot"
+        android:background="@drawable/button_primary"
+        android:elevation="8dp"
+        android:fontFamily="@font/roboto_light"
+        android:textAllCaps="false"
+        android:textColor="@color/textColorPrimary"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/relaunch"
+        app:layout_constraintTop_toBottomOf="@+id/butt_connect_liquid_galaxy"
+        app:layout_constraintVertical_bias="0.186" />
+
+    <Button
+        android:id="@+id/clean_logo"
+        android:layout_width="130dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="260dp"
+        android:text="Clean Logo"
+        android:background="@drawable/button_primary"
+        android:elevation="8dp"
+        android:fontFamily="@font/roboto_light"
+        android:textAllCaps="false"
         android:textColor="@color/textColorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/butt_connect_liquid_galaxy"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.198" />
 
-    <Button
-        android:id="@+id/power"
-        android:layout_width="127dp"
-        android:layout_height="51dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/button_primary"
-        android:text="@string/power"
-        android:textColor="@color/textColorPrimary"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/Clear"
-        app:layout_constraintTop_toBottomOf="@+id/butt_connect_liquid_galaxy"
-        app:layout_constraintVertical_bias="0.019" />
-
-    <Button
-        android:id="@+id/Clear"
-        android:layout_width="127dp"
-        android:layout_height="51dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/button_primary"
-        android:text="@string/clear"
-        android:textColor="@color/textColorPrimary"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/button4"
-        app:layout_constraintTop_toBottomOf="@+id/butt_connect_liquid_galaxy"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <Button
-        android:id="@+id/button4"
-        android:layout_width="127dp"
-        android:layout_height="51dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/button_primary"
-        android:text="@string/logo"
-        android:textColor="@color/textColorPrimary"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/restart"
-        app:layout_constraintTop_toBottomOf="@+id/butt_connect_liquid_galaxy"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <Button
-        android:id="@+id/clean_logo"
-        android:layout_width="127dp"
-        android:layout_height="51dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/button_primary"
-        android:text="@string/clean_logo"
-        android:textColor="@color/textColorPrimary"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/restart"
-        app:layout_constraintTop_toBottomOf="@+id/butt_connect_liquid_galaxy"
-        app:layout_constraintVertical_bias="0.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>

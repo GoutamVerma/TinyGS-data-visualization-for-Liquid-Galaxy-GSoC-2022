@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -43,6 +44,10 @@ public class CatalogActivity extends TopBarActivity {
         buttCatalog = topBar.findViewById(R.id.butt_about);
         connectionStatus = findViewById(R.id.connection_status);
         SharedPreferences sharedPreferences = getSharedPreferences(ConstantPrefs.SHARED_PREFS.name(), MODE_PRIVATE);
+        TextView tv = (TextView) findViewById(R.id. use_description);
+        tv.setMovementMethod(LinkMovementMethod.getInstance());
+        TextView tv1 = (TextView) findViewById(R.id. end_description);
+        tv1.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
 }

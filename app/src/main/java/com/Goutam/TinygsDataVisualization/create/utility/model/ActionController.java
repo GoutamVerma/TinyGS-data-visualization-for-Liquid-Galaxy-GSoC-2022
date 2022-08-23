@@ -80,10 +80,26 @@ public class ActionController {
         }, 2000);
 
     }
+    public void sendcleanballloon(AppCompatActivity activity){
+        createResourcesFolder();
+        LGConnectionSendFile lgConnectionSendFile = LGConnectionSendFile.getInstance();
+        lgConnectionSendFile.startConnection();
+
+        cleanFileKMLs(0);
+
+        handler.postDelayed(() -> {
+            LGCommand lgCommand = new LGCommand(ActionBuildCommandUtility.clean_balloon(),
+                    LGCommand.CRITICAL_MESSAGE, (String result) -> {
+            });
+            LGConnectionManager lgConnectionManager = LGConnectionManager.getInstance();
+            lgConnectionManager.startConnection();
+            lgConnectionManager.addCommandToLG(lgCommand);
+        }, 2000);
+
+    }
 
 
-
-    public void sendshutdown(AppCompatActivity activity,String username){
+    public void sendshutdown(AppCompatActivity activity,String username,String password, Integer rigs){
       createResourcesFolder();
       LGConnectionSendFile lgConnectionSendFile = LGConnectionSendFile.getInstance();
       lgConnectionSendFile.startConnection();
@@ -91,7 +107,7 @@ public class ActionController {
       cleanFileKMLs(0);
 
       handler.postDelayed(() -> {
-          LGCommand lgCommand = new LGCommand(ActionBuildCommandUtility.buildCommandshutdown(username),
+          LGCommand lgCommand = new LGCommand(ActionBuildCommandUtility.buildCommandshutdown(username,password,rigs),
                   LGCommand.CRITICAL_MESSAGE, (String result) -> {
           });
           LGConnectionManager lgConnectionManager = LGConnectionManager.getInstance();
@@ -102,7 +118,7 @@ public class ActionController {
   }
 
 
-  public void sendReboot(AppCompatActivity activity,String username){
+  public void sendReboot(AppCompatActivity activity,String username,String password,Integer rigs){
         createResourcesFolder();
         LGConnectionSendFile lgConnectionSendFile = LGConnectionSendFile.getInstance();
         lgConnectionSendFile.startConnection();
@@ -110,7 +126,7 @@ public class ActionController {
         cleanFileKMLs(0);
 
        handler.postDelayed(() -> {
-           LGCommand lgCommand = new LGCommand(ActionBuildCommandUtility.buildCommandReboot(username),
+           LGCommand lgCommand = new LGCommand(ActionBuildCommandUtility.buildCommandReboot(username,password,rigs),
                    LGCommand.CRITICAL_MESSAGE, (String result) -> {
            });
            LGConnectionManager lgConnectionManager = LGConnectionManager.getInstance();
@@ -119,6 +135,24 @@ public class ActionController {
        }, 2000);
 
   }
+
+    public void sendLaunch(AppCompatActivity activity,String username,String password,Integer rigs){
+        createResourcesFolder();
+        LGConnectionSendFile lgConnectionSendFile = LGConnectionSendFile.getInstance();
+        lgConnectionSendFile.startConnection();
+
+        cleanFileKMLs(0);
+
+        handler.postDelayed(() -> {
+            LGCommand lgCommand = new LGCommand(ActionBuildCommandUtility.buildCommandReLaunch(username,password,rigs),
+                    LGCommand.CRITICAL_MESSAGE, (String result) -> {
+            });
+            LGConnectionManager lgConnectionManager = LGConnectionManager.getInstance();
+            lgConnectionManager.startConnection();
+            lgConnectionManager.addCommandToLG(lgCommand);
+        }, 2000);
+
+    }
 
     /**
      * Paint a balloon with the logos
@@ -139,6 +173,24 @@ public class ActionController {
             lgConnectionManager.startConnection();
             lgConnectionManager.addCommandToLG(lgCommand);
             }, 2000);
+    }
+
+    public void sendBalloon(AppCompatActivity activity,String des) {
+        createResourcesFolder();
+        ActionController.getInstance().sendcleanballloon(activity);
+        LGConnectionSendFile lgConnectionSendFile = LGConnectionSendFile.getInstance();
+        lgConnectionSendFile.startConnection();
+
+        cleanFileKMLs(0);
+
+        handler.postDelayed(() -> {
+            LGCommand lgCommand = new LGCommand(ActionBuildCommandUtility.buildCommandBalloon(des),
+                    LGCommand.CRITICAL_MESSAGE, (String result) -> {
+            });
+            LGConnectionManager lgConnectionManager = LGConnectionManager.getInstance();
+            lgConnectionManager.startConnection();
+            lgConnectionManager.addCommandToLG(lgCommand);
+        }, 2000);
     }
 
     public void sendStarlinkfile(AppCompatActivity activity) {
@@ -187,6 +239,9 @@ public class ActionController {
 
         startOrbit(null);
     }
+
+
+
     /**
      * @param listener listener
      */
@@ -214,7 +269,7 @@ public class ActionController {
                     LGCommand.CRITICAL_MESSAGE, (String result) -> {
             });
             handler2.postDelayed(() -> lgConnectionManager.addCommandToLG(lgCommandStartTour), 1500);
-        }, 1000);
+        }, 1500);
     }
 
     public void sendTourStation(LGCommand.Listener listener,String lon,String lat,String alti,String des,String name){
@@ -245,8 +300,6 @@ public class ActionController {
 
     public void sendOribitfile(AppCompatActivity activity,String lon,String lat,String alti,String des,String name) {
         createResourcesFolder();
-        cleanFileKMLs(0);
-
         String imagePath = command_orbit(activity,lon,lat,alti,des,name);
         Log.w(TAG_DEBUG, "ISS KML FILEPATH: " + imagePath);
         LGConnectionSendFile lgConnectionSendFile = LGConnectionSendFile.getInstance();
@@ -267,10 +320,33 @@ public class ActionController {
         startOrbit(null);
     }
 
+    public void sendPoiToLG(String lon,String lat, LGCommand.Listener listener) {
+        LGCommand lgCommand = new LGCommand(buildCommandPOITest(lon,lat), LGCommand.CRITICAL_MESSAGE, (String result) -> {
+            if (listener != null) {
+                listener.onResponse(result);
+            }
+        });
+        LGConnectionManager lgConnectionManager = LGConnectionManager.getInstance();
+        lgConnectionManager.startConnection();
+        lgConnectionManager.addCommandToLG(lgCommand);
+    }
+
+    static String buildCommandPOITest(String lon,String lat) {
+
+        return "echo 'flytoview=" +
+                "<gx:duration>4</gx:duration>" +
+                "<gx:flyToMode>smooth</gx:flyToMode><LookAt>" +
+                "<longitude>" + lon + "</longitude>" +
+                "<latitude>" + lat + "</latitude>" +
+                "<heading>" + "800" + "</heading>" +
+                "<tilt>" + "60" + "</tilt>" +
+                "<range>" + "800" + "</range>" +
+                "<gx:altitudeMode>" + "absolute" + "</gx:altitudeMode>" +
+                "</LookAt>' > /tmp/query.txt";
+    }
+
     public void sendOribitStation(AppCompatActivity activity,String lon,String lat,String alti,String des,String name) {
         createResourcesFolder();
-        cleanFileKMLs(0);
-
         String imagePath = command_orbit_station(activity,lon,lat,alti,des,name);
         Log.w(TAG_DEBUG, "ISS KML FILEPATH: " + imagePath);
         LGConnectionSendFile lgConnectionSendFile = LGConnectionSendFile.getInstance();
@@ -640,7 +716,7 @@ public class ActionController {
                 "\t\t\t\t<longitude>"+lon+"</longitude>\n" +
                 "\t\t\t\t<latitude>"+lat+"</latitude>\n" +
                 "\t\t\t\t<altitude>500000</altitude>\n"  +
-                "\t\t\t\t<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>\n" +
+                "\t\t\t\t<gx:altitudeMode>absolute</gx:altitudeMode>\n" +
                 "\t\t\t</LookAt>\n" +
                 "\t\t\t<styleUrl>#s_ylw-pushpin</styleUrl>\n" +
                 "\t\t\t<Point>\n" +
@@ -814,11 +890,11 @@ public class ActionController {
                     "      <heading>"+heading+"</heading> \n"+
                     "      <tilt>45</tilt> \n"+
                     "      <gx:fovy>60</gx:fovy> \n"+
-                    "      <range>8000</range> \n"+
+                    "      <range>15000</range> \n"+
                     "      <gx:altitudeMode>absolute</gx:altitudeMode> \n"+
                     "      </LookAt> \n"+
                     "    </gx:FlyTo> \n\n";
-            heading = heading + 10;
+                    heading = heading + 10;
             orbit++;
         }
         return command;
@@ -897,5 +973,15 @@ public class ActionController {
                 LGCommand.CRITICAL_MESSAGE, (String result) -> {
         });
         lgConnectionManager.addCommandToLG(lgCommandCleanSlaves);
-    };
+    }
+
+    public void cleanTour(){
+        //cleanFileKMLs(0);
+        LGCommand lgCommand = new LGCommand(ActionBuildCommandUtility.buildCommandExitTour(),
+                LGCommand.CRITICAL_MESSAGE, (String result) -> {
+        });
+        LGConnectionManager lgConnectionManager = LGConnectionManager.getInstance();
+        lgConnectionManager.startConnection();
+        lgConnectionManager.addCommandToLG(lgCommand);
+    }
 }

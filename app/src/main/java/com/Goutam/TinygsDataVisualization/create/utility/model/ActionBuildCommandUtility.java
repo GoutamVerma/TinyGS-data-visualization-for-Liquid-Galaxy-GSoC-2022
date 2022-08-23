@@ -34,7 +34,10 @@ public class ActionBuildCommandUtility {
     static String buildCommandCreateResourcesFolder() {
         return "mkdir -p " + RESOURCES_FOLDER_PATH;
     }
-
+    public static String buildCommandRemoveBallon(){
+        String command ="echo '' > /var/www/html/kml/slave_3.kml";
+        return command;
+    }
     public static String buildCommandwriteStartTourFile(){
         String command = "echo \"http://lg1:81/Tour.kml\"  > " +
                 BASE_PATH +
@@ -72,8 +75,13 @@ public class ActionBuildCommandUtility {
                         "    <gx:labelVisibility>1</gx:labelVisibility>\n" +
                         "    </LineStyle>\n" +
                         "   </Style>\n\n")
+                .append(" <Style id=\"purple_paddle\">\n" +
+                        "   <BalloonStyle>\n" +
+                        "     <text>$[description]</text>\n" +
+                        "     <bgColor>ff1e1e1e</bgColor>\n" +
+                        "   </BalloonStyle>\n" +
+                        " </Style>\n")
                 .append(stylekml());
-
         String middleCommand = buildTour(folderBalloonShapes,lon,lat,alti,des,name);
         folderBalloonShapes.append("  </Folder>\n");
         folderBalloonShapes.append("</Document>\n" + "</kml> ' > ").append(BASE_PATH).append("Tour.kml");
@@ -315,35 +323,48 @@ public class ActionBuildCommandUtility {
         String startCommand = "    <Placemark id=\"" + TEST_PLACE_MARK_ID + "\">\n" +
                 "     <name>" + name + "</name>\n" +
                 "     <description>\n" +
-                "      <![CDATA[\n" +
-                "      <head>\n" +
-                "      <!-- Required meta tags -->\n" +
-                "      <meta charset=\"UTF-8\">\n" +
-                "      <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\">\n" +
-                "\n" +
-                "      <!-- Bootstrap CSS -->\n" +
-                "      <link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css\" integrity=\"sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm\" crossorigin=\"anonymous\">\n" +
-                "\n" +
-                "      </head>\n" +
-                "      <body>\n" +
-                "       <div class=\"p-lg-5\" align=\"center\">\n" +
-                "\n";
-        String description = "";
-            description = "       <h5>" + des + "</h5>\n" +
-                    "       <br>\n";
-
-        String endCommand = "       </div>\n    <script src=\"https://code.jquery.com/jquery-3.2.1.slim.min.js\" integrity=\"sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN\" crossorigin=\"anonymous\"></script>\n" +
-                "       <script src=\"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js\" integrity=\"sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q\" crossorigin=\"anonymous\"></script>\n" +
-                "       <script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js\" integrity=\"sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl\" crossorigin=\"anonymous\"></script>\n" +
-                "       </body>\n" +
-                "       ]]>\n" +
+                "<![CDATA[<!-- BalloonStyle background color:\n" +
+                "ffffffff\n" +
+                "-->\n" +
+                "<!-- Icon URL:\n" +
+                "http://maps.google.com/mapfiles/kml/paddle/purple-blank.png\n" +
+                "-->\n" +
+                "<table width=\"400\" border=\"0\" cellspacing=\"0\" cellpadding=\"5\">\n" +
+                " <tr>\n" +
+                "   <td colspan=\"2\" align=\"center\">\n" +
+                "     <img src=\"https://raw.githubusercontent.com/GoutamVerma/TinyGS-data-visualization-for-Liquid-Galaxy-GSoC-2022/main/app/src/main/res/drawable-xxxhdpi/applogo.png\" alt=\"picture\" width=\"150\" height=\"150\" />\n" +
+                "   </td>\n" +
+                " </tr>\n" +
+                " <tr>\n" +
+                "   <td colspan=\"2\" align=\"center\">\n" +
+                "     <h2><font color='#00CC99'>TinyGS Data Visualization Tool</font></h2>\n" +
+                "   </td>\n" +
+                " </tr>\n" +
+                " <tr>\n" +
+                "   <td colspan=\"2\">\n" +
+                "     <p><font color=\"#3399CC\">Description: \n" +
+                des+
+                "</font></p>\n" +
+                "   </td>\n" +
+                " </tr>\n" +
+                " <tr>\n" +
+                "   <td align=\"center\">\n" +
+                "     <a href=\"#\"> </a>\n" +
+                "   </td>\n" +
+                " </tr>\n" +
+                " <tr>\n" +
+                "   <td colspan=\"2\" align=\"center\">\n" +
+                "     <font color=\"#999999\">TinyGS Data Visualization Tool 2022</font>\n" +
+                "   </td>\n" +
+                " </tr>\n" +
+                "</table>]]>"+
                 "      </description>\n" +
                 "      <Point>\n" +
                 "       <coordinates>" + "32.2563256" + "," + "32.2563256" + "</coordinates>\n" +
                 "      </Point>\n" +
                 "    </Placemark>\n\n";
         String wait = commandWait(50);
-        folderBalloonShapes.append(startCommand + description + endCommand);
+        folderBalloonShapes.append(startCommand);
         Log.w(TAG_DEBUG, "BALLOON: " + folderBalloonShapes);
         String animateClose = "    <gx:AnimatedUpdate>\n" +
                 "    <gx:duration>0</gx:duration>\n" +
@@ -432,35 +453,48 @@ public class ActionBuildCommandUtility {
         String startCommand = "    <Placemark id=\"" + TEST_PLACE_MARK_ID + "\">\n" +
                 "     <name>" + name + "</name>\n" +
                 "     <description>\n" +
-                "      <![CDATA[\n" +
-                "      <head>\n" +
-                "      <!-- Required meta tags -->\n" +
-                "      <meta charset=\"UTF-8\">\n" +
-                "      <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, shrink-to-fit=no\">\n" +
-                "\n" +
-                "      <!-- Bootstrap CSS -->\n" +
-                "      <link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css\" integrity=\"sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm\" crossorigin=\"anonymous\">\n" +
-                "\n" +
-                "      </head>\n" +
-                "      <body>\n" +
-                "       <div class=\"p-lg-5\" align=\"center\">\n" +
-                "\n";
-        String description = "";
-        description = "       <h5>" + des + "</h5>\n" +
-                "       <br>\n";
-
-        String endCommand = "       </div>\n    <script src=\"https://code.jquery.com/jquery-3.2.1.slim.min.js\" integrity=\"sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN\" crossorigin=\"anonymous\"></script>\n" +
-                "       <script src=\"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js\" integrity=\"sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q\" crossorigin=\"anonymous\"></script>\n" +
-                "       <script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js\" integrity=\"sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl\" crossorigin=\"anonymous\"></script>\n" +
-                "       </body>\n" +
-                "       ]]>\n" +
+                "<![CDATA[<!-- BalloonStyle background color:\n" +
+        "ffffffff\n" +
+                "-->\n" +
+                "<!-- Icon URL:\n" +
+                "http://maps.google.com/mapfiles/kml/paddle/purple-blank.png\n" +
+                "-->\n" +
+                "<table width=\"400\" border=\"0\" cellspacing=\"0\" cellpadding=\"5\">\n" +
+                " <tr>\n" +
+                "   <td colspan=\"2\" align=\"center\">\n" +
+                "     <img src=\"https://raw.githubusercontent.com/GoutamVerma/TinyGS-data-visualization-for-Liquid-Galaxy-GSoC-2022/main/app/src/main/res/drawable-xxxhdpi/applogo.png\" alt=\"picture\" width=\"150\" height=\"150\" />\n" +
+                "   </td>\n" +
+                " </tr>\n" +
+                " <tr>\n" +
+                "   <td colspan=\"2\" align=\"center\">\n" +
+                "     <h2><font color='#00CC99'>TinyGS Data Visualization Tool</font></h2>\n" +
+                "   </td>\n" +
+                " </tr>\n" +
+                " <tr>\n" +
+                "   <td colspan=\"2\">\n" +
+                "     <p><font color=\"#3399CC\">Description: \n" +
+                des+
+                "</font></p>\n" +
+                "   </td>\n" +
+                " </tr>\n" +
+                " <tr>\n" +
+                "   <td align=\"center\">\n" +
+                "     <a href=\"#\"> </a>\n" +
+                "   </td>\n" +
+                " </tr>\n" +
+                " <tr>\n" +
+                "   <td colspan=\"2\" align=\"center\">\n" +
+                "     <font color=\"#999999\">TinyGS Data Visualization Tool 2022</font>\n" +
+                "   </td>\n" +
+                " </tr>\n" +
+                "</table>]]>"+
                 "      </description>\n" +
                 "      <Point>\n" +
                 "       <coordinates>" + "32.2563256" + "," + "32.2563256" + "</coordinates>\n" +
                 "      </Point>\n" +
                 "    </Placemark>\n\n";
         String wait = commandWait(50);
-        folderBalloonShapes.append(startCommand + description + endCommand);
+        folderBalloonShapes.append(startCommand);
         Log.w(TAG_DEBUG, "BALLOON: " + folderBalloonShapes);
         String animateClose = "    <gx:AnimatedUpdate>\n" +
                 "    <gx:duration>0</gx:duration>\n" +
@@ -498,32 +532,33 @@ public class ActionBuildCommandUtility {
 
     private static String POICommand(String lon,String lat,String alti) {
         String command =  "     <gx:FlyTo>\n" +
-                "      <gx:duration>" + "10" + "</gx:duration>\n" +
-                "      <gx:flyToMode>bounce</gx:flyToMode>\n" +
+                "      <gx:duration>" + "8" + "</gx:duration>\n" +
+                "      <gx:flyToMode>smooth</gx:flyToMode>\n" +
                 "      <LookAt>\n" +
                 "       <longitude>" + lon + "</longitude>\n" +
                 "       <latitude>" + lat + "</latitude>\n" +
                 "       <altitude>" + "800000" + "</altitude>\n" +
-                "       <heading>" + "35.236" + "</heading>\n" +
-                "       <tilt>" + "60" + "</tilt>\n" +
-                "       <range>" + "56" + "</range>\n" +
-                "       <gx:altitudeMode>" + "absolute" + "</gx:altitudeMode>\n" +
+                "      <heading>"+"0"+"</heading> \n"+
+                "      <tilt>45</tilt> \n"+
+                "      <gx:fovy>60</gx:fovy> \n"+
+                "      <range>10000</range> \n"+
+                "      <gx:altitudeMode>absolute</gx:altitudeMode> \n"+
                 "     </LookAt>\n" +
+
                 "    </gx:FlyTo>\n\n";
         Log.w(TAG_DEBUG, "POI COMMAND: " + command);
         return  command;
     }
     private static String POICommandStation(String lon,String lat,String alti) {
         String command =  "     <gx:FlyTo>\n" +
-                "      <gx:duration>" + "10" + "</gx:duration>\n" +
+                "      <gx:duration>" + "4" + "</gx:duration>\n" +
                 "      <gx:flyToMode>bounce</gx:flyToMode>\n" +
                 "      <LookAt>\n" +
                 "       <longitude>" + lat + "</longitude>\n" +
                 "       <latitude>" + lon + "</latitude>\n" +
-                "       <altitude> 400 </altitude>\n"+
-                "       <heading>" + "35.236" + "</heading>\n" +
+                "       <heading>" + "0" + "</heading>\n" +
                 "       <tilt>" + "60" + "</tilt>\n" +
-                "       <range>" + "400" + "</range>\n" +
+                "       <range>" + "1000" + "</range>\n" +
                 "       <gx:altitudeMode>" + "absolute" + "</gx:altitudeMode>\n" +
                 "     </LookAt>\n" +
                 "    </gx:FlyTo>\n\n";
@@ -532,20 +567,49 @@ public class ActionBuildCommandUtility {
     }
 
     public static String clean_logo(){
-        return "echo '' > /var/www/html/kml/slave_4.kml";
+        String clean_logo= "echo '<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
+                "<kml xmlns=\"http://www.opengis.net/kml/2.2\" xmlns:gx=\"http://www.google.com/kml/ext/2.2\" xmlns:kml=\"http://www.opengis.net/kml/2.2\" xmlns:atom=\"http://www.w3.org/2005/Atom\">\n" +
+                "  <Document id=\"1\">\n" +
+                "  </Document>\n" +
+                "</kml>' > /var/www/html/kml/slave_4.kml";
+        Log.d("TAG_DEBUG",clean_logo);
+        return clean_logo;
     }
 
+    public static String clean_balloon(){
+        return "echo '' > /var/www/html/kml/slave_3.kml";
+    }
 
-    public static String buildCommandshutdown(String username){
-        String shutdown = "'/home/"+username+"/bin/lg-poweroff' > /home/"+username+"/log.txt";
+    public static String buildCommandshutdown(String username,String password,Integer rigs){
+       String shutdown = "sshpass -p "+password+" ssh -t lg"+rigs+" \"echo "+password+" | sudo -S poweroff\"";
         Log.d(TAG_DEBUG,shutdown);
         return shutdown;
     }
 
-    public static String buildCommandReboot(String username){
-        String reboot= "'/home/"+username+"/bin/lg-reboot' > /home/"+username+"/log.txt";
-        Log.d(TAG_DEBUG,reboot);
-        return reboot;
+    public static String buildCommandReboot(String username,String password,Integer rigs){
+        String reboot1 = "sshpass -p "+ password +" ssh -t lg"+rigs+ " \"echo "+password+" | sudo -S reboot\"";
+        Log.d(TAG_DEBUG,reboot1);
+        return reboot1;
+    }
+
+    public static String buildCommandReLaunch(String username,String password,Integer rigs){
+        String relaunch =  "\"\"\"RELAUNCH_CMD=\"\\\\\n" +
+                "if [ -f /etc/init/lxdm.conf ]; then\n" +
+                " export SERVICE=lxdm\n" +
+                "elif [ -f /etc/init/lightdm.conf ]; then\n" +
+                " export SERVICE=lightdm\n" +
+                "else\n" +
+                " exit 1\n" +
+                "fi\n" +
+                "if  [[ \\\\\\$(service \\\\\\$SERVICE status) =~ 'stop' ]]; then\n" +
+                " service \\\\\\${SERVICE} start\n" +
+                "else\n" +
+                " echo lq | sudo -S service \\\\\\${SERVICE} restart\n" +
+                "fi\n" +
+                "\" && sshpass -p "+password+" ssh -x -t lg@lg"+rigs+" \"\\$RELAUNCH_CMD\\\"\"\"";
+
+        Log.d(TAG_DEBUG,relaunch);
+        return relaunch;
     }
 
     /**
@@ -573,20 +637,10 @@ public class ActionBuildCommandUtility {
                 "   <ScreenOverlay id=\"abc\">\n" +
                 "     <name>VolTrac</name>\n" +
                 "     <Icon>\n" +
-                "       <href>https://raw.githubusercontent.com/GoutamVerma/TinyGS-data-visualization-for-Liquid-Galaxy-GSoC-2022/main/app/src/main/res/drawable/logos.png</href>\n" +
+                "       <href>https://raw.githubusercontent.com/GoutamVerma/TinyGS-data-visualization-for-Liquid-Galaxy-GSoC-2022/main/app/src/main/res/drawable/new_logo.png</href>\n" +
                 "     </Icon>\n" +
                 "     <overlayXY x=\"0\" y=\"1\" xunits=\"fraction\" yunits=\"fraction\"/>\n" +
                 "     <screenXY x=\"0.2\" y=\"0.98\" xunits=\"fraction\" yunits=\"fraction\"/>\n" +
-                "     <rotationXY x=\"0\" y=\"0\" xunits=\"fraction\" yunits=\"fraction\"/>\n" +
-                "     <size x=\"0\" y=\"0\" xunits=\"pixels\" yunits=\"fraction\"/>\n" +
-                "   </ScreenOverlay>\n" +
-                "   <ScreenOverlay id=\"def\">\n" +
-                "     <name>Logos</name>\n" +
-                "     <Icon>\n" +
-                "       <href>https://raw.githubusercontent.com/GoutamVerma/TinyGS-data-visualization-for-Liquid-Galaxy-GSoC-2022/main/app/src/main/res/drawable/logos.png</href>\n" +
-                "     </Icon>\n" +
-                "     <overlayXY x=\"0\" y=\"1\" xunits=\"fraction\" yunits=\"fraction\"/>\n" +
-                "     <screenXY x=\"0\" y=\"0.75\" xunits=\"fraction\" yunits=\"fraction\"/>\n" +
                 "     <rotationXY x=\"0\" y=\"0\" xunits=\"fraction\" yunits=\"fraction\"/>\n" +
                 "     <size x=\"0\" y=\"0\" xunits=\"pixels\" yunits=\"fraction\"/>\n" +
                 "   </ScreenOverlay>\n" +
@@ -645,49 +699,9 @@ public class ActionBuildCommandUtility {
         return command;
     }
 
-    private static void orbit(POI poi, StringBuilder command) {
-        double heading = poi.getPoiCamera().getHeading();
-        int orbit = 0;
-        while (orbit <= 36) {
-            if (heading >= 360) heading = heading - 360;
-            command.append("    <gx:FlyTo>\n").append("    <gx:duration>1.2</gx:duration> \n")
-                    .append("    <gx:flyToMode>smooth</gx:flyToMode> \n")
-                    .append("     <LookAt> \n")
-                    .append("      <longitude>").append(poi.getPoiLocation().getLongitude()).append("</longitude> \n")
-                    .append("      <latitude>").append(poi.getPoiLocation().getLatitude()).append("</latitude> \n")
-                    .append("      <heading>").append(heading).append("</heading> \n")
-                    .append("      <tilt>").append(60).append("</tilt> \n")
-                    .append("      <gx:fovy>35</gx:fovy> \n")
-                    .append("      <range>").append(poi.getPoiCamera().getRange()).append("</range> \n")
-                    .append("      <gx:altitudeMode>absolute</gx:altitudeMode> \n")
-                    .append("      </LookAt> \n")
-                    .append("    </gx:FlyTo> \n\n");
-            heading = heading + 10;
-            orbit++;
-        }
-    }
-
-    private static void movement(POI poi, StringBuilder command, int duration) {
-        POILocation poiLocation = poi.getPoiLocation();
-        POICamera poiCamera = poi.getPoiCamera();
-        command.append("    <gx:FlyTo>\n")
-                .append("    <gx:duration>").append(duration).append("</gx:duration>\n")
-                .append("    <gx:flyToMode>smooth</gx:flyToMode>\n")
-                .append("     <LookAt>\n")
-                .append("      <longitude>").append(poiLocation.getLongitude()).append("</longitude>\n")
-                .append("      <latitude>").append(poiLocation.getLatitude()).append("</latitude>\n")
-                .append("      <altitude>").append(poiLocation.getAltitude()).append("</altitude>\n")
-                .append("      <heading>").append(poiCamera.getHeading()).append("</heading>\n")
-                .append("      <tilt>").append(poiCamera.getTilt()).append("</tilt>\n")
-                .append("      <range>").append(poiCamera.getRange()).append("</range>\n")
-                .append("      <gx:altitudeMode>").append(poiCamera.getAltitudeMode()).append("</gx:altitudeMode>\n")
-                .append("     </LookAt>\n")
-                .append("    </gx:FlyTo>\n\n");
-    }
 
     private static String commandWait(int duration) {
-        String waitCommand =  "    <gx:Wait>\n" +
-                "     <gx:duration>" + duration + "</gx:duration>\n" +
+        String waitCommand =  "    <gx:Wait>\n" + "     <gx:duration>" + duration + "</gx:duration>\n" +
                 "    </gx:Wait>\n\n";
         Log.w(TAG_DEBUG, "WAIT COMMAND:" + waitCommand);
         return  waitCommand;
@@ -703,5 +717,77 @@ public class ActionBuildCommandUtility {
         String command = "echo '' > " + BASE_PATH + "kmls.txt ";
         Log.w(TAG_DEBUG, "commandCleanSlaves: " + command);
         return command;
+    }
+
+    public static String buildCommandBalloon(String des) {
+        String startCommand =  "echo '" +
+                "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
+                "<kml xmlns=\"http://www.opengis.net/kml/2.2\" xmlns:gx=\"http://www.google.com/kml/ext/2.2\" xmlns:kml=\"http://www.opengis.net/kml/2.2\" xmlns:atom=\"http://www.w3.org/2005/Atom\">\n" +
+                "<Document>\n" +
+                " <name>historic.kml</name>\n" +
+                " <Style id=\"purple_paddle\">\n" +
+                "   <BalloonStyle>\n" +
+                "     <text>$[description]</text>\n" +
+                "     <bgColor>ff1e1e1e</bgColor>\n" +
+                "   </BalloonStyle>\n" +
+                " </Style>\n" +
+                " <Placemark id=\"0A7ACC68BF23CB81B354\">\n" +
+                "   <name>TinyGS Data Visualization</name>\n" +
+                "   <Snippet maxLines=\"0\"></Snippet>\n" +
+                "   <description><![CDATA[<!-- BalloonStyle background color:\n" +
+                "ffffffff\n" +
+                "-->\n" +
+                "<!-- Icon URL:\n" +
+                "http://maps.google.com/mapfiles/kml/paddle/purple-blank.png\n" +
+                "-->\n" +
+                "<table width=\"400\" border=\"0\" cellspacing=\"0\" cellpadding=\"5\">\n" +
+                " <tr>\n" +
+                "   <td colspan=\"2\" align=\"center\">\n" +
+                "     <img src=\"https://raw.githubusercontent.com/GoutamVerma/TinyGS-data-visualization-for-Liquid-Galaxy-GSoC-2022/main/app/src/main/res/drawable-xxxhdpi/applogo.png\" alt=\"picture\" width=\"150\" height=\"150\" />\n" +
+                "   </td>\n" +
+                " </tr>\n" +
+                " <tr>\n" +
+                "   <td colspan=\"2\" align=\"center\">\n" +
+                "     <h2><font color='#00CC99'>TinyGS Data Visualization Tool</font></h2>\n" +
+                "   </td>\n" +
+                " </tr>\n" +
+                " <tr>\n" +
+                "   <td colspan=\"2\">\n" +
+                "     <p><font color=\"#FFFFFF\">Description: \n" +
+                des+
+                "</font></p>\n" +
+                "   </td>\n" +
+                " </tr>\n" +
+                " <tr>\n" +
+                "   <td align=\"center\">\n" +
+                "     <a href=\"#\"> </a>\n" +
+                "   </td>\n" +
+                " </tr>\n" +
+                " <tr>\n" +
+                "   <td colspan=\"2\" align=\"center\">\n" +
+                "     <font color=\"#FFFFFF\">TinyGS Data Visualization Tool 2022</font>\n" +
+                "   </td>\n" +
+                " </tr>\n" +
+                "</table>]]></description>\n" +
+                "   <LookAt>\n" +
+                "     <longitude>-17.841486</longitude>\n" +
+                "     <latitude>28.638478</latitude>\n" +
+                "     <altitude>0</altitude>\n" +
+                "     <heading>0</heading>\n" +
+                "     <tilt>0</tilt>\n" +
+                "     <range>24000</range>\n" +
+                "   </LookAt>\n" +
+                "   <styleUrl>#purple_paddle</styleUrl>\n" +
+                "   <gx:balloonVisibility>1</gx:balloonVisibility>\n" +
+                "   <Point>\n" +
+                "     <coordinates>-17.841486,28.638478,0</coordinates>\n" +
+                "   </Point>\n" +
+                " </Placemark>\n" +
+                "</Document>\n" +
+                "</kml> "+
+                "' > " +
+                "/var/www/html/kml/slave_3.kml";
+        Log.d("TAG DEBUG",startCommand);
+        return startCommand;
     }
 }

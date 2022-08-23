@@ -15,7 +15,7 @@
 
         <TextView
             android:id="@+id/stationname"
-            android:layout_width="170dp"
+            android:layout_width="300dp"
             android:layout_height="36dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
@@ -126,56 +126,34 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/station_orbit"
-            android:layout_width="102dp"
+            android:id="@+id/station_send"
+            android:layout_width="140dp"
             android:layout_height="44dp"
-            android:layout_marginStart="20dp"
-            android:text="Orbit"
+            android:layout_marginStart="0dp"
+            android:text="Send to LG"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/textView5"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.384" />
 
         <Button
             android:id="@+id/station_orbit_Stop"
-            android:layout_width="102dp"
+            android:layout_width="140dp"
             android:layout_height="44dp"
-            android:layout_marginStart="20dp"
-            android:text="Stop"
+            android:layout_marginStart="0dp"
+            android:text="Stop Orbit"
             android:textColor="@color/white"
             android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/textView5"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Button
-            android:id="@+id/station_show"
-            android:layout_width="114dp"
-            android:layout_height="42dp"
-            android:layout_marginStart="16dp"
-            android:text="Visualize"
-            android:textColor="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/station_orbit"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.533" />
+            app:layout_constraintVertical_bias="0.307" />
 
-        <Button
-            android:id="@+id/station_show_stop"
-            android:layout_width="114dp"
-            android:layout_height="42dp"
-            android:layout_marginStart="16dp"
-            android:text="Clear"
-            android:textColor="@color/white"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/station_orbit"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.533" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

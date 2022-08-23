@@ -9,7 +9,6 @@
     <style name="SplashScreen" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowBackground">@drawable/background_splashscreen</item>
     </style>
-
     <style name="spinnerItemStyle" parent="android:Widget.TextView.SpinnerItem">
     </style>
 

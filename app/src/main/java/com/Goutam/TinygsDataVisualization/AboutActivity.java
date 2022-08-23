@@ -21,7 +21,7 @@ public class AboutActivity extends TopBarActivity {
 
         View topBar = findViewById(R.id.top_bar);
         buttAbout = topBar.findViewById(R.id.butt_about);
-
-
+        TextView tv = (TextView) findViewById(R.id. textView8);
+        tv.setMovementMethod(LinkMovementMethod.getInstance());
     }
 }

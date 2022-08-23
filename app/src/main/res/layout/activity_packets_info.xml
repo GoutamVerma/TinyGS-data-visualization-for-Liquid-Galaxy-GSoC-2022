@@ -55,43 +55,30 @@
 
     </LinearLayout>
 
-    <Spinner
-        android:id="@+id/orbit_test"
-        android:layout_width="145dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="52dp"
-        android:text="Animate"
-        android:textAlignment="center"
-        android:textColor="@color/textColorClick"
-        app:layout_constraintEnd_toStartOf="@+id/test"
-        app:layout_constraintHorizontal_bias="0.773"
-        app:layout_constraintStart_toEndOf="@+id/linearLayout"
-        app:layout_constraintTop_toBottomOf="@+id/top_bar" />
-
     <Button
         android:id="@+id/test"
-        android:layout_width="123dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="52dp"
+        android:layout_width="192dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="60dp"
         android:background="@drawable/button_primary"
-        android:text="Visualize"
+        android:text="Send to LG"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.613"
+        app:layout_constraintHorizontal_bias="0.201"
         app:layout_constraintStart_toEndOf="@+id/linearLayout"
         app:layout_constraintTop_toBottomOf="@+id/top_bar" />
 
     <Button
         android:id="@+id/stop"
-        android:layout_width="123dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="52dp"
+        android:layout_width="192dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="60dp"
         android:background="@drawable/button_primary"
-        android:text="Clear"
-        android:visibility="invisible"
+        android:text="Stop"
         android:textColor="@color/white"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.613"
+        app:layout_constraintHorizontal_bias="0.201"
         app:layout_constraintStart_toEndOf="@+id/linearLayout"
         app:layout_constraintTop_toBottomOf="@+id/top_bar" />
 

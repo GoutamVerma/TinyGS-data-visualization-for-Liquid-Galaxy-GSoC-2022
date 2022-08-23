@@ -12,7 +12,8 @@
     <string name="image_not_available_on_screen">Image not Available on screen</string>
     <string name="connecting"> Connecting …</string>
     <string name="test_connection"> Test Location …</string>
-
+    <string name="app_intro">TinyGS Data Visualization Tool is developed by <b>Goutam Verma</b> under the part of <b>Google Summer of Code 2022</b> with the help of main mentor <b>Merul Diman</b> and co-mentors <b>Andreu Ibañez, Mario Ezquerro</b> \n The tester <b>Pau Francino</b> at Liquid Galaxy Lab Lleida</string>
+    <string name="app_intro_github">Read more about me at my <a href="https://www.linkedin.com/in/goutam-verma-3064931a4/"><b>LinkedIn</b></a> and checkout code work at <a href="https://github.com/GoutamVerma/TinyGS-data-visualization-for-Liquid-Galaxy-GSoC-2022"><b>Github</b></a></string>
     <string name="button_connect">Connect to Liquid Galaxy</string>
     <string name="button_try_again">Connect to Liquid Galaxy</string>
     <string name="button_change">Change</string>
@@ -471,4 +472,5 @@
     <string name="clear">Clear KMLs</string>
     <string name="logo">Logo</string>
     <string name="clean_logo">Clean Logo</string>
+    <string name="version">TinyGS Data Visualization Tool 2022, Version <b>1.0</b></string>
 </resources>

@@ -137,47 +137,17 @@ public class PacketsActivity extends TopBarActivity {
         buttTest = findViewById(R.id.test);
         buttStop = findViewById(R.id.stop);
         buttStop.setVisibility(view.INVISIBLE);
-        spin = findViewById(R.id.orbit_test);
         String sat = packet.get(i).get(11);
         String pos[]= sat.split(",");
         String lon[]= pos[0].split(":");
         String alti[]= pos[1].split(":");
         String lat[]= pos[2].split(":");
-        buttTest.setOnClickListener(view2 -> sendPacket(view, lon[1], lat[1].substring(0, lat[1].length() - 1), alti[1], description, packet.get(i).get(5)));
+        buttTest.setOnClickListener(view2 -> sendOrbit(view, lon[1], lat[1].substring(0, lat[1].length() - 1), alti[1], description, packet.get(i).get(5)));
         buttStop.setOnClickListener(view2 -> stopTestStoryBoard());
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.spinner_item, mode);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spin.setAdapter(adapter);
-        spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if(mode[i].equals("Fly-To")){
-                    buttTest.setVisibility(View.VISIBLE);
-                    buttStop.setVisibility(View.INVISIBLE);
-                    buttTest.setOnClickListener(view2 -> sendPacket(view, lon[1], lat[1].substring(0, lat[1].length() - 1), alti[1], description, packet.get(i).get(5)));
-                    buttStop.setOnClickListener(view2 -> stopTestStoryBoard());
-                }
-                else if(mode[i].equals("Orbit")){
-                    buttTest.setVisibility(View.VISIBLE);
-                    buttStop.setVisibility(View.INVISIBLE);
-                    buttTest.setOnClickListener(view1 -> sendOrbit(view, lon[1], lat[1].substring(0, lat[1].length() - 1), alti[1], description, packet.get(i).get(5)));
-                    buttStop.setOnClickListener(view1 -> stopTestStoryBoard());
-                }else if(mode[i].equals("Zoom-To")){
-                    buttTest.setVisibility(View.VISIBLE);
-                    buttStop.setVisibility(View.INVISIBLE);
-                    buttTest.setOnClickListener(view1 -> sendZoomTo(view, lon[1], lat[1].substring(0, lat[1].length() - 1), alti[1], description, packet.get(i).get(5)));
-                    buttStop.setOnClickListener(view1 -> stopTestStoryBoard());
-                }
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-    }
+       }
     private void stopTestStoryBoard() {
         ActionController actionController = ActionController.getInstance();
-        actionController.exitTour();
+        actionController.cleanTour();
         buttTest.setVisibility(View.VISIBLE);
         buttStop.setVisibility(View.INVISIBLE);
         }
@@ -316,32 +286,6 @@ public class PacketsActivity extends TopBarActivity {
         return obj;
     }
 
-    /**
-     * @param longi Longitude of packets
-     * @param lat   Latitude of packets
-     * @param alti  Altitude of packets
-     * @param des   Description of satellite
-     * @param name  Name of satellite
-     * This function is in charge of sending kml packets to Liquid Galaxy
-     */
-    public void sendPacket(View view,String longi,String lat,String alti,String des,String name) {
-        Button test = findViewById(R.id.test);
-        Dialog dialog = getDialog(this, "Setting Files");
-        dialog.show();
-        SharedPreferences sharedPreferences = getSharedPreferences(ConstantPrefs.SHARED_PREFS.name(), MODE_PRIVATE);
-        boolean isConnected = sharedPreferences.getBoolean(ConstantPrefs.IS_CONNECTED.name(), false);
-        if (isConnected) {
-            ActionController.getInstance().sendTour( null, longi, lat, alti, des, name);
-            test.setVisibility(view.INVISIBLE);
-            buttStop.setVisibility(view.VISIBLE);
-            CustomDialogUtility.showDialog(this, "Visualizing Satellite on LG!");
-        } else {
-            dialog.dismiss();
-            CustomDialogUtility.showDialog(this, "LG is not connected, Please visit connect tab.");
-            return;
-        }
-        dialog.dismiss();
-    }
 
     /**
      * @param longi Longitude of packets
@@ -353,37 +297,19 @@ public class PacketsActivity extends TopBarActivity {
      */
     public void sendOrbit(View view, String longi, String lat, String alti, String des, String name) {
         Button test = findViewById(R.id.test);
-        Dialog dialog = getDialog(this, "Setting Files");
-        dialog.show();
         SharedPreferences sharedPreferences = getSharedPreferences(ConstantPrefs.SHARED_PREFS.name(), MODE_PRIVATE);
         boolean isConnected = sharedPreferences.getBoolean(ConstantPrefs.IS_CONNECTED.name(), false);
         if (isConnected) {
-            dialog.dismiss();
-            CustomDialogUtility.showDialog(this, "Visualizing Orbit animation on LG!");
-            ActionController.getInstance().sendOribitfile(PacketsActivity.this, longi, lat, alti,des,name);
+            ActionController.getInstance().sendBalloon(this, des);
+//            ActionController.getInstance().sendTour(null,longi,lat,alti,des,name);
+//            Handler handler = new Handler();
+//            handler.postDelayed(new Runnable() {
+//                @Override
+//                public void run() {
+                    ActionController.getInstance().sendOribitfile(PacketsActivity.this, longi, lat, alti,des,name);
             test.setVisibility(view.INVISIBLE);
             buttStop.setVisibility(view.VISIBLE);
         } else {
-            dialog.dismiss();
-            CustomDialogUtility.showDialog(this, "LG is not connected, Please visit connect tab.");
-        }
-
-    }
-    public void sendZoomTo(View view, String longi, String lat, String alti, String des, String name) {
-        Button test = findViewById(R.id.test);
-        Dialog dialog = getDialog(this, "Setting Files");
-        dialog.show();
-        SharedPreferences sharedPreferences = getSharedPreferences(ConstantPrefs.SHARED_PREFS.name(), MODE_PRIVATE);
-        boolean isConnected = sharedPreferences.getBoolean(ConstantPrefs.IS_CONNECTED.name(), false);
-        if (isConnected) {
-            dialog.dismiss();
-            CustomDialogUtility.showDialog(this, "Visualizing Zoom-To animation on LG!");
-            ActionController.getInstance().sendZoomfile(PacketsActivity.this, longi, lat, alti,des,name);
-            test.setVisibility(view.INVISIBLE);
-            buttStop.setVisibility(view.VISIBLE);
-
-        } else {
-            dialog.dismiss();
             CustomDialogUtility.showDialog(this, "LG is not connected, Please visit connect tab.");
         }
 

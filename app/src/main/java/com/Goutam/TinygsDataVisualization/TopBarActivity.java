@@ -28,12 +28,12 @@ public class TopBarActivity extends AppCompatActivity {
      * @param view The view which is call.
      */
     public void buttConnectMenu(View view) {
-        Intent intent = new Intent(getApplicationContext(), CatalogActivity.class);
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
     }
 
     public void buttStation(View view) {
-        Intent intent = new Intent(getApplicationContext(), StationActivity.class);
+        Intent intent = new Intent(getApplicationContext(), CatalogActivity.class);
         startActivity(intent);
     }
     /**
@@ -42,7 +42,7 @@ public class TopBarActivity extends AppCompatActivity {
      * @param view The view which is call.
      */
     public void buttSingleSpacecraft(View view) {
-        Intent intent = new Intent(getApplicationContext(), PacketsActivity.class);
+        Intent intent = new Intent(getApplicationContext(), SateliteActivity.class);
         startActivity(intent);
     }
 
@@ -58,12 +58,12 @@ public class TopBarActivity extends AppCompatActivity {
 
 
     public void buttCatalog(View view) {
-        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        Intent intent = new Intent(getApplicationContext(), StationActivity.class);
         startActivity(intent);
     }
 
     public void buttSpaceports(View view) {
-        Intent intent = new Intent(getApplicationContext(), SateliteActivity.class);
+        Intent intent = new Intent(getApplicationContext(), PacketsActivity.class);
         startActivity(intent);
     }
 
