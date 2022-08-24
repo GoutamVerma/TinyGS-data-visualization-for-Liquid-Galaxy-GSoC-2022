@@ -301,12 +301,7 @@ public class PacketsActivity extends TopBarActivity {
         boolean isConnected = sharedPreferences.getBoolean(ConstantPrefs.IS_CONNECTED.name(), false);
         if (isConnected) {
             ActionController.getInstance().sendBalloon(this, des);
-//            ActionController.getInstance().sendTour(null,longi,lat,alti,des,name);
-//            Handler handler = new Handler();
-//            handler.postDelayed(new Runnable() {
-//                @Override
-//                public void run() {
-                    ActionController.getInstance().sendOribitfile(PacketsActivity.this, longi, lat, alti,des,name);
+            ActionController.getInstance().sendOribitfile(PacketsActivity.this, longi, lat, alti,des,name);
             test.setVisibility(view.INVISIBLE);
             buttStop.setVisibility(view.VISIBLE);
         } else {

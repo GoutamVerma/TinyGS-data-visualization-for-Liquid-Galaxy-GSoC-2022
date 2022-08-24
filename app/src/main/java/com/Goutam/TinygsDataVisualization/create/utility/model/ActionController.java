@@ -143,14 +143,12 @@ public class ActionController {
 
         cleanFileKMLs(0);
 
-        handler.postDelayed(() -> {
-            LGCommand lgCommand = new LGCommand(ActionBuildCommandUtility.buildCommandReLaunch(username,password,rigs),
+           LGCommand lgCommand = new LGCommand(ActionBuildCommandUtility.buildCommandReLaunch(username,password,rigs),
                     LGCommand.CRITICAL_MESSAGE, (String result) -> {
             });
             LGConnectionManager lgConnectionManager = LGConnectionManager.getInstance();
             lgConnectionManager.startConnection();
             lgConnectionManager.addCommandToLG(lgCommand);
-        }, 2000);
 
     }
 

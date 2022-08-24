@@ -592,22 +592,22 @@ public class ActionBuildCommandUtility {
         return reboot1;
     }
 
-    public static String buildCommandReLaunch(String username,String password,Integer rigs){
-        String relaunch =  "\"\"\"RELAUNCH_CMD=\"\\\\\n" +
-                "if [ -f /etc/init/lxdm.conf ]; then\n" +
-                " export SERVICE=lxdm\n" +
-                "elif [ -f /etc/init/lightdm.conf ]; then\n" +
-                " export SERVICE=lightdm\n" +
-                "else\n" +
-                " exit 1\n" +
-                "fi\n" +
-                "if  [[ \\\\\\$(service \\\\\\$SERVICE status) =~ 'stop' ]]; then\n" +
-                " service \\\\\\${SERVICE} start\n" +
-                "else\n" +
-                " echo lq | sudo -S service \\\\\\${SERVICE} restart\n" +
-                "fi\n" +
-                "\" && sshpass -p "+password+" ssh -x -t lg@lg"+rigs+" \"\\$RELAUNCH_CMD\\\"\"\"";
 
+    public static String buildCommandReLaunch(String username,String password,Integer rigs){
+        String relaunch =  "RELAUNCH_CMD=\"\\\n" +
+                "if [ -f /etc/init/lxdm.conf ]; then\n" +
+                "  export SERVICE=lxdm\n" +
+                "elif [ -f /etc/init/lightdm.conf ]; then\n" +
+                "export SERVICE=lightdm\n" +
+                "else\n" +
+                "  exit 1\n" +
+                "fi\n" +
+                "if  [[ \\$(service \\$SERVICE status) =~ 'stop' ]]; then\n" +
+                "  echo "+password+" | sudo -S service \\${SERVICE} start\n" +
+                "else\n" +
+                "  echo "+password+" | sudo -S service \\${SERVICE} restart\n" +
+                "fi\n" +
+                "\" && sshpass -p "+password+" ssh -x -t lg@lg"+rigs+" \"$RELAUNCH_CMD\"\n";
         Log.d(TAG_DEBUG,relaunch);
         return relaunch;
     }

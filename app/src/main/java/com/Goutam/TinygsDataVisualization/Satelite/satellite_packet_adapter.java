@@ -93,14 +93,7 @@ public class satellite_packet_adapter extends ArrayAdapter<satellite_packet_card
             orbit.setVisibility(View.INVISIBLE);
             stop.setVisibility(View.VISIBLE);
             ActionController.getInstance().sendBalloon(activity,des);
-            ActionController.getInstance().sendTour(null,longi,lat,alti,des,name);
-            Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    ActionController.getInstance().sendOribitfile(activity, longi, lat, alti,des,name);
-                }
-            }, 15000);
+            ActionController.getInstance().sendOribitfile(activity, longi, lat, alti,des,name);
         } else {
             CustomDialogUtility.showDialog(activity, "LG is not connected, Please visit connect tab.");
         }

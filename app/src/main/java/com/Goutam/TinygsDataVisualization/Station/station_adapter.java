@@ -99,15 +99,7 @@ public class station_adapter extends ArrayAdapter<station_card_model> {
             orbit.setVisibility(View.INVISIBLE);
             stop.setVisibility(View.VISIBLE);
             ActionController.getInstance().sendBalloon(activity,des);
-//            ActionController.getInstance().sendTourStation(null,longi,lat,alti,des,name);
-//            Handler handler = new Handler();
-//            handler.postDelayed(new Runnable() {
-//                @Override
-//                public void run() {
-                    ActionController.getInstance().sendOribitStation(activity, longi, lat, alti, des, name);
-//                }
-//
-//            }, 10000);
+            ActionController.getInstance().sendOribitStation(activity, longi, lat, alti, des, name);
         } else {
             CustomDialogUtility.showDialog(activity, "LG is not connected, Please visit connect tab.");
         }
