@@ -577,7 +577,13 @@ public class ActionBuildCommandUtility {
     }
 
     public static String clean_balloon(){
-        return "echo '' > /var/www/html/kml/slave_3.kml";
+        String command =  "echo '<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
+                "<kml xmlns=\"http://www.opengis.net/kml/2.2\" xmlns:gx=\"http://www.google.com/kml/ext/2.2\" xmlns:kml=\"http://www.opengis.net/kml/2.2\" xmlns:atom=\"http://www.w3.org/2005/Atom\">\n" +
+                "  <Document id=\"1\">\n" +
+                "  </Document>\n" +
+                "</kml>' > /var/www/html/kml/slave_3.kml";
+        Log.d("TAG_DEBUG",command);
+        return command;
     }
 
     public static String buildCommandshutdown(String username,String password,Integer rigs){

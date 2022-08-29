@@ -2,6 +2,7 @@ package com.Goutam.TinygsDataVisualization.Station;
 
 import static com.Goutam.TinygsDataVisualization.dialog.CustomDialogUtility.getDialog;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -85,6 +86,7 @@ public class StationActivity extends TopBarActivity {
         buttRefresh.setOnClickListener(view -> activity_handler());
     }
 
+    @SuppressLint("MissingPermission")
     private void activity_handler(){
         ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
         if(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||

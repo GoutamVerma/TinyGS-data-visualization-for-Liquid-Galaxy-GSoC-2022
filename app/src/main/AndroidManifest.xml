@@ -27,6 +27,7 @@
 
         <activity android:screenOrientation="sensorLandscape" android:name="com.Goutam.TinygsDataVisualization.SplashScreen"
             android:theme="@style/SplashScreen"
+            android:exported="true"
             tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -34,7 +35,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.Goutam.TinygsDataVisualization.MainActivity">
+        <activity android:name="com.Goutam.TinygsDataVisualization.MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
