@@ -553,61 +553,6 @@ public class SateliteActivity extends TopBarActivity {
         return adapter;
     }
 
-    public void sendStation(AppCompatActivity activity,String coordinate, String des, String name, SharedPreferences sharedPreferences) {
-        boolean isConnected = sharedPreferences.getBoolean(ConstantPrefs.IS_CONNECTED.name(), false);
-        org.json.JSONObject json = null;
-        try {
-            json = new org.json.JSONObject(coordinate);
-            System.out.println(json.toString());
-            String lng = json.getString("lng");
-            String lat = json.getString("lat");
-            if (isConnected) {
-                CustomDialogUtility.showDialog(activity, "Visualizing Station on LG!");
-                ActionController.getInstance().sendTourStation(null, lng, lat, "", des, name);
-            } else {
-                CustomDialogUtility.showDialog(activity, "LG is not connected, Please visit connect tab.");
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-    }
-    /**
-     * @param satellite name of satellite
-     * @return return packet_adapter contains List of all packets along with desired information
-     * check packets is null? get_api_data and add values to adapter : add values to adapter
-     */
-    private satellite_packet_adapter updatefrommap(String satellite){
-        SharedPreferences sharedPreferences = getSharedPreferences(ConstantPrefs.SHARED_PREFS.name(), MODE_PRIVATE);
-        satellite_packet_adapter adapter = new satellite_packet_adapter(this, satellitepacketcardmodelArrayList);
-        packet  = getHashMap("1");;
-        if(packet==null){
-            get_Api_Data();
-        }
-        int count =0;
-        for(int i=0;i<50;i++) {
-                    List<String> temp = new ArrayList<>();
-                    if (packet.get(i).get(5).equals(satellite)){
-                        temp.add(packet.get(i).get(0));
-                    temp.add(packet.get(i).get(1));
-                    temp.add(packet.get(i).get(2));
-                    temp.add(packet.get(i).get(3));
-                    temp.add(packet.get(i).get(4));
-                    temp.add(packet.get(i).get(5));
-                    temp.add(packet.get(i).get(6));
-                    temp.add(packet.get(i).get(7));
-                    temp.add(packet.get(i).get(8));
-                    temp.add(packet.get(i).get(9));
-                    temp.add(packet.get(i).get(10));
-                    temp.add(packet.get(i).get(11));
-                    satellitepacketcardmodelArrayList.add(new satellite_packet_card_model(packet.get(i).get(5), packet.get(i).get(0) + "@" + packet.get(i).get(1), packet.get(i).get(12), "\uD83D\uDCFB " + packet.get(i).get(6) + "mW \uD83C\uDF21 " + packet.get(i).get(8) + "ºC \uD83D\uDEF0 " + packet.get(i).get(10) + "mV ⛽️ not avaiable mW \uD83C\uDF21" + packet.get(i).get(8) + "ºC ☀️notavaiable \uD83D\uDD0B notavaiable mAh \uD83D\uDD0C " + packet.get(i).get(9) + "mW \uD83C\uDF21 Board PMM: " + packet.get(i).get(2) + "ºC PAM: 5ºC PDM: notavaiableºC",packet.get(i).get(11),this,sharedPreferences));
-                    temp_packet.put(count,temp);
-                    count++;
-                    }
-        }
-        return adapter;
-    }
-
     /**
      * @param key store value in HashMap
      * @param obj Json Object
