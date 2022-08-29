@@ -658,18 +658,6 @@ public class ActionBuildCommandUtility {
         Log.w(TAG_DEBUG, "Command: " + startCommand);
         return startCommand;
     }
-    /**
-     * Get the absolute path of the file
-     * @return the absolute path
-     */
-
-    static String buildWriteStarlinkFile() {
-        String command = "echo 'http://lg1:81/resources/Starlink.kml' > " +
-                BASE_PATH +
-                "kmls.txt";
-        Log.w(TAG_DEBUG, "command: " + command);
-        return command;
-    }
 
     static String buildWriteISSFile() {
         String command = "echo 'http://lg1:81/resources/ISS.kml' > " +
