@@ -450,20 +450,7 @@ public class SateliteActivity extends TopBarActivity {
         }
     }
 
-    /**
-     * @param key The key "1" store all packets data including longitude,latitude,altitude,description,name,etc.
-     * @return Return hashmap that contains all the information about tinyGS packets
-     * This function is in charge of reading HashMap from SharedPreferences
-     */
-    public HashMap<Integer, List<String>> getHashMap(String key) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(SateliteActivity.this);
-        Gson gson = new Gson();
-        String json = prefs.getString(key, "");
-        java.lang.reflect.Type type = new TypeToken<HashMap<Integer, List<String>>>() {
-        }.getType();
-        HashMap<Integer, List<String>> obj = gson.fromJson(json, type);
-        return obj;
-    }
+
     private satellite_packet_adapter get_data_satellite(String name){
         satellite_packet_adapter adapter= new satellite_packet_adapter(this,satellitepacketcardmodelArrayList);
         HashMap<Integer,List<String>> sat_packet = new HashMap<Integer, List<String>>();
