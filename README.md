@@ -20,8 +20,6 @@ around the satellites and ground stations. To perform actions users needs to hav
 
 This application is developed as part of Google Summer of Code 2022 by Goutam Verma, with Merul Diman as mentor, and Andreu Ibañez, Mario Ezquerro as co-mentors.
 
-For information regarding how to create content click [here](https://docs.google.com/document/d/1ctusDehQJA2rD2hkLhemHXaoJVU2jk1SpHPEBQ8IngI/edit?usp=sharing)
-
 ![app_banner](https://user-images.githubusercontent.com/66783850/187384759-9d03c653-a5e4-47a4-9184-b38d05000ba6.png)
 
 
