@@ -450,7 +450,11 @@ public class SateliteActivity extends TopBarActivity {
         }
     }
 
-
+    /**
+     *
+     * @param name takes name of satellite
+     * @return list of satellite packets in the form of adapter
+     */
     private satellite_packet_adapter get_data_satellite(String name){
         satellite_packet_adapter adapter= new satellite_packet_adapter(this,satellitepacketcardmodelArrayList);
         HashMap<Integer,List<String>> sat_packet = new HashMap<Integer, List<String>>();
