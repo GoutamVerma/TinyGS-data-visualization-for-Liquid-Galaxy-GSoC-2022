@@ -82,7 +82,11 @@ public class station_adapter extends ArrayAdapter<station_card_model> {
         return listitemView;
     }
 
-
+    /**
+     * @param buttTest button
+     * @param buttStop button
+     * Stops the visualization on Liquid Galaxy
+     */
     private void stopTestStoryBoard(Button buttTest,Button buttStop) {
         ActionController actionController = ActionController.getInstance();
         actionController.cleanTour();
@@ -90,6 +94,17 @@ public class station_adapter extends ArrayAdapter<station_card_model> {
         buttStop.setVisibility(View.INVISIBLE);
     }
 
+    /**
+     * @param activity station_activity
+     * @param longi longitude of POI(point of interest)
+     * @param lat latitude of POI
+     * @param alti altitude of POI
+     * @param des  description of POI
+     * @param name name of
+     * @param sharedPreferences
+     * @param orbit
+     * @param stop
+     */
     public void sendOrbit(AppCompatActivity activity, String longi, String lat, String alti, String des, String name,SharedPreferences sharedPreferences,Button orbit,Button stop) {
         boolean isConnected = sharedPreferences.getBoolean(ConstantPrefs.IS_CONNECTED.name(), false);
         if (isConnected) {

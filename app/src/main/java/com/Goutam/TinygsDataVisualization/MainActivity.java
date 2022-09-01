@@ -293,6 +293,10 @@ public class MainActivity extends TopBarActivity {
     private boolean isValidHostNPort(String hostPort) {
         return HOST_PORT.matcher(hostPort).matches();
     }
+
+    /**
+     * Clean kmls from all slaves and master
+     */
     private void ClearKML() {
         SharedPreferences sharedPreferences = getSharedPreferences(ConstantPrefs.SHARED_PREFS.name(), MODE_PRIVATE);
         boolean isConnected = sharedPreferences.getBoolean(ConstantPrefs.IS_CONNECTED.name(), false);
@@ -305,6 +309,9 @@ public class MainActivity extends TopBarActivity {
         }
     }
 
+    /**
+     * Relaunch Liquid Galaxy
+     */
     private void relaunch(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Confirm");
@@ -350,7 +357,9 @@ public class MainActivity extends TopBarActivity {
         alert.show();
     }
 
-
+    /**
+     * Reboot Liquid Galaxy
+     */
     private void reboot(){
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -396,6 +405,9 @@ public class MainActivity extends TopBarActivity {
 
     }
 
+    /**
+     * Shutdown Liquid Galaxy
+     */
     private void shutdown(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Confirm");
@@ -439,8 +451,10 @@ public class MainActivity extends TopBarActivity {
         alert.show();
         }
 
+    /**
+     * Clean logo from left most slave
+     */
     private void clean_logo(){
-
         SharedPreferences sharedPreferences = getSharedPreferences(ConstantPrefs.SHARED_PREFS.name(), MODE_PRIVATE);
         boolean isConnected = sharedPreferences.getBoolean(ConstantPrefs.IS_CONNECTED.name(), false);
         if (isConnected) {
