@@ -48,12 +48,9 @@ import java.util.List;
 public class PacketsActivity extends TopBarActivity {
     private static final String TAG_DEBUG = "PacketsActivity";
     public static final String EXTRA_MESSAGE = "com.example.tinygsdatavisualizer.MESSAGE";
-    private Dialog dialog;
     public Button buttRefresh,buttStop,buttTest;
     private ProgressDialog progressDialog;
     public HashMap<Integer,List<String>> packets = new HashMap<Integer, List<String>>();
-    public String[] mode = { "Fly-To","Orbit","Zoom-To"};
-    private Spinner spin;
     private TextView connectionStatus;
     public GridView grid;
     private Handler handler = new Handler();

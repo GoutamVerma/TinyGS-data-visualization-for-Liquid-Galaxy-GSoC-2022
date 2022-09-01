@@ -52,45 +52,6 @@ public class ActionBuildCommandUtility {
         return command;
     }
 
-    public static String buildCommandTour(String lon,String lat,String alti,String des,String name){
-        String startCommand = "echo '" +
-                "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
-                "<kml xmlns=\"http://www.opengis.net/kml/2.2\"\n" +
-                " xmlns:gx=\"http://www.google.com/kml/ext/2.2\">\n" +
-                "<Document>\n" +
-                "  <name>Tour</name>\n" +
-                "  <open>1</open>\n\n" +
-                "  <gx:Tour>\n" +
-                "    <name>TestTour</name>\n" +
-                "    <gx:Playlist>\n\n";
-
-        //Build the tour
-        StringBuilder folderBalloonShapes = new StringBuilder();
-        folderBalloonShapes.append("  <Folder>\n" +
-                        "   <name>Points and Shapes</name>\n\n")
-                .append("   <Style id=\"linestyleExample\">\n" +
-                        "    <LineStyle>\n" +
-                        "    <color>501400FF</color>\n" +
-                        "    <width>100</width>\n" +
-                        "    <gx:labelVisibility>1</gx:labelVisibility>\n" +
-                        "    </LineStyle>\n" +
-                        "   </Style>\n\n")
-                .append(" <Style id=\"purple_paddle\">\n" +
-                        "   <BalloonStyle>\n" +
-                        "     <text>$[description]</text>\n" +
-                        "     <bgColor>ff1e1e1e</bgColor>\n" +
-                        "   </BalloonStyle>\n" +
-                        " </Style>\n")
-                .append(stylekml());
-        String middleCommand = buildTour(folderBalloonShapes,lon,lat,alti,des,name);
-        folderBalloonShapes.append("  </Folder>\n");
-        folderBalloonShapes.append("</Document>\n" + "</kml> ' > ").append(BASE_PATH).append("Tour.kml");
-        Log.w(TAG_DEBUG, "FOLDER COMMAND: " + folderBalloonShapes.toString());
-        String endCommand = "    </gx:Playlist>\n" +
-                "  </gx:Tour>\n\n";
-        Log.w(TAG_DEBUG, "FINAL COMMAND: " + startCommand + middleCommand + folderBalloonShapes.toString() + endCommand);
-        return startCommand + middleCommand + endCommand + folderBalloonShapes.toString();
-    }
 
     public static String stylekmlforStation(){
         return "<Style id=\"s_ylw-pushpin_hl\">\n" +
@@ -657,18 +618,6 @@ public class ActionBuildCommandUtility {
                 "/var/www/html/kml/slave_4.kml";
         Log.w(TAG_DEBUG, "Command: " + startCommand);
         return startCommand;
-    }
-    /**
-     * Get the absolute path of the file
-     * @return the absolute path
-     */
-
-    static String buildWriteStarlinkFile() {
-        String command = "echo 'http://lg1:81/resources/Starlink.kml' > " +
-                BASE_PATH +
-                "kmls.txt";
-        Log.w(TAG_DEBUG, "command: " + command);
-        return command;
     }
 
     static String buildWriteISSFile() {

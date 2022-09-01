@@ -77,6 +77,12 @@ public class satellite_packet_adapter extends ArrayAdapter<satellite_packet_card
 
         return listitemView;
     }
+
+    /**
+     * @param buttTest Button
+     * @param buttStop Button
+     * Stop of current visualization on liquid galaxy
+     */
     private void stopTestStoryBoard(Button buttTest,Button buttStop) {
         ActionController actionController = ActionController.getInstance();
         actionController.cleanTour();
@@ -84,6 +90,18 @@ public class satellite_packet_adapter extends ArrayAdapter<satellite_packet_card
         buttStop.setVisibility(View.INVISIBLE);
     }
 
+    /**
+     *
+     * @param activity Satellite Activity
+     * @param longi stands for longitude of satellite
+     * @param lat stands for latitude of satellite
+     * @param alti stands for altitude of satellite
+     * @param des stands for description about satellite
+     * @param name stands for name of satellite
+     * @param orbit Button orbit on UI
+     * @param stop Button stop on UI
+     * @param sharedPreferences store state of button in sharedpreferences
+     */
     public void sendOrbit(AppCompatActivity activity, String longi, String lat, String alti, String des, String name, Button orbit, Button stop,SharedPreferences sharedPreferences) {
         boolean isConnected = sharedPreferences.getBoolean(ConstantPrefs.IS_CONNECTED.name(), false);
         if (isConnected) {

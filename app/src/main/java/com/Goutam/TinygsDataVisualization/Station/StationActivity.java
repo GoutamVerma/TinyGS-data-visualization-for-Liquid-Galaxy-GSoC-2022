@@ -104,6 +104,10 @@ public class StationActivity extends TopBarActivity {
         }
     }
 
+    /**
+     * Update status of connection between LG and apk
+     * @param sharedPreferences
+     */
     private void loadConnectionStatus(SharedPreferences sharedPreferences) {
         boolean isConnected = sharedPreferences.getBoolean(ConstantPrefs.IS_CONNECTED.name(), false);
         if (isConnected) {
@@ -165,6 +169,10 @@ public class StationActivity extends TopBarActivity {
         thread.start();
     }
 
+    /**
+     * add data in satellitecardmodelArrayList
+     * update UI
+     */
     public void loadContent(){
         SharedPreferences sharedPreferences = getSharedPreferences(ConstantPrefs.SHARED_PREFS.name(), MODE_PRIVATE);
         HashMap<Integer,List<String>> stations = getHashMap("2");
@@ -185,6 +193,10 @@ public class StationActivity extends TopBarActivity {
 
     }
 
+    /**
+     * @param key over which data is stored
+     * @param obj Hashmap store in the form of object
+     */
 
     public void saveHashMap(String key , Object obj) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(StationActivity.this);
@@ -195,6 +207,10 @@ public class StationActivity extends TopBarActivity {
         editor.apply();
     }
 
+    /**
+     * @param key
+     * @return haspmap
+     */
     public HashMap<Integer,List<String>> getHashMap(String key) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(StationActivity.this);
         Gson gson = new Gson();
