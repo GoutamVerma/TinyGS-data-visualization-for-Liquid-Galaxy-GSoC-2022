@@ -55,6 +55,7 @@
   <androidx.glance/>
   <androidx.gridlayout/>
   <androidx.health/>
+  <androidx.health.connect/>
   <androidx.heifwriter/>
   <androidx.hilt/>
   <androidx.interpolator/>
@@ -165,6 +166,7 @@
   <com.google.ads.afsn/>
   <com.google.ads.interactivemedia.v3/>
   <com.google.ads.mediation/>
+  <com.google.ambient.crossdevice/>
   <com.google.android.ads/>
   <com.google.android.ads.consent/>
   <com.google.android.apps.common.testing.accessibility.framework/>
@@ -186,6 +188,7 @@
   <com.google.android.libraries.mapsplatform.secrets-gradle-plugin/>
   <com.google.android.libraries.places/>
   <com.google.android.libraries.play.games/>
+  <com.google.android.livesharing/>
   <com.google.android.material/>
   <com.google.android.mediahome/>
   <com.google.android.odml/>
@@ -202,6 +205,7 @@
   <com.google.assistant.suggestion/>
   <com.google.camerax.effects/>
   <com.google.chromeos/>
+  <com.google.d2c/>
   <com.google.devtools.ksp/>
   <com.google.fhir/>
   <com.google.firebase/>

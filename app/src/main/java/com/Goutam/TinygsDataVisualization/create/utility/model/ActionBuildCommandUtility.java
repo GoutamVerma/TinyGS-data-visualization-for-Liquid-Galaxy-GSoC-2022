@@ -527,22 +527,22 @@ public class ActionBuildCommandUtility {
         return  command;
     }
 
-    public static String clean_logo(){
+    public static String clean_logo(int rig){
         String clean_logo= "echo '<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                 "<kml xmlns=\"http://www.opengis.net/kml/2.2\" xmlns:gx=\"http://www.google.com/kml/ext/2.2\" xmlns:kml=\"http://www.opengis.net/kml/2.2\" xmlns:atom=\"http://www.w3.org/2005/Atom\">\n" +
                 "  <Document id=\"1\">\n" +
                 "  </Document>\n" +
-                "</kml>' > /var/www/html/kml/slave_4.kml";
+                "</kml>' > /var/www/html/kml/slave_"+rig+".kml";
         Log.d("TAG_DEBUG",clean_logo);
         return clean_logo;
     }
 
-    public static String clean_balloon(){
+    public static String clean_balloon(int rig){
         String command =  "echo '<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                 "<kml xmlns=\"http://www.opengis.net/kml/2.2\" xmlns:gx=\"http://www.google.com/kml/ext/2.2\" xmlns:kml=\"http://www.opengis.net/kml/2.2\" xmlns:atom=\"http://www.w3.org/2005/Atom\">\n" +
                 "  <Document id=\"1\">\n" +
                 "  </Document>\n" +
-                "</kml>' > /var/www/html/kml/slave_3.kml";
+                "</kml>' > /var/www/html/kml/slave_"+rig+".kml";
         Log.d("TAG_DEBUG",command);
         return command;
     }
@@ -583,7 +583,7 @@ public class ActionBuildCommandUtility {
      * Build the command to paint a balloon in Liquid Galaxy
      * @return String with command
      */
-    public static String buildCommandBalloonWithLogos() {
+    public static String buildCommandBalloonWithLogos(int rig) {
 
         String startCommand =  "echo '" +
                 "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
@@ -615,7 +615,7 @@ public class ActionBuildCommandUtility {
                 "</Document>\n" +
                 "</kml>\n"+
                 "' > " +
-                "/var/www/html/kml/slave_4.kml";
+                "/var/www/html/kml/slave_"+rig+".kml";
         Log.w(TAG_DEBUG, "Command: " + startCommand);
         return startCommand;
     }
@@ -674,7 +674,7 @@ public class ActionBuildCommandUtility {
         return command;
     }
 
-    public static String buildCommandBalloon(String des) {
+    public static String buildCommandBalloon(String des,int rig) {
         String startCommand =  "echo '" +
                 "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                 "<kml xmlns=\"http://www.opengis.net/kml/2.2\" xmlns:gx=\"http://www.google.com/kml/ext/2.2\" xmlns:kml=\"http://www.opengis.net/kml/2.2\" xmlns:atom=\"http://www.w3.org/2005/Atom\">\n" +
@@ -741,7 +741,92 @@ public class ActionBuildCommandUtility {
                 "</Document>\n" +
                 "</kml> "+
                 "' > " +
-                "/var/www/html/kml/slave_3.kml";
+                "/var/www/html/kml/slave_"+rig+".kml";
+        Log.d("TAG DEBUG",startCommand);
+        return startCommand;
+    }
+
+    public static String buildCommandBalloonRaw(String des,String raw,int rig) {
+        String startCommand =  "echo '" +
+                "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
+                "<kml xmlns=\"http://www.opengis.net/kml/2.2\" xmlns:gx=\"http://www.google.com/kml/ext/2.2\" xmlns:kml=\"http://www.opengis.net/kml/2.2\" xmlns:atom=\"http://www.w3.org/2005/Atom\">\n" +
+                "<Document>\n" +
+                " <name>historic.kml</name>\n" +
+                " <Style id=\"purple_paddle\">\n" +
+                "   <BalloonStyle>\n" +
+                "     <text>$[description]</text>\n" +
+                "     <bgColor>ff1e1e1e</bgColor>\n" +
+                "   </BalloonStyle>\n" +
+                " </Style>\n" +
+                " <Placemark id=\"0A7ACC68BF23CB81B354\">\n" +
+                "   <name>TinyGS Data Visualization</name>\n" +
+                "   <Snippet maxLines=\"0\"></Snippet>\n" +
+                "   <description><![CDATA[<!-- BalloonStyle background color:\n" +
+                "ffffffff\n" +
+                "-->\n" +
+                "<!-- Icon URL:\n" +
+                "http://maps.google.com/mapfiles/kml/paddle/purple-blank.png\n" +
+                "-->\n" +
+                "<table width=\"400\" border=\"0\" cellspacing=\"0\" cellpadding=\"5\">\n" +
+                " <tr>\n" +
+                "   <td colspan=\"2\" align=\"center\">\n" +
+                "     <img src=\"https://raw.githubusercontent.com/GoutamVerma/TinyGS-data-visualization-for-Liquid-Galaxy-GSoC-2022/main/app/src/main/res/drawable-xxxhdpi/applogo.png\" alt=\"picture\" width=\"150\" height=\"150\" />\n" +
+                "   </td>\n" +
+                " </tr>\n" +
+                " <tr>\n" +
+                "   <td colspan=\"2\" align=\"center\">\n" +
+                "     <h2><font color='#00CC99'>TinyGS Data Visualization Tool</font></h2>\n" +
+                "   </td>\n" +
+                " </tr>\n" +
+                " <tr>\n" +
+                "   <td colspan=\"2\">\n" +
+                "     <p><font color=\"#FFFFFF\">Description: \n" +
+                des+
+                "</font></p>\n" +
+                "   </td>\n" +
+                " </tr>\n" +
+
+                " <tr>\n" +
+                "   <td colspan=\"2\" align=\"center\">\n" +
+                "     <h3><font color='#00CC99'>Hexadecimal view</font></h3>\n" +
+                "   </td>\n" +
+                " </tr>\n" +
+
+                " <tr>\n" +
+                "   <td colspan=\"2\" align=\"center\">\n" +
+                "     <font color=\"#FFFFFF\">"+raw+"</font>\n" +
+                "   </td>\n" +
+                " </tr>\n" +
+
+                " <tr>\n" +
+                "   <td align=\"center\">\n" +
+                "     <a href=\"#\"> </a>\n" +
+                "   </td>\n" +
+                " </tr>\n" +
+                " <tr>\n" +
+                "   <td colspan=\"2\" align=\"center\">\n" +
+                "     <font color=\"#FFFFFF\">TinyGS Data Visualization Tool 2022</font>\n" +
+                "   </td>\n" +
+                " </tr>\n" +
+                "</table>]]></description>\n" +
+                "   <LookAt>\n" +
+                "     <longitude>-17.841486</longitude>\n" +
+                "     <latitude>28.638478</latitude>\n" +
+                "     <altitude>0</altitude>\n" +
+                "     <heading>0</heading>\n" +
+                "     <tilt>0</tilt>\n" +
+                "     <range>24000</range>\n" +
+                "   </LookAt>\n" +
+                "   <styleUrl>#purple_paddle</styleUrl>\n" +
+                "   <gx:balloonVisibility>1</gx:balloonVisibility>\n" +
+                "   <Point>\n" +
+                "     <coordinates>-17.841486,28.638478,0</coordinates>\n" +
+                "   </Point>\n" +
+                " </Placemark>\n" +
+                "</Document>\n" +
+                "</kml> "+
+                "' > " +
+                "/var/www/html/kml/slave_"+rig+".kml";
         Log.d("TAG DEBUG",startCommand);
         return startCommand;
     }

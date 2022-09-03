@@ -192,7 +192,6 @@ public class StationActivity extends TopBarActivity {
         });
 
     }
-
     /**
      * @param key over which data is stored
      * @param obj Hashmap store in the form of object
