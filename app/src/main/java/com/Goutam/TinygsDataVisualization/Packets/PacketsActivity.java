@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
@@ -19,6 +20,7 @@ import android.widget.GridView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.annotation.RequiresApi;
 import androidx.core.content.ContextCompat;
 
 import com.Goutam.TinygsDataVisualization.R;
@@ -36,9 +38,11 @@ import org.json.simple.JSONValue;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.math.BigInteger;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 
@@ -57,6 +61,7 @@ public class PacketsActivity extends TopBarActivity {
 
     ArrayList<packet_card_model> packetcardmodelArrayList = new ArrayList<packet_card_model>();
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,6 +101,7 @@ public class PacketsActivity extends TopBarActivity {
 
 
             grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @RequiresApi(api = Build.VERSION_CODES.O)
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 loadContent(i,view);
@@ -113,11 +119,24 @@ public class PacketsActivity extends TopBarActivity {
      * @param view
      * This function is in charge of load content on layout activity_packets_info
      */
-    public void loadContent(int i,View view){
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public void loadContent(int i, View view){
         setContentView(R.layout.activity_packets_info);
         HashMap<Integer,List<String>> packet = getHashMap("1");
         TextView name = findViewById(R.id.packet_name);
         TextView data = findViewById(R.id.packet_description);
+        TextView raw = findViewById(R.id.hexa_description);
+        String guid = packet.get(i).get(13);
+        byte[] decoded = Base64.getDecoder().decode(guid);
+        String datas = String.format("%040x", new BigInteger(1, decoded));
+        String finl ="";
+        for(int j=0;j<datas.length();j++){
+            finl+= datas.charAt(j);
+            if(j%2!=0){
+                finl+=" ";
+            }
+        }
+        raw.setText(finl.toUpperCase());
         name.setText(packet.get(i).get(5));
         String description = "Received on:\n" +
                 "LoRa "+ packet.get(i).get(1)+" Mhz SF: "+packet.get(i).get(2)+" CR: "+packet.get(i).get(4)+" BW: "+packet.get(i).get(3)+" kHz\n" +
@@ -139,7 +158,8 @@ public class PacketsActivity extends TopBarActivity {
         String lon[]= pos[0].split(":");
         String alti[]= pos[1].split(":");
         String lat[]= pos[2].split(":");
-        buttTest.setOnClickListener(view2 -> sendOrbit(view, lon[1], lat[1].substring(0, lat[1].length() - 1), alti[1], description, packet.get(i).get(5)));
+        String finalFinl = finl;
+        buttTest.setOnClickListener(view2 -> sendOrbit(view, finalFinl.toUpperCase() ,lon[1], lat[1].substring(0, lat[1].length() - 1), alti[1], description, packet.get(i).get(5)));
         buttStop.setOnClickListener(view2 -> stopTestStoryBoard());
        }
     private void stopTestStoryBoard() {
@@ -200,6 +220,7 @@ public class PacketsActivity extends TopBarActivity {
                         boolean mainvolt = pay.get("tinygsMainVoltage") == null ? data.add("null") : data.add(pay.get("tinygsMainVoltage").toString());
                         boolean sat = obj1.get("satPos") == null ? data.add("null") : data.add(obj1.get("satPos").toString());
                         boolean number = obj1.get("stationNumber") == null ? data.add("null") : data.add(obj1.get("stationNumber").toString());
+                        boolean raw = obj1.get("raw") == null? data.add("null"): data.add(obj1.get("raw").toString());
                         packets.put(i, data);
                         System.out.println(i + "  " + data);
                      }
@@ -245,6 +266,7 @@ public class PacketsActivity extends TopBarActivity {
                 packet_adapter adapter = new packet_adapter(PacketsActivity.this, packetcardmodelArrayList);
                 grid.setAdapter(adapter);
                 grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @RequiresApi(api = Build.VERSION_CODES.O)
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                         loadContent(i,view);
@@ -292,12 +314,14 @@ public class PacketsActivity extends TopBarActivity {
      * @param name  Name of satellite
      * @return
      */
-    public void sendOrbit(View view, String longi, String lat, String alti, String des, String name) {
+    public void sendOrbit(View view, String raw ,String longi, String lat, String alti, String des, String name) {
         Button test = findViewById(R.id.test);
         SharedPreferences sharedPreferences = getSharedPreferences(ConstantPrefs.SHARED_PREFS.name(), MODE_PRIVATE);
         boolean isConnected = sharedPreferences.getBoolean(ConstantPrefs.IS_CONNECTED.name(), false);
         if (isConnected) {
-            ActionController.getInstance().sendBalloon(this, des);
+            String rig = sharedPreferences.getString(ConstantPrefs.SHARED_PREFS.LG_RIGS.name(), "");
+            int rig_no= Integer.parseInt(rig);
+            ActionController.getInstance().sendBalloonRaw(this, des, raw,rig_no);
             ActionController.getInstance().sendOribitfile(PacketsActivity.this, longi, lat, alti,des,name);
             test.setVisibility(view.INVISIBLE);
             buttStop.setVisibility(view.VISIBLE);

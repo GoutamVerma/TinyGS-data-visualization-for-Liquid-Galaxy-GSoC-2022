@@ -63,15 +63,15 @@ public class ActionController {
     }
 
 
-    public void sendcleanlogo(AppCompatActivity activity){
+    public void sendcleanlogo(AppCompatActivity activity,int rig){
         createResourcesFolder();
         LGConnectionSendFile lgConnectionSendFile = LGConnectionSendFile.getInstance();
         lgConnectionSendFile.startConnection();
-
+        double rigs = Math.floor( rig/ 2) + 2;
         cleanFileKMLs(0);
 
         handler.postDelayed(() -> {
-            LGCommand lgCommand = new LGCommand(ActionBuildCommandUtility.clean_logo(),
+            LGCommand lgCommand = new LGCommand(ActionBuildCommandUtility.clean_logo((int)rigs),
                     LGCommand.CRITICAL_MESSAGE, (String result) -> {
             });
             LGConnectionManager lgConnectionManager = LGConnectionManager.getInstance();
@@ -80,15 +80,14 @@ public class ActionController {
         }, 2000);
 
     }
-    public void sendcleanballloon(AppCompatActivity activity){
+    public void sendcleanballloon(AppCompatActivity activity,int rig){
         createResourcesFolder();
         LGConnectionSendFile lgConnectionSendFile = LGConnectionSendFile.getInstance();
         lgConnectionSendFile.startConnection();
-
         cleanFileKMLs(0);
 
         handler.postDelayed(() -> {
-            LGCommand lgCommand = new LGCommand(ActionBuildCommandUtility.clean_balloon(),
+            LGCommand lgCommand = new LGCommand(ActionBuildCommandUtility.clean_balloon(rig),
                     LGCommand.CRITICAL_MESSAGE, (String result) -> {
             });
             LGConnectionManager lgConnectionManager = LGConnectionManager.getInstance();
@@ -155,16 +154,16 @@ public class ActionController {
     /**
      * Paint a balloon with the logos
      */
-    public void sendBalloonWithLogos(AppCompatActivity activity) {
+    public void sendBalloonWithLogos(AppCompatActivity activity,int rig) {
         createResourcesFolder();
 
         LGConnectionSendFile lgConnectionSendFile = LGConnectionSendFile.getInstance();
         lgConnectionSendFile.startConnection();
-
+        double rigs = Math.floor( rig/ 2) + 2;
         cleanFileKMLs(0);
 
         handler.postDelayed(() -> {
-            LGCommand lgCommand = new LGCommand(ActionBuildCommandUtility.buildCommandBalloonWithLogos(),
+            LGCommand lgCommand = new LGCommand(ActionBuildCommandUtility.buildCommandBalloonWithLogos((int)rigs),
                     LGCommand.CRITICAL_MESSAGE, (String result) -> {
             });
             LGConnectionManager lgConnectionManager = LGConnectionManager.getInstance();
@@ -173,16 +172,17 @@ public class ActionController {
             }, 2000);
     }
 
-    public void sendBalloon(AppCompatActivity activity,String des) {
+    public void sendBalloon(AppCompatActivity activity,String des,int rig) {
         createResourcesFolder();
-        ActionController.getInstance().sendcleanballloon(activity);
+        double rigs = Math.floor( rig/ 2) + 1;
+        ActionController.getInstance().sendcleanballloon(activity,(int)rigs);
         LGConnectionSendFile lgConnectionSendFile = LGConnectionSendFile.getInstance();
         lgConnectionSendFile.startConnection();
 
         cleanFileKMLs(0);
 
         handler.postDelayed(() -> {
-            LGCommand lgCommand = new LGCommand(ActionBuildCommandUtility.buildCommandBalloon(des),
+            LGCommand lgCommand = new LGCommand(ActionBuildCommandUtility.buildCommandBalloon(des,(int)rigs),
                     LGCommand.CRITICAL_MESSAGE, (String result) -> {
             });
             LGConnectionManager lgConnectionManager = LGConnectionManager.getInstance();
@@ -190,6 +190,7 @@ public class ActionController {
             lgConnectionManager.addCommandToLG(lgCommand);
         }, 2000);
     }
+
 
     public void sendTourStation(LGCommand.Listener listener,String lon,String lat,String alti,String des,String name){
         cleanFileKMLs(0);
