@@ -53,7 +53,6 @@ public class satellite_packet_adapter extends ArrayAdapter<satellite_packet_card
         JSONObject json = null;
         try {
             json = new JSONObject(locatios);
-            System.out.println(json.toString());
             String lng = json.getString("lng");
             String lat = json.getString("lat");
             String Description = "Name : "+ packetcardmodel.getPacket_name()+" Sats :"+packetcardmodel.get_location()+ "Data :"+packetcardmodel.get_satelite_data();
@@ -104,13 +103,16 @@ public class satellite_packet_adapter extends ArrayAdapter<satellite_packet_card
      */
     public void sendOrbit(AppCompatActivity activity, String longi, String lat, String alti, String des, String name, Button orbit, Button stop,SharedPreferences sharedPreferences) {
         boolean isConnected = sharedPreferences.getBoolean(ConstantPrefs.IS_CONNECTED.name(), false);
+        
         if (isConnected) {
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putString("statesate",longi);
             editor.apply();
             orbit.setVisibility(View.INVISIBLE);
             stop.setVisibility(View.VISIBLE);
-            ActionController.getInstance().sendBalloon(activity,des);
+            String rig = sharedPreferences.getString(ConstantPrefs.SHARED_PREFS.LG_RIGS.name(), "");
+            int rig_no= Integer.parseInt(rig);
+            ActionController.getInstance().sendBalloon(activity,des,rig_no);
             ActionController.getInstance().sendOribitfile(activity, longi, lat, alti,des,name);
         } else {
             CustomDialogUtility.showDialog(activity, "LG is not connected, Please visit connect tab.");

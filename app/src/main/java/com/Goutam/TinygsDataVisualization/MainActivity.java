@@ -237,8 +237,10 @@ public class MainActivity extends TopBarActivity {
                 changeToNewView();
                 ActionController actionController = ActionController.getInstance();
                 actionController.exitTour();
-                ActionController.getInstance().sendBalloonWithLogos(MainActivity.this);
                 SharedPreferences sharedPreferences = getSharedPreferences(ConstantPrefs.SHARED_PREFS.name(), MODE_PRIVATE);
+                String rig = sharedPreferences.getString(ConstantPrefs.SHARED_PREFS.LG_RIGS.name(), "");
+                int rig_no= Integer.parseInt(rig);
+                ActionController.getInstance().sendBalloonWithLogos(MainActivity.this,rig_no);
                 loadConnectionStatus(sharedPreferences);
 
             }
@@ -302,7 +304,10 @@ public class MainActivity extends TopBarActivity {
         boolean isConnected = sharedPreferences.getBoolean(ConstantPrefs.IS_CONNECTED.name(), false);
         if (isConnected) {
             ActionController actionController = ActionController.getInstance();
-            actionController.sendcleanballloon(MainActivity.this);
+            String rig = sharedPreferences.getString(ConstantPrefs.SHARED_PREFS.LG_RIGS.name(), "");
+            int rig_no= Integer.parseInt(rig);
+            double rigs = Math.floor( rig_no/ 2) + 1;
+            actionController.sendcleanballloon(MainActivity.this,(int)rigs);
             actionController.exitTour();
         }else{
             CustomDialogUtility.showDialog(MainActivity.this,"LG is not connected, Please connect first!");
@@ -458,7 +463,9 @@ public class MainActivity extends TopBarActivity {
         SharedPreferences sharedPreferences = getSharedPreferences(ConstantPrefs.SHARED_PREFS.name(), MODE_PRIVATE);
         boolean isConnected = sharedPreferences.getBoolean(ConstantPrefs.IS_CONNECTED.name(), false);
         if (isConnected) {
-            ActionController.getInstance().sendcleanlogo(MainActivity.this);
+            String rig = sharedPreferences.getString(ConstantPrefs.SHARED_PREFS.LG_RIGS.name(), "");
+            int rig_no= Integer.parseInt(rig);
+            ActionController.getInstance().sendcleanlogo(MainActivity.this,rig_no);
             }else{
             CustomDialogUtility.showDialog(MainActivity.this,"LG is not connected,Please connect first!");
         }
