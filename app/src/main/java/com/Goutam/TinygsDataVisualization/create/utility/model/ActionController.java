@@ -191,23 +191,6 @@ public class ActionController {
         }, 2000);
     }
 
-    public void sendBalloonRaw(AppCompatActivity activity,String des,String raw,int rig) {
-        createResourcesFolder();
-        double rigs = Math.floor( rig/ 2) + 1;
-        ActionController.getInstance().sendcleanballloon(activity,(int)rigs);
-        LGConnectionSendFile lgConnectionSendFile = LGConnectionSendFile.getInstance();
-        lgConnectionSendFile.startConnection();
-        cleanFileKMLs(0);
-
-        handler.postDelayed(() -> {
-            LGCommand lgCommand = new LGCommand(ActionBuildCommandUtility.buildCommandBalloonRaw(des,raw,(int)rigs),
-                    LGCommand.CRITICAL_MESSAGE, (String result) -> {
-            });
-            LGConnectionManager lgConnectionManager = LGConnectionManager.getInstance();
-            lgConnectionManager.startConnection();
-            lgConnectionManager.addCommandToLG(lgCommand);
-        }, 2000);
-    }
 
     public void sendTourStation(LGCommand.Listener listener,String lon,String lat,String alti,String des,String name){
         cleanFileKMLs(0);
